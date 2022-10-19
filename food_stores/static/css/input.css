@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .errorlist li{
-    @apply italic text-red-500 text-[10px] pt-2
+    @apply italic text-red-500 text-[10px] pt-2;
 }
