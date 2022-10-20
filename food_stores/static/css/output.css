@@ -1168,10 +1168,6 @@ input[type="range"]::-ms-fill-lower {
   border-bottom-right-radius: 0.125rem;
 }
 
-.border-2 {
-  border-width: 2px;
-}
-
 .border-\[1px\] {
   border-width: 1px;
 }
@@ -1182,11 +1178,6 @@ input[type="range"]::-ms-fill-lower {
 
 .border-b {
   border-bottom-width: 1px;
-}
-
-.border-red-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(240 82 82 / var(--tw-border-opacity));
 }
 
 .border-gray-200 {
@@ -1237,11 +1228,6 @@ input[type="range"]::-ms-fill-lower {
 .bg-mainColor {
   --tw-bg-opacity: 1;
   background-color: rgb(255 122 0 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#000\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-register {

@@ -1,0 +1,89 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FoodBakery</title>
+	<!-- Google Font Family Link Start -->
+	{% comment %} <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700"> {% endcomment %}
+	{% comment %} <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800"> {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Libre+Baskerville:wght@400;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="px-4 md:px-0 bg-register bg-center bg-cover bg-no-repeat" style="background-image:url({% static 'images/register.jpg' %})">
+    <div class="pt-8 pb-10 mx-auto max-w-screen-lg ">
+        <div class=" px-10 py-10 lg:shadow-xl border-[1px] bg-white">
+            <div class="text-center pb-16 flex flex-col space-y-3">
+                <h2 class="text-2xl lg:text-4xl text- font-baskerville font-bold uppercase">Partner with FoodStores</h2>
+                <p class="text-amber-700 lg:px-16 text-sm lg:text-lg font-dancing">Extend your reach by signing up on our marketplace/p>
+            </div>
+            <form action="{% url 'registerVendor'%}" method="post" novalidate enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="grid gap-6 mb-6 md:grid-cols-2 font-poppin">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First name</label>
+                        {{form.first_name}}
+                        {{ form.first_name.errors }}
+                    </div>
+                    <div>
+                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label>
+                        {{form.last_name}}
+                        {{ form.last_name.errors }}
+                    </div>
+                    <div>
+                        <label for="v_form.vendor_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Restaurant Name</label>
+                        {{v_form.vendor_name}}
+                        {{ v_form.vendor_name.errors }}
+                    </div>
+                    <div>
+                        <label for="v_form.vendor_license" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Restaurant License</label>
+                        {{v_form.vendor_license}}
+                        {{ v_form.vendor_name.license}}
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
+                        {{form.email}}
+                        {{ form.email.errors }}
+                    </div> 
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+                        {{form.username}}
+                        {{ form.username.errors }}
+                    </div>
+                </div>
+                <div class="mb-6 font-poppin">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+                    {{form.password}}
+                    <span class="">{{ form.password.errors }}</span>
+                </div> 
+                <div class="mb-6 font-poppin">
+                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm password</label>
+                    {{form.confirm_password}}
+                </div> 
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        {{form.terms_and_condition}}
+                    </div>
+                    <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                </div>
+                <ul class="italic text-red-500 text-[10px] py-2">{{form.non_field_errors}}</ul>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</button>
+                
+                <!--Load message-->
+                {% include 'includes/alerts.html'%}
+            </form>
+            <a href="{% url 'homepage' %}">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full fixed top-10 left-5 bg-green-300 before:rounded-full before:absolute before:inset-1 before:bg-green-500 before:animate-ping after:rounded-full after:absolute after:inset-2 after:animate-pulse after:bg-green-700 cursor-pointer">
+                    <svg class="w-5 h-5" fill="white" stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                </div>
+            </a>
+        </div>
+    </div>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+</body>
+</html>
