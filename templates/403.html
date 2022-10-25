@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html'%}
+
+{% load static%}
+
+{% block content%}
+<div class="lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
+    <div class="xl:pt-24 w-full xl:w-1/2 lg:relative pb-12 lg:pb-0">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h1 class="my-2 text-slate-400 font-bold text-sm lg:text-2xl">
+                        Hi there, looks like you don't have permission to view this page
+                    <p class="my-2 text-slate-400 mb-5">Sorry about that! Please visit our hompage to get where you need to go.</p>
+                    <button class="sm:w-full text-base lg:text-lg lg:w-auto my-2 border rounded md py-4 px-8 text-center bg-green-300 text-white hover:bg-green-500 focus:outline-none focus:ring-2 focus:bg-green-500 focus:ring-opacity-50">Take me there!</button>
+                </div>
+            </div>
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10">
+            <p class="text-[10rem] lg:text-[18rem] font-bold text-emerald-100">403</p>
+        </div>
+    </div>
+    <div class="flex items-center justify-center w-1/2 lg:w-auto lg:block">
+        <img src="{% static 'images/403.png' %}" />
+    </div>
+    
+</div>
+{% endblock %}
+

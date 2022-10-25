@@ -9,16 +9,22 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" integrity="sha512-4wfcoXlib1Aq0mUtsLLM74SZtmB73VHTafZAvxIp/Wk9u1PpIsrfmTvK0+yKetghCL8SHlZbMyEcV8Z21v42UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="stylesheet" href="{% static 'css/output.css'%}">
 	</head>
-<body>
-<div class="page-loader">
-	
-</div>
+	<body>
+		<div class="page-loader">
+			
+		</div>
 
-<!--header content-->
-{% include 'includes/header.html'%}
-<!--main content-->
-{% block content%}
+		<!--header content-->
+		{% include 'includes/header.html'%}
+		<!--main content-->
+		{% block content%}
 
-{% endblock%}
-<!--footer content-->
-{% include 'includes/footer.html'%}
+		{% endblock%}
+		<!--footer content-->
+		{% include 'includes/footer.html'%}
+
+		<script src="{% static 'js/script.js'%}"></script>
+		<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+	</body>
+
+</html>
