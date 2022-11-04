@@ -78,22 +78,15 @@ WSGI_APPLICATION = 'food_stores.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD' : config('DB_PASSWORD'),
-#         'HOST' : config('DB_HOST'),
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD' : config('DB_PASSWORD'),
+        'HOST' : config('DB_HOST'),
     }
 }
-
 
 
 # Password validation
@@ -146,6 +139,9 @@ MEDIA_ROOT = BASE_DIR/'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# EMAIL_SCOPE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# SCOPES = ['https://mail.google.com/']
 
 # Email configuration
 EMAIL_HOST = config('EMAIL_HOST')

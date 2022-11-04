@@ -63,7 +63,7 @@ class User(AbstractBaseUser):
     
     #required fields
     date_joined = models.DateTimeField(auto_now_add=True),
-    last_login = models.DateTimeField(auto_now_add=True),
+    last_login = models.DateTimeField(auto_now=True),
     created_date = models.DateTimeField(auto_now_add=True),
     modified_date = models.DateTimeField(auto_now_add=True),
     is_admin = models.BooleanField(default=False)
