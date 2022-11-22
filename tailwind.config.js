@@ -13,7 +13,9 @@ module.exports = {
       fontFamily: {
         'dancing': ['"Dancing Script"', 'cursive'],
         'poppin': ['Poppins', 'sans-serif'],
-        'baskerville': ['"Libre Baskerville"', 'serif']
+        'baskerville': ['"Libre Baskerville"', 'serif'],
+        'spartan': ['"League Spartan"', 'sans-serif'],
+        'monserat': ['"Montserrat"', 'sans-serif']
       },
       colors: {
         "mainColor":"#FF7A00",
