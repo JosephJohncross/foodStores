@@ -1,18 +1,16 @@
 {% extends 'base.html' %}
-
+{% load static%}
 {% block content %}
 
-<!-- <div class="absolute top-1/2 left-1/2 text-black"> 
-    <h1 class="">Welcome {{ user.first_name }}</h1>
-    <p>Your role is {{ user.get_role}}</p>
-</div>
-{%include 'includes/alerts.html'%} -->
-    <section class="customer-body gap-10 bg-gray-200/50 h-screen">
+
+<!-- {%include 'includes/alerts.html'%} -->
+    <section class="customer-body h-screen">
         <div class="bg-white shadow-md">1</div>
-        <div class="grid grid-cols-9 gap-10">
-            <div class="col-span-6 font-monserat overflow-y-scroll main">
+
+        <div class="grid grid-cols-10 bg-gray-200/50 h-screen">
+            <div id="mid-section" class="col-span-7 font-monserat overflow-y-scroll main">
                 <!-- Top bar section -->
-                <div class="flex justify-between items-center py-10 sticky top-0">
+                <div id="top-bar" class="px-10 backdrop-blur-xl z-20 flex justify-between items-center py-10 sticky top-0">
                     <div>
                         <div class="text-3xl font-monserat font-semibold">Welcome, {{user.first_name}}</div>
                         <p class="text-gray-400">Discover whatever you need easily</p> 
@@ -28,25 +26,193 @@
                     </form>
                 </div>
 
-                <!-- selection section -->
-                <div class="flex overflow-x-scroll items-center justify-evenly text-lg pb-12 main">
-                    <div class="selection-btn">Signature</div>
-                    <div class="selection-btn">Croissant</div>
-                    <div class="selection-btn">Waffle</div>
-                    <div class="selection-btn">Coffee</div>
-                    <div class="selection-btn">Ice Cream</div>
+                <div class="px-10 pb-12">
+                    <!-- selection section -->
+                    <div id="menu-select" class="flex overflow-x-scroll items-center gap-x-14 text-lg pb-12 main">
+                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="true">Signature</div>
+                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Croissant</div>
+                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Waffle</div>
+                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Coffee</div>
+                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Ice Cream</div>
+                    </div>
+    
+                    <!-- menu items section -->
+                    <div class="flex flex-wrap gap-11">
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu1.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu2.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu3.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu4.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu5.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu6.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu7.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu8.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                        <div class="card flex flex-col space-y-2">
+                            <div class="card__div relative" style="background-image: url('/static/images/menu9.jpg'); height:150px; background-size:cover; background-position: center;">
+                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                </span>
+                            </div>
+                            <p class="card__title">Almond Brown Sugar Croissant</p>
+                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
+                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
+                        </div>
+                    </div> 
                 </div>
+            </div>
+            <div class="col-span-3 bg-white shadow-md px-8">
+                <p class="text-3xl font-monserat font-semibold py-10">Current Order</p> 
 
-                <!-- menu items section -->
-                <div class="flex flex-wrap">
-                    <div class="card">
-                        <div class="card__div" style="background-image: url('images/menu1.jpg')">
+                <!-- orders -->
+                <div class="flex flex-col space-y-6">
+                    <div class="flex space-x-4">
+                        <div class="h-16 w-32 rounded-md" style="background-image: url('/static/images/menu9.jpg'); background-size:cover; background-position: center;">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="card__title h-1/2 text-base">Almond Brown Sugar Croissant</p>
+                            <div class="h-1/2 flex items-end justify-between">
+                                <p class="text-lg font-semibold text-mainColor">$10.01</p>
+                                <div class="flex space-x-3">
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor/50 rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/android/24/ffffff/plus.png" class="h-4 w-4"/>
+                                    </span>
+                                    <p class="">1</p>
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/minus-math.png"/>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> 
-            </div>
-            <div class="col-span-3 bg-white shadow-md">
-                3
+                    <div class="flex space-x-4">
+                        <div class="h-16 w-32 rounded-md" style="background-image: url('/static/images/menu3.jpg'); background-size:cover; background-position: center;">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="card__title h-1/2 text-base">Almond Brown Sugar Croissant</p>
+                            <div class="h-1/2 flex items-end justify-between">
+                                <p class="text-lg font-semibold text-mainColor">$10.01</p>
+                                <div class="flex space-x-3">
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/android/24/ffffff/plus.png" class="h-4 w-4"/>
+                                    </span>
+                                    <p class="">2</p>
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/minus-math.png"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <div class="h-16 w-32 rounded-md" style="background-image: url('/static/images/menu8.jpg'); background-size:cover; background-position: center;">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="card__title h-1/2 text-base">Almond Brown Sugar Croissant</p>
+                            <div class="h-1/2 flex items-end justify-between">
+                                <p class="text-lg font-semibold text-mainColor">$10.01</p>
+                                <div class="flex space-x-3">
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer" >
+                                        <img src="https://img.icons8.com/android/24/ffffff/plus.png" class="h-4 w-4"/>
+                                    </span>
+                                    <p class="">4</p>
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/minus-math.png"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <div class="h-16 w-32 rounded-md" style="background-image: url('/static/images/menu4.jpg'); background-size:cover; background-position: center;">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="card__title h-1/2 text-base">Almond Brown Sugar Croissant</p>
+                            <div class="h-1/2 flex items-end justify-between">
+                                <p class="text-lg font-semibold text-mainColor">$10.01</p>
+                                <div class="flex space-x-3">
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor/50 rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/android/24/ffffff/plus.png" class="h-4 w-4"/>
+                                    </span>
+                                    <p class="">1</p>
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/minus-math.png"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

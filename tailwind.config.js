@@ -36,6 +36,9 @@ module.exports = {
         'scale': 'scale 3s linear infinite',
       }
     },
+    data: {
+      pressed: "pressed ~= 'aria-pressed' "
+    }
   },
   plugins: [
     require('flowbite/plugin')

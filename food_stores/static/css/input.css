@@ -11,18 +11,23 @@
 }
 
 .card{
-    @apply bg-white rounded-lg shadow-md w-[220px] h-[320px]
+    @apply bg-white rounded-lg shadow-md w-[240px] h-[330px] p-2 hover:shadow-2xl transition-all
 }
 .selection-btn{
-    @apply text-black bg-white px-5 py-1 font-medium font-spartan focus:bg-mainColor focus:text-white hover:bg-mainColor/30 hover:text-white hover:cursor-pointer
+    @apply text-black bg-white px-5 py-1 rounded-full font-medium font-spartan focus:bg-mainColor focus:text-white hover:bg-mainColor/30 hover:text-white hover:cursor-pointer
 }
 .card__div{
-    @apply h-12 bg-cover bg-center w-full block border-2
+    @apply h-12 bg-cover bg-center w-full block rounded-tl-lg rounded-tr-lg
+}
+.card__title{
+    @apply text-lg font-semibold
+}
+.card_description{
+    @apply text-sm text-gray-400
 }
 .main::-webkit-scrollbar {
     display: none;
   }
-  
   /* Hide scrollbar for IE, Edge and Firefox */
   .main {
     -ms-overflow-style: none;  /* IE and Edge */
