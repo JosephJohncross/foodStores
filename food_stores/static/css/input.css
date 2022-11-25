@@ -6,10 +6,11 @@
     @apply italic text-red-500 text-[10px] pt-2;
 }
 .customer-body{
-    display: grid;
     grid-template-columns: 150px 1fr;
 }
-
+.customer-body{
+    @apply block md:grid  
+}
 .card{
     @apply bg-white rounded-lg shadow-md w-[240px] h-[330px] p-2 hover:shadow-2xl transition-all
 }
@@ -20,16 +21,17 @@
     @apply h-12 bg-cover bg-center w-full block rounded-tl-lg rounded-tr-lg
 }
 .card__title{
-    @apply text-lg font-semibold
+    @apply text-base lg:text-lg font-semibold
 }
 .card_description{
     @apply text-sm text-gray-400
 }
-.main::-webkit-scrollbar {
+.main::-webkit-scrollbar,
+#orders_list::-webkit-scrollbar {
     display: none;
   }
   /* Hide scrollbar for IE, Edge and Firefox */
-  .main {
+  .main, .orders_list{
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
