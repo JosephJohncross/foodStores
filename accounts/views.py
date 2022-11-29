@@ -8,6 +8,7 @@ from vendor.forms import VendorForm
 from .forms import UserForm
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.decorators.csrf import csrf_protect
 
 from django.core.exceptions import  PermissionDenied
 from .tokens import account_activation_token
@@ -129,7 +130,7 @@ def registerVendor(request):
     }
     return render(request, 'accounts/registerVendor.html', context)
 
-
+@csrf_protect
 def login(request):
     global message_state
 
