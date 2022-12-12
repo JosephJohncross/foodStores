@@ -27,3 +27,4 @@ function slideDrawer(){
         sideDrawer.classList.add('translate-x-full')
     }
 }
+

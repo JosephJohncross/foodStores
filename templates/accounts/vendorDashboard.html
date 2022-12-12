@@ -1,12 +1,181 @@
 {% extends 'base.html' %}
-
+{% load static%}
 {% block content %}
+{% include 'includes/dashboardMobileHeader.html' %}
 
-<div class="absolute top-1/2 left-1/2 text-black"> 
-    <h1 class="">Welcome {{ user.first_name }}</h1>
-    <p>Your role is {{ user.get_role}}</p>
-</div>
-{%include 'includes/alerts.html'%}
+<section class="customer-body h-screen grid-cols-[150px 1fr] overflow-hidden main dark:bg-[#090938]">
+    
+        {% include 'includes/vendorSideBar.html'%}
+        
+        <div class="orders_list h-screen overflow-scroll main pb-20">
+            <div class="hidden px-14 py-7 shadow-md font-bold text-2xl sticky top-0 bg-white md:flex md:justify-between md:items-center dark:text-white dark:bg-[#0f0f56] z-20">
+                <p class="dark:text-[#7EC8E3]">Dashboard</p>
+            </div>
+            <div class="md:px-16 flex flex-col gap-y-10">
+                <div class="group aria flex flex-wrap justify-between items-center main pt-10">
+                    <button href="" class="group outline-none">
+                        <div class="dashboard-card group-focus:bg-[#eb94ce] group-focus:text-white dark:group-focus:shadow-darkCard1">
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col items-start">
+                                    <p class="dashboard-card-number">120</p>
+                                    <p class="dashboard-item">Total Menu</p>
+                                </div>
+                                <div class="p-1 bg-white group-focus:bg-white rounded-lg">
+                                    <img src="https://img.icons8.com/ios-filled/30/null/menu-squared-2.png"/>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="bg-[#eb94ce] group-focus:bg-black h-2.5 rounded-full dark:group-focus:bg-white" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                    <button href="" class="group outline-none">
+                        <div class="dashboard-card group-focus:bg-[#82b0e3] group-focus:text-white dark:group-focus:shadow-darkCard2">
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col items-start">
+                                    <p class="dashboard-card-number">150</p>
+                                    <p class="dashboard-item">Total Orders Today</p>
+                                </div>
+                                <div class="p-1 bg-white group-focus:bg-white rounded-lg">
+                                    <img src="https://img.icons8.com/ios-glyphs/30/null/shopping-bag.png"/>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="bg-[#82b0e3] group-focus:bg-black h-2.5 rounded-full dark:group-focus:bg-white" style="width: 36%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                    <button href="" class="group outline-none">
+                        <div class="dashboard-card group-focus:bg-[#a1e5af] group-focus:text-white dark:group-focus:shadow-darkCard3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col items-start">
+                                    <p class="dashboard-card-number">240</p>
+                                    <p class="dashboard-item">Total Client Today</p>
+                                </div>
+                                <div class="p-1 bg-white group-focus:bg-white rounded-lg">
+                                    <img src="https://img.icons8.com/ios-glyphs/30/null/conference-call--v1.png"/>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="bg-[#a1e5af] group-focus:bg-black h-2.5 rounded-full dark:group-focus:bg-white" style="width: 53%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                    <button href="" class="group outline-none">
+                        <div class="dashboard-card group-focus:bg-[#fa8e29] group-focus:text-white dark:group-focus:shadow-darkCard4">
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col items-start">
+                                    <p class="dashboard-card-number">140</p>
+                                    <p class="dashboard-item">Revenue Day Ratio</p>
+                                </div>
+                                <div class="p-1 bg-white group-focus:bg-white rounded-lg">
+                                    <img src="https://img.icons8.com/ios-glyphs/30/null/combo-chart--v1.png"/>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="bg-[#fa8e29] group-focus:bg-black h-2.5 rounded-full dark:group-focus:bg-white" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="flex flex-wrap md:justify-between justify-center">
+                    <div id="container" class="w-[44%] min-w-[44%] h-80 flex bg-white rounded-md shadow-shadow1 px-3 py-3">
+
+                    </div>
+                    <div id="barChart" class="w-[44%] min-w-[44%] h-80 bg-white rounded-md shadow-shadow1 px-3 py-5"></div>
+                </div>
+                <div class="shadow-shadow1 px-10 py-8 rounded-md">
+                    <div class="flex justify-between items-center mb-8">
+                        <p class="text-xl font-monserat font-semibold dark:text-[#7EC8E3]">Order List</p>
+                        <div class="">
+                            <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Monthly</button>
+                            <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Weekly</button>
+                            <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Today</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col space-y-3">
+                        <table class="table-auto">
+                            <thead class="bg-gray-100 rounded-lg px-3 py-3 dark:bg-[#000C66]">
+                              <tr class="text-start text-gray-500 dark:text-white">
+                                <td class="text-start px-2 py-2 text-sm font-medium">No</td>
+                                <td class="text-start px-2 py-2 text-sm font-medium">ID</td>
+                                <td class="text-start px-2 py-2 text-sm font-medium">Date</td>
+                                <td class="text-start px-2 py-2 text-sm font-medium">Customer Name</td>
+                                <td class="text-start px-2 py-2 text-sm font-medium">Location</td>
+                                <td class="text-start px-2 py-2 text-sm font-medium">Amount</td>
+                                <td class="text-start px-2 py-2 text-sm font-medium">Status Order</th>
+                                <td class="text-start px-2 py-2 text-sm font-medium">Action</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-start dark:text-gray-400">
+                                    <td class="text-start px-2 py-3">1</td>
+                                    <td class="text-start px-2 py-3">#82636</td>
+                                    <td class="text-start px-2 py-3">24 Jun 2022</td>
+                                    <td class="text-start px-2 py-3">Robert Kiosaki</td>
+                                    <td class="text-start px-2 py-3">West Minister Abbey, London</td>
+                                    <td class="text-start px-2 py-3">$23.56</td>
+                                    <td class="text-center text-[.75rem]">
+                                        <span class="new">New Order</span>
+                                    </th>
+                                    <td class="text-start px-2 py-2 cursor-pointer">...</td>
+                                </tr>
+                                <tr class="text-start mt-4 dark:text-gray-400">
+                                    <td class="text-start px-2 py-2">2</td>
+                                    <td class="text-start px-2 py-2">#34458</td>
+                                    <td class="text-start px-2 py-2">6th July 2022</td>
+                                    <td class="text-start px-2 py-2">Nania Ancher</td>
+                                    <td class="text-start px-2 py-2">34 Chin Xui district</td>
+                                    <td class="text-start px-2 py-2">$56.89</td>
+                                    <td class="text-start text-[.75rem]">
+                                        <span class="delivery">On Delivery</span>
+                                    </th>
+                                    <td class="text-start px-2 py-2 cursor-pointer">...</td>
+                                </tr>
+                             
+                            </tbody>
+                          </table>
+<!--                         
+                        <ul class="grid grid-cols-8 ">
+                            <li class="text-sm text-gray-500 font-medium">No</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">ID</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Date</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Customer Name</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Location</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Amount</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Status Order</li>
+                            <li class="text-sm text-gray-500 font-medium text-end">Action</li>
+                        </ul>
+                        <ul class="grid grid-cols-8">
+                            <li class="text-sm text-gray-500 font-medium">1</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">#63646</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Jan 24th 2022</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Jordan Rbertson</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">Corner street 5th London</li>
+                            <li class="text-sm text-gray-500 font-medium text-center">$34.20</li>
+                            <li class="new-order"></li>
+                            <li class="text-sm text-gray-500 font-medium text-end">Action</li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- drawer init and toggle -->
+        <div class="text-center fixed bottom-0 left-0 w-full bg-black/20 rounded-tr-lg backdrop-blur-sm md:hidden">
+            <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe" data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-0" aria-controls="drawer-swipe">
+                <span class="absolute w-8 h-1 -translate-x-1/2 bg-white rounded-tl-lg rounded-tr-lg top-3 left-1/2"></span>
+            </div>
+         </div>
+ 
+</section>
 
 {% endblock %}
-    

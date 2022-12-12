@@ -35,3 +35,24 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  .dashboard-card{
+    @apply flex flex-col justify-between rounded-md font-monserat p-4 w-64 h-40 bg-white border-2 border-slate-400/30
+  }
+  .dashboard-card-number{
+    @apply text-black font-bold text-lg  group-focus:text-white transition-colors
+  }
+  .dashboard-item{
+    @apply text-base text-slate-400 group-focus:text-white transition-colors
+  }
+  .dashboard-item-img{
+    @apply p-2 rounded-md w-4 h-4 block
+  }
+
+  .new{
+    @apply px-3 py-1 bg-gray-300/30 rounded-full block w-max font-medium
+    
+  }
+  .delivery{
+    @apply px-3 py-1 bg-[#bfcedf] rounded-full block w-max font-medium text-[#7aabe2]
+  }

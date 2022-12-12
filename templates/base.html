@@ -10,24 +10,72 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" integrity="sha512-4wfcoXlib1Aq0mUtsLLM74SZtmB73VHTafZAvxIp/Wk9u1PpIsrfmTvK0+yKetghCL8SHlZbMyEcV8Z21v42UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
 		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+		<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+		<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+		<style type="text/css"></style>
 		<link rel="stylesheet" href={% static 'css/output.css' %} >
+		
 	</head>
 	<body>
 		<div class="page-loader">
 			
 		</div>
-
+		
 		<!--header content-->
 		<!--main content-->
 		{% block content%}
-
+		
 		{% endblock%}
 		<!--footer content-->
 		
-
+		
 		<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-		<script src={% static 'js/custom.js' %}></script>
+		<script src={% static 'js/site.js' %}></script>
+		<script>
+			const toggleDark = document.getElementById("toggleTheme")
+			// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+			if (localStorage.theme === 'dark' || (!('theme' in localStorage))) {
+				document.documentElement.classList.add('dark')
+				toggleDark.select()
+				toggleDark.click()
+			} else {
+				document.documentElement.classList.remove('dark')
+				if (toggleDark.checked){
+					toggleDark.select()
+					toggleDark.click()
+				}
+			}
+
+			// Whenever the user explicitly chooses light mode
+			localStorage.theme = 'light'
+
+			// Whenever the user explicitly chooses dark mode
+			localStorage.theme = 'dark'
+
+			// Whenever the user explicitly chooses to respect the OS preference
+			localStorage.removeItem('theme')
+			
+toggleDark.addEventListener('click', ()=> {
+    if (toggleDark.checked){
+        if (!document.documentElement.classList.contains('dark')){
+            document.documentElement.classList.add('dark');
+			localStorage.theme = 'dark'
+        }
+    }
+    else{
+        if (document.documentElement.classList.contains('dark')){
+            document.documentElement.classList.remove('dark');
+			localStorage.theme = 'light'
+        }
+    }
+})
+		</script>
+		<script src={% static 'js/anychart.js' %}></script>
 	</body>
 
 </html>

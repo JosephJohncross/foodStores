@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'accounts.context_processor.get_vendor',
             ],
         },
     },
@@ -152,5 +153,5 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-CSRF_TRUSTED_ORIGINS = ['https://50a9-129-205-113-147.eu.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ['https://a95c-197-210-55-200.eu.ngrok.io']
 SECUREE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

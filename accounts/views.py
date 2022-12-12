@@ -9,6 +9,7 @@ from .forms import UserForm
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.csrf import csrf_protect
+from vendor.models import Vendor
 
 from django.core.exceptions import  PermissionDenied
 from .tokens import account_activation_token
@@ -109,7 +110,7 @@ def registerVendor(request):
             vendor.save()
 
             #Send verification email
-            mail_subject = "Please acivate your account"
+            mail_subject = "Please activate your account"
             email_template = 'accounts/emails/account_verification_email.html'
             send_verification_email(request, user, mail_subject, email_template)
             
@@ -174,7 +175,6 @@ def myAccount(request):
 @user_passes_test(check_role_customer)
 def customerDashboard(request):
     return render(request, 'accounts/customerDashboard.html')
-
 
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
