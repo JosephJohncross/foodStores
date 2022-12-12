@@ -26,11 +26,11 @@ module.exports = {
       boxShadow: {
         'shadow1': '0 0 15px rgba(0,0,0,0.25)',
         'darkShadow1': '0px 0px 50px 5px #0ff',
-        'darkCard1': '0px 0px 50px 5px #eb94ce',
-        'darkCard2': '0px 0px 50px 5px #82b0e3',
-        'darkCard3': '0px 0px 50px 5px #82b0e3',
-        'darkCard4': '0px 0px 50px 5px #a1e5af',
-        'darkCard4': '0px 0px 50px 5px #fa8e29',
+        'darkCard1': '0px 0px 50px 7px #eb94ce',
+        'darkCard2': '0px 0px 50px 7px #82b0e3',
+        'darkCard3': '0px 0px 50px 7px #82b0e3',
+        'darkCard4': '0px 0px 50px 7px #a1e5af',
+        'darkCard4': '0px 0px 50px 7px #fa8e29',
       },
       keyframes: {
         scale: {
