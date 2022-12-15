@@ -14,7 +14,7 @@
                 <div class="w-28 h-28 block bg-white py-2 rounded-lg border-2 px-4 brightness-100 bg-center bg-contain" style="background-image: url({{vendor.user_profile.profile_picture.url}})"></div>
                 <div class="">
                     <p class="text-slate-400 text-2xl">{{vendor.vendor_name}}</p>
-                    <p class="text-white/90">{{vendor.user_profile.get_full_address}}</p>
+                    <p class="text-white/90">{{vendor.user_profile.address}}</p>
                 </div>
             </div>
         </div>
@@ -27,63 +27,70 @@
                     <div class="w-28 h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.profile_picture.url}})"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">Profile Picture</p>
-                        {{profile_form.profile_picture}}
+                        <div class="flex-col space-y-3 flex">
+                            <span>{{profile_form.profile_picture}}</span>                            
+                            {{profile_form.profile_picture.errors}}
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center py-14 md:space-x-16 px-4 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
                     <div class="w-28 h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.cover_photo.url}})"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">Cover Photo</p>
-                        {{profile_form.cover_photo}}
+                        <div class="flex-col space-y-3 flex">
+                            <span>{{profile_form.cover_photo}}</span>                            
+                            {{profile_form.cover_photo.errors}}
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center py-14 md:space-x-16 px-4 md:px-8 border-gray-500" style="border: 1px solid rgba(107, 114, 128, 1);">
                     <div class="w-28 h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{vendor.vendor_license.url}})"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">License</p>
-                        {{vendor_form.vendor_license}}
-                    </div>
+                        <div class="flex-col space-y-3 flex">
+                            <span>{{vendor_form.vendor_license}}</span>                            
+                            {{vendor_form.vendor_license.errors}}
+                        </div>                        
+                    </div>                    
                 </div>
-                <div class="pt-10">
-                    <div class="relative max-w-4xl">
-                        <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Restaurant Name</label>
-                        {{vendor_form.vendor_name}}
+                <div style="border: 1px solid rgba(107, 114, 128, 1);" class="md:px-8 flex flex-col space-y-5 py-10">
+                    <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-4xl">
+                        <div class="">
+                            <div class="relative max-w-4xl">
+                                <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Restaurant Name</label>
+                                {{vendor_form.vendor_name}}
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Address</label>
+                            {{profile_form.address}}
+                        </div>
+                        <div class="relative">
+                            {{profile_form.country}}
+                            <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Country</label>
+                        </div>  
+                        <div class="relative">
+                            {{profile_form.state}}
+                            <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">State</label>
+                        </div>
+                        <div class="relative">
+                            {{profile_form.city}}
+                            <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">City</label>
+                        </div>
+                        <div class="relative">
+                            {{profile_form.pin_code}}
+                            <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pin Code</label>
+                        </div>
+                        <div class="relative">
+                            {{profile_form.latitude}}
+                            <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Latitude</label>
+                        </div>
+                        <div class="relative">
+                            {{profile_form.longitude}}
+                            <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-3 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Longitude</label>
+                        </div>
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="max-width: min-content;">Submit</button>
                     </div>
-                </div>
-                <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-4xl">
-                    <div class="relative">
-                        <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Address Line 1</label>
-                        {{profile_form.address_line_1}}
-                    </div>
-                    <div class="relative">
-                        {{profile_form.address_line_2}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Address Line 2</label>
-                    </div>
-                    <div class="relative">
-                        {{profile_form.country}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Country</label>
-                    </div>  
-                    <div class="relative">
-                        {{profile_form.state}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">State</label>
-                    </div>
-                    <div class="relative">
-                        {{profile_form.city}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">City</label>
-                    </div>
-                    <div class="relative">
-                        {{profile_form.pin_code}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pin Code</label>
-                    </div>
-                    <div class="relative">
-                        {{profile_form.latitude}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Latitude</label>
-                    </div>
-                    <div class="relative">
-                        {{profile_form.longitude}}
-                        <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-3 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Longitude</label>
-                    </div>
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="max-width: min-content;">Submit</button>
                 </div>
             </form>
         </div>
