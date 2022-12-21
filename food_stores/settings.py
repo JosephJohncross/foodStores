@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'accounts.context_processor.get_vendor',
+                'accounts.context_processor.get_google_api',
             ],
         },
     },
@@ -155,3 +156,5 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
 CSRF_TRUSTED_ORIGINS = ['https://a95c-197-210-55-200.eu.ngrok.io']
 SECUREE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+GOOGLE_API_KEY = config('GOOGLE_API_KEY')

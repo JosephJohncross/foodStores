@@ -1145,6 +1145,10 @@ input:checked + .toggle-bg {
   z-index: 30;
 }
 
+.z-\[15\] {
+  z-index: 15;
+}
+
 .col-span-7 {
   grid-column: span 7 / span 7;
 }
@@ -1677,12 +1681,6 @@ input:checked + .toggle-bg {
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .overflow-auto {
   overflow: auto;
 }
@@ -1821,11 +1819,6 @@ input:checked + .toggle-bg {
 .border-blue-700 {
   --tw-border-opacity: 1;
   border-color: rgb(26 86 219 / var(--tw-border-opacity));
-}
-
-.border-gray-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
 .border-blue-600 {
@@ -2129,6 +2122,10 @@ input:checked + .toggle-bg {
 
 .pr-16 {
   padding-right: 4rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .pt-2 {
@@ -3495,6 +3492,10 @@ input:checked + .toggle-bg {
     height: 1rem;
   }
 
+  .md\:h-28 {
+    height: 7rem;
+  }
+
   .md\:w-32 {
     width: 8rem;
   }
@@ -3505,6 +3506,10 @@ input:checked + .toggle-bg {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-28 {
+    width: 7rem;
   }
 
   .md\:translate-x-0 {
@@ -3585,14 +3590,38 @@ input:checked + .toggle-bg {
     margin-bottom: calc(0px * var(--tw-space-y-reverse));
   }
 
-  .md\:space-x-5 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(1.25rem * var(--tw-space-x-reverse));
-    margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
   .md\:border-0 {
     border-width: 0px;
+  }
+
+  .md\:border-2 {
+    border-width: 2px;
+  }
+
+  .md\:border-\[1px\] {
+    border-width: 1px;
+  }
+
+  .md\:border-slate-500 {
+    --tw-border-opacity: 1;
+    border-color: rgb(100 116 139 / var(--tw-border-opacity));
+  }
+
+  .md\:border-slate-400 {
+    --tw-border-opacity: 1;
+    border-color: rgb(148 163 184 / var(--tw-border-opacity));
+  }
+
+  .md\:border-slate-400\/50 {
+    border-color: rgb(148 163 184 / 0.5);
+  }
+
+  .md\:border-slate-500\/70 {
+    border-color: rgb(100 116 139 / 0.7);
+  }
+
+  .md\:border-slate-500\/80 {
+    border-color: rgb(100 116 139 / 0.8);
   }
 
   .md\:bg-white {
@@ -3637,6 +3666,11 @@ input:checked + .toggle-bg {
   .md\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  .md\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .md\:pt-0 {

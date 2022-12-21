@@ -19,7 +19,6 @@
 		<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
 		<style type="text/css"></style>
 		<link rel="stylesheet" href={% static 'css/output.css' %} >
-		
 	</head>
 	<body>
 		<div class="page-loader">
@@ -29,13 +28,13 @@
 		<!--header content-->
 		<!--main content-->
 		{% block content%}
-		
-		{% endblock%}
+		{% endblock %}
 		<!--footer content-->
 		
-		
-		<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+		{% block link %}
+		{% endblock link %}
 		<script src={% static 'js/site.js' %}></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete" async defer></script>
 		<script>
 			const toggleDark = document.getElementById("toggleTheme")
 			// On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -54,7 +53,7 @@
 				localStorage.theme = 'light'
 			}
 		
-toggleDark.addEventListener('click', ()=> {
+			toggleDark.addEventListener('click', ()=> {
     if (toggleDark.checked){
         if (!document.documentElement.classList.contains('dark')){
             document.documentElement.classList.add('dark');
@@ -69,7 +68,7 @@ toggleDark.addEventListener('click', ()=> {
     }
 })
 		</script>
-		<script src={% static 'js/anychart.js' %}></script>
+		
 	</body>
 
 </html>

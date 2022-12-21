@@ -1,15 +1,15 @@
 
 {% extends 'base.html' %}
-{% load static%}
+{% load static %}
+
 {% block content %}
 {% include 'includes/dashboardMobileHeader.html' %}
 <section class="customer-body h-screen grid-cols-[150px 1fr]">
-    {% include 'includes/alerts.html' %}
-
-    {% include 'includes/vendorSideBar.html' %}
+    {% include 'includes/alerts.html'%} 
+    {% include 'includes/vendorSideBar.html'%}
     
-    <div class="block w-full bg-gray-200/50 h-screen dark:bg-[#090938] overflow-scroll main">
-        <div class="sticky top-0 w-full h-56 block bg-center bg-cover z-20 after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0 after:bg-black/50" style="background-image: url({{vendor.user_profile.cover_photo.url}})">
+    <div class="block w-full bg-gray-200/50 h-screen dark:bg-[#090938] overflow-scroll main pt-20 md:pt-0">
+        <div class="sticky top-0 w-full h-56 block bg-center bg-cover z-[15] after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0 after:bg-black/50" style="background-image: url({{vendor.user_profile.cover_photo.url}})">
             <div class="absolute top-1/3 md:left-16 flex gap-6 font-semibold items-end z-10">
                 <div class="w-28 h-28 block bg-white py-2 rounded-lg border-2 px-4 brightness-100 bg-center bg-contain" style="background-image: url({{vendor.user_profile.profile_picture.url}})"></div>
                 <div class="">
@@ -19,12 +19,12 @@
             </div>
         </div>
         
-        <div class="py-10 mx-auto mt-10 font-monserat">
+        <div class="py-10 mx-auto mt-10 font-monserat px-4 md:px-2">
             <p class="text-3xl dark:text-[#7EC8E3] md:px-16 mb-12">Profile Settings</p>            
             <form class="md:px-16 flex flex-col space-y-6" action={% url 'vprofile' %} method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="flex items-center py-14 md:space-x-16 px-4 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
-                    <div class="w-28 h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.profile_picture.url}})"></div>
+                <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
+                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.profile_picture.url}})"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">Profile Picture</p>
                         <div class="flex-col space-y-3 flex">
@@ -33,8 +33,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center py-14 md:space-x-16 px-4 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
-                    <div class="w-28 h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.cover_photo.url}})"></div>
+                <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
+                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.cover_photo.url}})"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">Cover Photo</p>
                         <div class="flex-col space-y-3 flex">
@@ -43,8 +43,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center py-14 md:space-x-16 px-4 md:px-8 border-gray-500" style="border: 1px solid rgba(107, 114, 128, 1);">
-                    <div class="w-28 h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{vendor.vendor_license.url}})"></div>
+                <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
+                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{vendor.vendor_license.url}})"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">License</p>
                         <div class="flex-col space-y-3 flex">
@@ -53,9 +53,9 @@
                         </div>                        
                     </div>                    
                 </div>
-                <div style="border: 1px solid rgba(107, 114, 128, 1);" class="md:px-8 flex flex-col space-y-5 py-10">
+                <div class="md:px-8 flex flex-col space-y-5 py-10 md:border-slate-500/80 md:border-[1px]">
                     <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-4xl">
-                        <div class="">
+                        <div class="">  
                             <div class="relative max-w-4xl">
                                 <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Restaurant Name</label>
                                 {{vendor_form.vendor_name}}
@@ -95,5 +95,15 @@
             </form>
         </div>
     </div>
+    <!-- drawer init and toggle -->
+    <div class="text-center fixed bottom-0 left-0 w-full bg-black/20 rounded-tr-lg backdrop-blur-sm md:hidden">
+        <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe" data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-0" aria-controls="drawer-swipe">
+            <span class="absolute w-8 h-1 -translate-x-1/2 bg-white rounded-tl-lg rounded-tr-lg top-3 left-1/2"></span>
+        </div>
+     </div>
 </section>
 {% endblock %}
+
+{% block link %}
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+{% endblock link %}

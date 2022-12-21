@@ -175,7 +175,11 @@
                 <span class="absolute w-8 h-1 -translate-x-1/2 bg-white rounded-tl-lg rounded-tr-lg top-3 left-1/2"></span>
             </div>
          </div>
- 
 </section>
 
 {% endblock %}
+
+{% block link %}
+    <script src={% static 'js/anychart.js' %}></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+{% endblock link %}

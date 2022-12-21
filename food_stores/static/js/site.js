@@ -1,3 +1,4 @@
+const axios = require('axios');
 const menuSelect = document.getElementById('menu-select')
 const selectionBtn = document.querySelectorAll('.selection-btn')
 const closeOrder = document.getElementById('close-order');
@@ -28,3 +29,27 @@ function slideDrawer(){
     }
 }
 
+let autocomplete;
+
+function initAutoComplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('id_address'),{
+            types: ['geocode', 'establishment'],
+            componentRestrictions: {'country': ['in', 'us']}
+        }
+    )
+    //Product to specify what should happen when the product is clicked
+    autocomplete.addEventListener('place_changed', onPlaceChanged)
+}
+
+function onPlaceChanged(){
+    var place = autocomplete.getPlace();
+
+    //user did not select the prediction, reset the input field or alert()
+    if (!place.geometry){
+        document.getElementById('id_address').placeholder = "start typing..."
+    }else{
+        console.log('place name => ', place.name)
+    }
+    //get the address omponent and assign them to the fields
+}
