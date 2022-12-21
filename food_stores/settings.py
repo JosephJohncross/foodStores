@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'vendor',
     'livereload',
+    'menu',
 ]
 
 MIDDLEWARE = [
