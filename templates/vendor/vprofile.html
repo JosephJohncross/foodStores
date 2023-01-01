@@ -9,22 +9,14 @@
     {% include 'includes/vendorSideBar.html'%}
     
     <div class="block w-full bg-gray-200/50 h-screen dark:bg-[#090938] overflow-scroll main pt-20 md:pt-0">
-        <div class="sticky top-0 w-full h-56 block bg-center bg-cover z-[15] after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0 after:bg-black/50" style="background-image: url({{vendor.user_profile.cover_photo.url}})">
-            <div class="absolute top-1/3 md:left-16 flex gap-6 font-semibold items-end z-10">
-                <div class="w-28 h-28 block bg-white py-2 rounded-lg border-2 px-4 brightness-100 bg-center bg-contain" style="background-image: url({{vendor.user_profile.profile_picture.url}})"></div>
-                <div class="">
-                    <p class="text-slate-400 text-2xl">{{vendor.vendor_name}}</p>
-                    <p class="text-white/90">{{vendor.user_profile.address}}</p>
-                </div>
-            </div>
-        </div>
-        
+       
+        {% include 'vendor/vendorHero.html' %}
         <div class="py-10 mx-auto mt-10 font-monserat px-4 md:px-2">
             <p class="text-3xl dark:text-[#7EC8E3] md:px-16 mb-12">Profile Settings</p>            
             <form class="md:px-16 flex flex-col space-y-6" action={% url 'vprofile' %} method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
-                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.profile_picture.url}})"></div>
+                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url('{% if profile.profile_picture %}{{profile.profile_picture.url}} {% else %}{% static 'images/default_vendor_profile.jpg' %}{% endif %}')"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">Profile Picture</p>
                         <div class="flex-col space-y-3 flex">
@@ -34,7 +26,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
-                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url({{profile.cover_photo.url}})"></div>
+                    <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url('{% if profile.cover_photo %}{{profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')"></div>
                     <div class="flex flex-col space-y-4">
                         <p class="dark:text-[#7EC8E3]">Cover Photo</p>
                         <div class="flex-col space-y-3 flex">
