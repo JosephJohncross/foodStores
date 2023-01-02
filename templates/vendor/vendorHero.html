@@ -1,7 +1,7 @@
 {% load static %}
-<div class="relative w-full h-56 block bg-center bg-cover z-[15] after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0 after:bg-black/50" style="background-image: url('{% if profile.cover_photo %}{{profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')">
+<div class="relative w-full h-56 block bg-center bg-cover z-[15] after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0 after:bg-black/50" style="background-image: url('{% if vendor.user_profile.cover_photo %}{{vendor.user_profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')">
     <div class="absolute top-1/3 md:left-16 flex gap-6 font-semibold items-end z-10">
-        <div class="w-28 h-28 block bg-white py-2 rounded-lg border-2 px-4 brightness-100 bg-center bg-contain" style="background-image: url('{% if profile.profile_picture %}{{profile.profile_picture.url}} {% else %}{% static 'images/default_vendor_profile.jpg' %}{% endif %}')""></div>
+        <div class="w-28 h-28 block bg-white py-2 rounded-lg border-2 px-4 brightness-100 bg-center bg-contain" style="background-image: url('{% if vendor.user_profile.profile_picture %}{{vendor.user_profile.profile_picture.url}} {% else %}{% static 'images/default_vendor_profile.jpg' %}{% endif %}')""></div>
         <div class="">
             <p class="text-slate-400 text-2xl">{{vendor.vendor_name}}</p>
             {% if vendor.user_profile.address %}

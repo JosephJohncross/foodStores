@@ -3,12 +3,16 @@
 {% load static %}
 
 {% block content%}
+<section class="container">
 {% include 'includes/header.html' %}
-    <section class="">
-        <div  style="background-image: url('static/images/home-bg.jpg'); height:100vh; background-size:cover; background-position: center;">
+    <div class="flex">
+
+        <div class="" style="background-image: url('static/images/home-bg.jpg'); height:100vh; background-size:cover; background-position: center;">
              
         </div>
-    </section>
+    </div>
+</section>
 {% include 'includes/footer.html' %}
 {% endblock %}
 
+bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-orange-400 via-orange-500 to-orange-400
