@@ -1,17 +1,41 @@
 {% load static%}
 
 <nav
-  class="bg-white px-2 sm:px-4 py-5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600 shadow-lg font-spartan"
+  class="bg-white px-2 sm:px-4 py-5 sticky w-full z-20 top-0 left-0 dark:border-gray-600 font-spartan" 
 >
-  <div class="container flex flex-wrap md:flex-nowrap justify-around items-center mx-auto">
+  <div class="flex justify-between items-center md:px-10">
     
-	<a href={% url "homepage" %} class="flex items-center">
-      <img
-        src="{% static 'images/doughnut.png' %}"
-        class="mr-3 h-6 sm:h-9"
-        alt="FoodStores logo"
-      />
+    <a href={% url "homepage" %} class="flex items-center w-full">
+        <img
+          src="{% static 'images/doughnut.png' %}"
+          class="mr-3 h-6 sm:h-9"
+          alt="FoodStores logo"
+        />
     </a>
+    
+    <ul class="w-full flex space-x-11">
+      <li class="">
+        <a
+          href=""
+          class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
+          >Home</a
+        >
+      </li>
+      <li class="">
+        <a
+          href=""
+          class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700  after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
+          >About Us</a
+        >
+      </li>
+      <li class="">
+        <a
+          href=""
+          class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700  after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
+          >How it Works</a
+        >
+      </li>
+    </ul>
 
     <div class="flex md:order-2">
       <button
@@ -38,31 +62,18 @@
       </button>
     </div>
 
-	<div class="hidden md:justify-end md:space-x-10 items-center w-full md:flex md:w-full md:order-1" id="navbar-sticky">
-      <form class="hidden md:flex">
-        <div class="flex">
-          <label for="location-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
-          
-          <div class="relative w-full">
-            <input type="text" id="location-search" class="block rounded-sm pr-16 w-full z-20 text-sm text-gray-900 bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search for city or address" required >
-            <button type="submit" class="absolute top-0 right-0 rounded-r-sm h-full p-2.5 text-sm font-medium text-white bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-              <span class="sr-only">Search</span>
-            </button>
-          </div>
-        </div>
-      </form>
+	  <div class="hidden md:justify-end md:space-x-10 items-center md:flex md:order-1 w-full" id="navbar-sticky">
       <ul class="flex flex-col shadow-lg md:shadow-none p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         {% if user.is_authenticated%}
           <li>
             <a
               href="{% url 'myAccount'%}"
-              class="block py-2 pr-4 pl-3 text-base text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >My Accounts</a
             >
             <a
               href="{% url 'logout'%}"
-              class="block py-2 pr-4 pl-3 text-base text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Logout</a
             >
           </li>
@@ -70,24 +81,25 @@
           <li>
             <a
               href="{% url 'login'%}"
-              class="block py-2 pr-4 pl-3 text-base text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >Login</a
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              >
+              Login</a
             >
           </li>
           <li>
             <a
               href="{% url 'registerUser' %}"
-              class="block py-2 pr-4 pl-3 text-base text-gray-700 rounded hover:bg-gray- md:text-lg md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray- md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Register</a
             >
           </li>
-          <li>
+          <!-- <li>
             <a
               href="{% url 'registerVendor' %}"
               class="block py-2 pr-4 pl-3 text-base text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Register Restaurant</a
             >
-          </li>
+          </li> -->
         {% endif %}
       </ul>
     </div>

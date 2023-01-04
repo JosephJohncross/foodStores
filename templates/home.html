@@ -3,16 +3,128 @@
 {% load static %}
 
 {% block content%}
-<section class="container">
+<section class="container mx-auto">
 {% include 'includes/header.html' %}
-    <div class="flex">
-
-        <div class="" style="background-image: url('static/images/home-bg.jpg'); height:100vh; background-size:cover; background-position: center;">
-             
+ 
+<div class="py-32 container md:px-12 bg-center bg-no-repeat bg-cover" style="background-image: url('{% static 'images/home_landing.jpg'%}');">
+    <div class="">
+        <div class="font-monserat mb-4">
+            <p class="text-5xl text-mainColor font-medium">Good Food</p>
+            <p class="text-5xl text-mainColor font-medium">Is a Recipe for Good Life</p>
+        </div>
+        <p class="md:max-w-lg text-gray-500 mb-28">From your neighbourhod sushi spot to the burger you crave. Choose over +300k local and national favourites across the African continent</p>
+    </div>
+    <div class="container">
+        <form class="max-w-2xl mx-auto">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full focus:ring-mainColor/40 focus:border-mainColor dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required>
+                <button type="submit" class="text-white font-semibold absolute right-2.5 bottom-2.5 bg-mainColor hover:bg-mainColor/80 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-sm px-6 py-2 dark:bg-mainColor dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container max-w-4xl mx-auto font-monserat py-16 mb-10 text-sm">
+    <div class="flex justify-between text-gray-500">
+        <div class="flex space-x-2 items-center shadow-lg px-3 py-5 rounded-lg">
+            <img src="https://img.icons8.com/color/35/null/track-and-field.png"/>
+            <p class="">Fast and Reliable</p>
+        </div>
+        <div class="flex space-x-2 items-center shadow-lg px-3 py-5 rounded-lg">
+            <img src="https://img.icons8.com/3d-fluency/32/null/shopaholic.png"/>
+            <p class="">Doorstep Delivery</p>
+        </div>
+        <div class="flex space-x-2 items-center shadow-lg px-3 py-5 rounded-lg">
+            <img src="https://img.icons8.com/3d-fluency/35/null/shopping-cart.png"/>
+            <p class="">Convenience</p>
         </div>
     </div>
+</div>
+<div class="container mx-auto font-monserat py-14 mb-24 bg-gradient-to-bl from-orange-400 via-orange-400 to-orange-600">
+    <p class="text-center text-3xl text-white mb-8">Popular Restaurants</p>
+    <div class="flex max-w-4xl mx-auto space-x-4 justify-between">
+        <div class="flex flex-col space-y-3">
+            <div class="flex justify-center items-center rounded-full">
+                <img src="{% static 'images/menu1.jpg' %}" alt="" class="rounded-full border-4 border-white w-28"/>
+            </div>
+            <p class="text-white">Name of restaurants</p>
+        </div>
+        <div class="flex flex-col space-y-3">
+            <div class="flex justify-center items-center rounded-full">
+                <img src="{% static 'images/menu1.jpg' %}" alt="" class="rounded-full border-4 border-white w-28"/>
+            </div>
+            <p class="text-white">Name of restaurants</p>
+        </div>
+        <div class="flex flex-col space-y-3">
+            <div class="flex justify-center items-center rounded-full">
+                <img src="{% static 'images/menu1.jpg' %}" alt="" class="rounded-full border-4 border-white w-28"/>
+            </div>
+            <p class="text-white">Name of restaurants</p>
+        </div>
+        <div class="flex flex-col space-y-3">
+            <div class="flex justify-center items-center rounded-full">
+                <img src="{% static 'images/menu1.jpg' %}" alt="" class="rounded-full border-4 border-white w-28"/>
+            </div>
+            <p class="text-white">Name of restaurants</p>
+        </div>
+    </div>
+</div>
+
+<div class="flex container md:px-12 font-monserat">
+    <div class="w-1/2  h-12">
+        <p class="text-3xl text-slate-800 mb-8">Popular Foods</p>
+        <div class="flex">
+            <div class="w-1/2 flex flex-col space-y-5">
+                <div class="flex items-center hover:scale-105 w-max">
+                    <div class=" rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
+                        <img src="{% static 'images/menu2.jpg' %}" alt=""/>
+                    </div>
+                    <div class="-translate-x-10 py-6 px-3 pl-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
+                </div>
+                <div class="flex items-center translate-x-6 hover:scale-105 w-max">
+                    <div class=" rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
+                        <img src="{% static 'images/menu2.jpg' %}" alt=""/>
+                    </div>
+                    <div class="-translate-x-10 py-6 px-3 pl-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
+                </div>
+                <div class="flex items-center translate-x-12 hover:scale-105 w-max">
+                    <div class=" rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
+                        <img src="{% static 'images/menu2.jpg' %}" alt=""/>
+                    </div>
+                    <div class="-translate-x-10 py-6 px-3 pl-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
+                </div>
+            </div>
+            <div class="w-1/2 flex flex-col space-y-5">
+                <div class="flex items-center hover:scale-105 w-max translate-x-20">
+                    <div class="py-6 px-3 pr-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
+                    <div class="-translate-x-10 rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
+                        <img src="{% static 'images/menu2.jpg' %}" alt=""/>
+                    </div>
+                </div>
+                <div class="flex items-center translate-x-12 hover:scale-105 w-max">
+                    <div class="py-6 px-3 pr-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
+                    <div class="-translate-x-10 rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
+                        <img src="{% static 'images/menu2.jpg' %}" alt=""/>
+                    </div>
+                </div>
+                <div class="flex items-center translate-x-6 hover:scale-105 w-max">
+                    <div class="py-6 px-3 pr-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
+                    <div class="-translate-x-10 rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
+                        <img src="{% static 'images/menu2.jpg' %}" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-1/2 h-12">
+        <p class="text-3xl text-slate-800 mb-8">Popular Menu</p>
+
+    </div>
+</div>
 </section>
 {% include 'includes/footer.html' %}
 {% endblock %}
 
-bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-orange-400 via-orange-500 to-orange-400
