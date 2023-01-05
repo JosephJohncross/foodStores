@@ -13,6 +13,7 @@ from vendor.models import Vendor
 
 from django.core.exceptions import  PermissionDenied
 from .tokens import account_activation_token
+from django.template.defaultfilters import slugify
 
 # Create your views here.
 
@@ -104,7 +105,9 @@ def registerVendor(request):
             user.role = User.VENDOR
             user.save()
             vendor = v_form.save(commit=False)
+            vendor_name =  v_form.cleaned_data['vendor_name']
             vendor.user = user
+            vendor.vendor_slug = slugify(vendor_name) + '-' + str(user.id)
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()

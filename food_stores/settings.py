@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'vendor',
     'livereload',
     'menu',
+    'marketplace',
 ]
 
 MIDDLEWARE = [

@@ -1,9 +1,9 @@
 {% load static%}
 
 <nav
-  class="bg-white px-2 sm:px-4 py-5 sticky w-full z-20 top-0 left-0 dark:border-gray-600 font-spartan" 
+  class="bg-white py-5 sticky w-full z-20 top-0 left-0 dark:border-gray-600 font-spartan" 
 >
-  <div class="flex justify-between items-center md:px-10">
+  <div class="flex justify-between items-center container mx-auto max-w-screen-xl px-4 pb-6 sm:px-6 lg:px-8 ">
     
     <a href={% url "homepage" %} class="flex items-center w-full">
       <svg
@@ -31,9 +31,9 @@
     <ul class="w-full flex space-x-11">
       <li class="">
         <a
-          href=""
+          href="{% url 'marketplace' %}"
           class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
-          >Home</a
+          >Market Place</a
         >
       </li>
       <li class="">
