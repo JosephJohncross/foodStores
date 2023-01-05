@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content%}
+{% include 'includes/header.html'%}
+<section class="bg-gray-300/50 pb-16 font-monserat">
+    <div class="relative w-full block bg-center bg-cover bg-no-repeat" style="background-image: url('{% if vendor.user_profile.cover_photo %}{{vendor.user_profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')">
+        <div class="absolute left-0 right-0 top-0 bottom-0 bg-black/50 z-[-1]"></div>
+        <ul class="pt-10 container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+            <div class="flex gap-6 font-semibold items-center z-10 mb-20">
+                <div class="w-28 h-28 block bg-white py-2 rounded-lg border-2 px-4 brightness-100 bg-center bg-contain" style="background-image: url('{% if vendor.user_profile.profile_picture %}{{vendor.user_profile.profile_picture.url}} {% else %}{% static 'images/default_vendor_profile.jpg' %}{% endif %}')""></div>
+                <div class="b-7">
+                    <p class="text-slate-800 text-2xl">{{vendor.vendor_name}}</p>
+                </div>
+            </div>
+            <ul class="h-12 flex text-mainColor space-x-4">
+                <a href="{% url 'vendor_details'  vendor.vendor_slug %}" class="flex justify-center items-center">
+                    <li class="px-2 py-1 bg-white font-bold  rounded-md hover:scale-105 hover:shadow-md">About</li>
+                </a>
+                <li class="px-6 py-3 bg-white font-bold">Our Menu</li>
+                <a href="" class="flex justify-center items-center">
+                    <li class="px-2 py-1 bg-white font-bold rounded-md hover:scale-105 hover:shadow-md">Official Time</li>
+                </a>
+            </ul>
+        </ul>
+    </div>
+    <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="shadow-lg bg-white md:py-16 md:px-16">
+            
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}

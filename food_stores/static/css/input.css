@@ -59,4 +59,3 @@
   .is_available{
     @apply rounded-full px-3 py-2 h-min text-gray-500/70 shadow-md font-medium w-36 text-center
   }
-  
