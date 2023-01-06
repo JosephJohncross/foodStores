@@ -26,10 +26,66 @@
         </ul>
     </div>
     <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div class="shadow-lg bg-white md:py-16 md:px-16">
-            
+        <div class="shadow-lg bg-white md:py-16 md:px-16 md:grid" style="grid-template-columns: 1fr 3fr;">
+            <div class="px-4">
+                <p class="text-slate-600 text-lg font-semibold pb-5 border-b border-gray-300">Categories</p>
+                <ul class="flex-col flex space-y-2 pt-5">
+                    {% for category in categories %}
+                    <li>
+                        <a href="#{{category.slug}}" class="text-sm hover:text-mainColor text:gray-500">{{category.category_name  }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="px-4">
+                <p class="text-slate-600 text-lg font-semibold pb-5 border-b border-gray-300">Menu</p>
+                <div class="flex-col flex space-y-2 pt-5">
+                    <!-- Each category -->
+                    <div class="">
+                        <!-- Cat accordion -->
+                        <div id="accordion-collapse" data-accordion="open">
+                            {% for category in categories%}
+                            <div id="{{category.slug}}">
+                                <h2 id="accordion-collapse-heading-{{forloop.counter}}">
+                                  <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-2 focus:ring-gray-200 focus:bg-mainColor focus:border-mainColor focus:text-white dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-{{forloop.counter}}" aria-expanded="true" aria-controls="accordion-collapse-body-{{forloop.counter}}">
+                                    <span>{{category}}</span>
+                                    <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                  </button>
+                                </h2>
+                                <div id="accordion-collapse-body-{{forloop.counter}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{forloop.counter}}">
+                                  <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                    <div class="flex flex-wrap justify-center gap-11 md:justify-start">
+                                        {% for food in category.fooditems.all %}
+                                        {% if category.fooditems %}
+                                        <div class="menu-card flex flex-col space-y-2">
+                                            <div class="card__div relative" style="background-image: url('/static/images/menu1.jpg'); height:100px; background-size:cover; background-position: center;">
+                                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                                </span>
+                                            </div>
+                                            <p class="card__title">{{food.food_title}}</p>
+                                            <p class="card_description">{{food.description}}</p>
+                                            <p class="text-lg font-semibold text-mainColor">${{food.price}}</span></p>
+                                        </div>
+                                        {% else %}
+                                        <div class="text-slate-600">Coming soon</div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div> 
+                                  </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 {% include 'includes/footer.html' %}
 {% endblock %}
+
+{% block link %}
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+{% endblock link %}

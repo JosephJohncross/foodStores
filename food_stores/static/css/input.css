@@ -21,7 +21,7 @@
     @apply h-12 bg-cover bg-center w-full block rounded-tl-lg rounded-tr-lg
 }
 .card__title{
-    @apply text-base lg:text-lg font-semibold
+    @apply text-base lg:text-lg medium
 }
 .card_description{
     @apply text-sm text-gray-400
@@ -59,3 +59,6 @@
   .is_available{
     @apply rounded-full px-3 py-2 h-min text-gray-500/70 shadow-md font-medium w-36 text-center
   }
+  .menu-card{
+    @apply bg-white rounded-lg shadow-md w-[200px] h-[280px] p-2 hover:shadow-2xl transition-all
+}
