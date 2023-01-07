@@ -21,7 +21,7 @@
     @apply h-12 bg-cover bg-center w-full block rounded-tl-lg rounded-tr-lg
 }
 .card__title{
-    @apply text-base lg:text-lg medium
+    @apply text-base lg:text-lg font-medium
 }
 .card_description{
     @apply text-sm text-gray-400

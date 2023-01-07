@@ -58,10 +58,10 @@
                                         {% for food in category.fooditems.all %}
                                         {% if category.fooditems %}
                                         <div class="menu-card flex flex-col space-y-2">
-                                            <div class="card__div relative" style="background-image: url('/static/images/menu1.jpg'); height:100px; background-size:cover; background-position: center;">
-                                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                                </span>
+                                            <div class="card__div relative" style="background-image: url({{ food.image.url}}); height:100px; background-size:cover; background-position: center;">
+                                                <button class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
+                                                    <img class="add_cart" data-url="{% url 'add_to_cart' food.id %}" data-id="{{food.id}}" src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
+                                                </button>
                                             </div>
                                             <p class="card__title">{{food.food_title}}</p>
                                             <p class="card_description">{{food.description}}</p>

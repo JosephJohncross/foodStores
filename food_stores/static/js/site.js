@@ -1,13 +1,22 @@
-const axios = require('axios');
-const menuSelect = document.getElementById('menu-select')
-const selectionBtn = document.querySelectorAll('.selection-btn')
-const closeOrder = document.getElementById('close-order');
-const sideDrawer = document.getElementById('sideDrawer');
+const menuSelect = document.getElementById('menu-select') || null
+const selectionBtn = document.querySelectorAll('.selection-btn') || null
+const closeOrder = document.getElementById('close-order') || null;
+const sideDrawer = document.getElementById('sideDrawer') || null;
 const orders = document.getElementById('orders')
 
-menuSelect.addEventListener('click', toggleSelectionMenu)
-closeOrder.addEventListener('click', slideDrawer)
-orders.addEventListener('click', slideDrawer)
+menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) :
+closeOrder != null ? closeOrder.addEventListener('click', slideDrawer) : 
+orders != null ? orders.addEventListener('click', slideDrawer) : 
+
+document.onreadystatechange = () => {
+    if ( document.readyState === 'complete'){
+        document.onclick = (e)=>{
+            if (e.target.classList.contains('add_cart')){
+                e.target.onclick = (e) => {add_to_cart(e)}
+            }
+        }
+    }
+}
 
 function toggleSelectionMenu(e){
     if (e.target.classList.contains('selection-btn')) {
@@ -52,4 +61,16 @@ function onPlaceChanged(){
         console.log('place name => ', place.name)
     }
     //get the address omponent and assign them to the fields
+}
+
+// Requests
+
+async function add_to_cart(e){
+    e.preventDefault()
+
+    url = e.target.dataset.url
+    id = e.target.dataset.url
+
+    var response = await fetch(url)
+    result = await response.text()
 }
