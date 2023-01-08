@@ -12,7 +12,8 @@ document.onreadystatechange = () => {
     if ( document.readyState === 'complete'){
         document.onclick = (e)=>{
             if (e.target.classList.contains('add_cart')){
-                e.target.onclick = (e) => {add_to_cart(e)}
+                e.preventDefault()
+                addToCart(e.target)
             }
         }
     }
@@ -65,12 +66,15 @@ function onPlaceChanged(){
 
 // Requests
 
-async function add_to_cart(e){
-    e.preventDefault()
+async function addToCart(target){
+    url = target.dataset.url
+    id = target.dataset.url
 
-    url = e.target.dataset.url
-    id = e.target.dataset.url
-
-    var response = await fetch(url)
+    var response = await fetch(url, {
+        headers: {
+            'X-Request-With': 'XMLHttpRequest'
+        }
+    })
     result = await response.text()
+    console.log(result)
 }

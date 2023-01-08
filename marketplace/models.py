@@ -9,7 +9,7 @@ class Cart(models.Model):
     fooditem = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.user
+    def __unicode__(self):
+        return self.user    

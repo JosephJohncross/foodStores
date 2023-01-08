@@ -80,18 +80,34 @@
 	  <div class="hidden md:justify-end md:space-x-10 items-center md:flex md:order-1 w-full" id="navbar-sticky">
       <ul class="flex flex-col shadow-lg md:shadow-none p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         {% if user.is_authenticated%}
-          <li>
+          <li class="">
+            <a
+              href="{% url 'myAccount'%}"
+              class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700  after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
+              >My Account</a
+            >
+          </li>
+          <!-- <li>
             <a
               href="{% url 'myAccount'%}"
               class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >My Accounts</a
             >
+          </li> -->
+          <li class="">
+            <a
+              href="{% url 'logout'%}"
+              class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700  after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
+              >Logout</a
+            >
+          </li>
+          <!-- <li>
             <a
               href="{% url 'logout'%}"
               class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >Logout</a
             >
-          </li>
+          </li> -->
         {% else %}
           <li>
             <a
