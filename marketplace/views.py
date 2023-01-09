@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from menu.models import Category, FoodItem
 from vendor.models import Vendor
 from .models import Cart
+from .context_processor import get_cart_counter
 
 
 # Create your views here.
@@ -54,11 +55,11 @@ def add_to_cart(request, food_id=None):
                     # Increase cart quantity
                     checkCart.quantity += 1
                     checkCart.save()
-                    return JsonResponse({"status": "Success", "message": "Increased the cart quantity"})
-                except:
+                    return JsonResponse({"status": "Success", "message": "Increased the cart quantity", "cartcounter": get_cart_counter(request)})
+                except Exception as e:
                     # Add item to cart for the first time
                     checkCart = Cart.objects.create(user=request.user, fooditem = fooditem, quantity=1)
-                    return JsonResponse({"status": "Success", "message": "Added food item to cart"})
+                    return JsonResponse({"status": "Success", "message": "Added food item to cart", "cartcounter": get_cart_counter(request)})
             except:
                 return JsonResponse({"status": "Failed", "message": "This food does not exist"})
         else:

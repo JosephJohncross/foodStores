@@ -87,27 +87,16 @@
               >My Account</a
             >
           </li>
-          <!-- <li>
+          <li>
             <a
-              href="{% url 'myAccount'%}"
-              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >My Accounts</a
-            >
-          </li> -->
-          <li class="">
-            <a
-              href="{% url 'logout'%}"
-              class="relative block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700  after:hidden after:hover:block after:rounded-md after:absolute after:w-full after:h-1 after:bg-mainColor after:left-0 after:-bottom-2"
-              >Logout</a
-            >
+              href="{% url 'registerUser' %}"
+              class="text-center p-3 relative inline-flex items-center text-gray-700 rounded hover:bg-gray- md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              >
+                <i class="uil uil-shopping-cart text-3xl"></i>
+                <span class="sr-only">Cart</span>
+                <div id="cart_count" class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-3 -right-1 dark:border-gray-900">{{cart_count}}</div>
+              </a>
           </li>
-          <!-- <li>
-            <a
-              href="{% url 'logout'%}"
-              class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >Logout</a
-            >
-          </li> -->
         {% else %}
           <li>
             <a
