@@ -77,6 +77,7 @@ async function addToCart(target){
         }
     })
     result = await response.json()
+    console.log(result)
     cartCount.textContent = result.cartcounter["cart_count"]
 
     const nextURL = url;

@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 
 from menu.models import Category, FoodItem
 from vendor.models import Vendor
-from .models import Cart
+from .models import Cart, CartItem
 from .context_processor import get_cart_counter
 
 
@@ -51,17 +51,29 @@ def add_to_cart(request, food_id=None):
                 fooditem = FoodItem.objects.get(id=food_id)
                 # check if the user has added food item to cart
                 try:
-                    checkCart = Cart.objects.get(user=request.user, fooditem = fooditem)
-                    # Increase cart quantity
-                    checkCart.quantity += 1
-                    checkCart.save()
-                    return JsonResponse({"status": "Success", "message": "Increased the cart quantity", "cartcounter": get_cart_counter(request)})
+                    checkCart = Cart.objects.get(user=request.user)
+                    try:
+                        checkCartItem = CartItem.objects.get(cart = checkCart, fooditem = fooditem)
+                        # Increase cart quantity
+                        checkCartItem.quantity += 1
+                        checkCartItem.save()
+                        return JsonResponse({"status": "Success", "message": "Increased the cart quantity", "cartcounter": get_cart_counter(request)})
+                    except:
+                        checkCartItem = CartItem.objects.create(cart = checkCart, fooditem = fooditem, quantity= 1)
+                        return JsonResponse({'status': 'Success', "message": "Increased the item quantity", "cartcounter": get_cart_counter(request)})
                 except Exception as e:
                     # Add item to cart for the first time
-                    checkCart = Cart.objects.create(user=request.user, fooditem = fooditem, quantity=1)
-                    return JsonResponse({"status": "Success", "message": "Added food item to cart", "cartcounter": get_cart_counter(request)})
+                    checkCart = Cart.objects.create(user=request.user)
+                    checkCartItem = CartItem.objects.create(cart = checkCart, fooditem = fooditem, quantity=1)
+                    return JsonResponse({"status": "Success", "message": "Item added succesfully to cart", "cartcounter": get_cart_counter(request)})
             except:
                 return JsonResponse({"status": "Failed", "message": "This food does not exist"})
         else:
             return JsonResponse({"status": "Failed", "message": "Invalid request!"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})
+
+def decrement_cartitem(request, pk=None):
+    pass
+
+def increment_cartitem(request, pk=None):
+    pass
