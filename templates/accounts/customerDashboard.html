@@ -168,13 +168,14 @@
                 </div>
             </div>
 
-            <div id="sideDrawer" class="bg-white shadow-md px-4 md:px-8 fixed top-0 left-0 right-0 font-spartan z-50 overflow-auto h-screen pb-10 transition-transform translate-x-full md:translate-x-0 duration-500 md:relative md:pb-0 md:col-span-3">
+            <div id="sideDrawer" class="bg-white shadow-md px-4 md:px-8 fixed top-0 left-0 right-0 font-spartan z-50 overflow-y-auto h-screen pb-10 transition-transform translate-x-full md:translate-x-0 duration-500 md:relative md:pb-0 md:col-span-3">
                 <div class="flex justify-between items-center md:justify-start pr-4">
                     <p class="md:text-3xl font-monserat font-semibold py-10">Current Order</p> 
                     <img id="close-order" src="https://img.icons8.com/ios-filled/50/null/delete-sign--v1.png" class="md:hidden w-5 h-5 cursor-pointer"/>
                 </div>
                 <!-- orders -->
-                <div id="orders_list" class="flex flex-col space-y-6 h-72 md:h-56 overflow-y-scroll drop-shadow-lg border-2 border-gray-200/60 py-6 px-6 mb-12">
+                <div id="orders_list" class="flex flex-col space-y-6 drop-shadow-lg border border-gray-200/60 py-6 px-6 mb-12">
+                    {% if cart_item.cart_item %}
                     {% for items in cart_item.cart_item %}
                     <div class="flex space-x-4 scale-95 md:scale-100">
                         <div class=" h-16 w-24 md:h-16 md:w-32 rounded-md" style="background-image: url('{{ items.fooditem.image.url}}'); background-size:cover; background-position: center;">
@@ -184,20 +185,27 @@
                             <div class="h-1/2 flex items-end justify-between">
                                 <p class="text-sm md:text-lg font-semibold text-mainColor">${{items.fooditem.price}}</p>
                                 <div class="flex space-x-3">
-                                    <span class="h-4 w-4 flex items-center justify-center bg-mainColor/50 rounded-sm hover:cursor-pointer">
-                                        <img src="https://img.icons8.com/android/24/ffffff/plus.png" class="h-3 w-3 md:h-4 md:w-4"/>
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor/50 rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/minus-math.png" class="cart-decrease"  data-url="{% url 'decrement_cartitem' items.id %}" data-id="{{items.id}}"/>
                                     </span>
                                     <p class="">{{items.quantity}}</p>
-                                    <span class="h-4 w-4 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
-                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/minus-math.png"/>
+                                    <span class="h-5 w-5 flex items-center justify-center bg-mainColor rounded-sm hover:cursor-pointer">
+                                        <img src="https://img.icons8.com/android/24/ffffff/plus.png" class="h-3 w-3 md:h-4 md:w-4 cart-increase" data-url="{% url 'increment_cartitem' items.id %}" data-id="{{items.id}}"/>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>  
                     {% endfor %}
+                    {% else %}
+                    <div class="flex flex-col space-y-4 items-center w-full py-3">
+                        <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/null/external-empty-cart-web-store-flaticons-lineal-color-flat-icons.png"  class="w-16 h-16"/>
+                        <small class="text-gray-300">Cart is empty</small>
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="md:absolute md:bottom-5 md:left-0 w-full md:px-10 scale-95 md:scale-95">
+                {% if cart_item.cart_item %}
+                <div class="w-full md:px-10 scale-95 md:scale-95">
                     <div class="flex flex-col items-center">
                         <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-bl-2xl rounded-br-2xl flex flex-col space-y-2">
                             <div class="flex justify-between items-center px-8">
@@ -223,6 +231,7 @@
                     </div>
                     <button class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl">Continue to Payment</button>
                 </div>
+                {% endif %}
             </div>
         </div>
         

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Dine Out - Restaurant</title>
+		<title>FoodStores</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" integrity="sha512-4wfcoXlib1Aq0mUtsLLM74SZtmB73VHTafZAvxIp/Wk9u1PpIsrfmTvK0+yKetghCL8SHlZbMyEcV8Z21v42UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,7 +20,7 @@
 		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     	<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-		<style type="text/css"></style>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<link rel="stylesheet" href={% static 'css/output.css' %} >
 	</head>
 	<body>
@@ -37,7 +37,7 @@
 		{% block link %}
 		{% endblock link %}
 		<script src={% static 'js/site.js' %} ></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete" async defer></script>
+		<!-- <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete" async defer></script> -->
 		<!-- <script>
 			const toggleDark = document.getElementById("toggleTheme")
 			// On page load or when changing themes, best to add inline in `head` to avoid FOUC

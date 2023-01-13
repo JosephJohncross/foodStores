@@ -20,7 +20,7 @@ def get_items_in_cart(request):
     if request.user.is_authenticated:
         try:
             cart = Cart.objects.get(user=request.user)
-            cart_items = CartItem.objects.filter(cart_id=cart)
+            cart_items = CartItem.objects.filter(cart_id=cart).order_by('created_at')
             cart_item = dict(cart_item=cart_items)
         except:
             cart_item="No item exist in the cart"

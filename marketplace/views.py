@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.db.models import Prefetch 
 from django.shortcuts import get_object_or_404
-
 from menu.models import Category, FoodItem
 from vendor.models import Vendor
 from .models import Cart, CartItem
@@ -60,20 +59,41 @@ def add_to_cart(request, food_id=None):
                         return JsonResponse({"status": "Success", "message": "Increased the cart quantity", "cartcounter": get_cart_counter(request)})
                     except:
                         checkCartItem = CartItem.objects.create(cart = checkCart, fooditem = fooditem, quantity= 1)
-                        return JsonResponse({'status': 'Success', "message": "Increased the item quantity", "cartcounter": get_cart_counter(request)})
+                        return JsonResponse({'status': 'Success', "message": "Item added to cart", "cartcounter": get_cart_counter(request)})
                 except Exception as e:
                     # Add item to cart for the first time
                     checkCart = Cart.objects.create(user=request.user)
                     checkCartItem = CartItem.objects.create(cart = checkCart, fooditem = fooditem, quantity=1)
-                    return JsonResponse({"status": "Success", "message": "Item added succesfully to cart", "cartcounter": get_cart_counter(request)})
+                    return JsonResponse({"status": "Success", "message": "Item added to cart", "cartcounter": get_cart_counter(request)})
             except:
                 return JsonResponse({"status": "Failed", "message": "This food does not exist"})
         else:
             return JsonResponse({"status": "Failed", "message": "Invalid request!"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})
 
-def decrement_cartitem(request, pk=None):
-    pass
+def decrement_cartitem(request, cartitem_id=None):
+    cart_item = get_object_or_404(CartItem, pk=cartitem_id)
 
-def increment_cartitem(request, pk=None):
-    pass
+    if request.user.is_authenticated:
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+            return JsonResponse({"status": "Success", "message": "Cart item decremented"})
+        else:
+            return JsonResponse({"status": "Failed", "message": "Item is at the minimum"})
+    return JsonResponse({"status": "Failed", "message": "Please login to continue"})
+
+def increment_cartitem(request, cartitem_id=None):
+    cart_item = get_object_or_404(CartItem, pk=cartitem_id)
+
+    if request.user.is_authenticated:
+        if request.headers.get('x-request-with') == 'XMLHttpRequest':
+
+            if cart_item.quantity >= 1:
+                cart_item.quantity += 1
+                cart_item.save()
+                return JsonResponse({"status": "Success", "message": "Cart item decremented"})
+            else:
+                return JsonResponse({"status": "Success", "message": "Item is at the minimum"})
+        return JsonResponse({"status": "Failed", "message": "Invalid request"})
+    return JsonResponse({"status": "Failed", "message": "Please login to continue"})
