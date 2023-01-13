@@ -18,12 +18,14 @@ document.onreadystatechange = () => {
                 addToCart(e.target)
             }
             else if (e.target.classList.contains('cart-increase')){
-                console.log("increm")   
                 e.preventDefault()
                 incrementCartItem(e.target)
             }
             else if (e.target.classList.contains('cart-decrease')){
-                console.log("decrem")
+                e.preventDefault()
+                decrementCartItem(e.target)
+            }
+            else if (e.target.classList.contains('delete-item')){
                 e.preventDefault()
                 decrementCartItem(e.target)
             }
@@ -90,24 +92,8 @@ async function addToCart(target){
     if (result.status == "Success"){
         cartCount.textContent = result.cartcounter["cart_count"]
     }
-    //notification modal
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-        })
-        
-        Toast.fire({
-        icon: result.status == "Success" ? "success": "error",
-        title: result.message
-    })
 
+    toastNotification(result)
     console.log(result)
 
     const nextURL = url
@@ -131,23 +117,7 @@ async function decrementCartItem(target){
         }
     })
     result = await response.json()
-    //notification modal
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-        })
-        
-        Toast.fire({
-        icon: result.status == "Success" ? "success": "error",
-        title: result.message
-    })
+    toastNotification(result)
 
     const nextURL = `${location.protocol}//${location.host}/customerDashboard/`;
     const nextTitle = 'customerDashboard';
@@ -161,7 +131,6 @@ async function decrementCartItem(target){
     history.go()
 }
 
-
 async function incrementCartItem(target){
     url = target.dataset.url
     id = target.dataset.url
@@ -172,11 +141,47 @@ async function incrementCartItem(target){
         }
     })
     result = await response.json()
+    toastNotification(result)
 
+    const nextURL = `${location.protocol}//${location.host}/customerDashboard/`;
+    const nextTitle = 'customerDashboard';
+    const nextState = { additionalInformation: 'Updated the URL with JS' };
+
+    // This will create a new entry in the browser's history, without reloading
+    window.history.pushState(nextState, nextTitle, nextURL);
+
+    // This will replace the current entry in the browser's history, without reloading
+    window.history.replaceState(nextState, nextTitle, nextURL);
+    history.go()
+}
+
+async function deleteCartItem(){
+    url = target.dataset.url
+    id = target.dataset.url
+
+    var response = await fetch(url, {
+        headers: {
+            'X-Request-With': 'XMLHttpRequest'
+        }
+    })
+    result = await response.json()
+    toastNotification(result)
+
+    const nextURL = url;
+    const nextTitle = 'customerDashboard';
+    const nextState = { additionalInformation: 'Updated the URL with JS' };
+
+    // This will create a new entry in the browser's history, without reloading
+    window.history.pushState(nextState, nextTitle, nextURL);
+
+    // This will replace the current entry in the browser's history, without reloading
+    window.history.replaceState(nextState, nextTitle, nextURL);
+}
+
+function toastNotification(result){
     //notification modal
     const Toast = Swal.mixin({
         toast: true,
-        icon: "error",
         position: 'top-end',
         showConfirmButton: false,
         timer: 2000,
@@ -191,15 +196,4 @@ async function incrementCartItem(target){
         icon: result.status == "Success" ? "success": "error",
         title: result.message
     })
-
-    const nextURL = `${location.protocol}//${location.host}/customerDashboard/`;
-    const nextTitle = 'customerDashboard';
-    const nextState = { additionalInformation: 'Updated the URL with JS' };
-
-    // This will create a new entry in the browser's history, without reloading
-    window.history.pushState(nextState, nextTitle, nextURL);
-
-    // This will replace the current entry in the browser's history, without reloading
-    window.history.replaceState(nextState, nextTitle, nextURL);
-    history.go()
 }

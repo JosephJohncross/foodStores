@@ -16,7 +16,7 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     fooditem = models.ForeignKey(FoodItem, on_delete=models.CASCADE)    
     quantity =  models.PositiveBigIntegerField()
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def _str__(self):
         return self.fooditem.food_title

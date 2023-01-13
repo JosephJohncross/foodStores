@@ -177,9 +177,10 @@
                 <div id="orders_list" class="flex flex-col space-y-6 drop-shadow-lg border border-gray-200/60 py-6 px-6 mb-12">
                     {% if cart_item.cart_item %}
                     {% for items in cart_item.cart_item %}
-                    <div class="flex space-x-4 scale-95 md:scale-100">
-                        <div class=" h-16 w-24 md:h-16 md:w-32 rounded-md" style="background-image: url('{{ items.fooditem.image.url}}'); background-size:cover; background-position: center;">
-                        </div>
+                    <div class="flex space-x-4 scale-95 md:scale-100" id="cart-item_{{items.id}}">
+                        <div class="group relative h-16 w-24 md:h-16 md:w-32 rounded-md cursor-pointer before:absolute before:left-0 before:right-0 before:bottom-0 before:top-0 before:rounded-md before:z-[3] hover:before:bg-black/50 before:block" style="background-image: url('{{ items.fooditem.image.url}}'); background-size:cover; background-position: center;">
+                            <img src="https://img.icons8.com/material-outlined/24/FF7A00/trash--v1.png" class="absolute z-[10] hidden group-hover:block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 delete-item" data-url="{% url 'delete_cartitem' items.id %}" data-id="{{items.id}}"/>
+                        </div>  
                         <div class="flex flex-col w-full">
                             <p class="card__title h-1/2 md:text-base">{{items.fooditem.food_title}}</p>
                             <div class="h-1/2 flex items-end justify-between">
@@ -210,22 +211,22 @@
                         <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-bl-2xl rounded-br-2xl flex flex-col space-y-2">
                             <div class="flex justify-between items-center px-8">
                                 <p class="text-sm md:text-base text-gray-500/90 font-medium">Subtotal</p>
-                                <p class="text-base font-bold md:text-lg">$37.61</p>
+                                <p class="text-base font-bold md:text-lg">${{subtotal}}</p>
                             </div>
                             <div class="flex justify-between items-center px-8">
                                 <p class="text-sm md:text-base text-gray-500/90 font-medium">Discount sales</p>
-                                <p class="text-base font-bold md:text-lg">-$5.00</p>
+                                <p class="text-base font-bold md:text-lg">-${{discount_sales}}</p>
                             </div>
                             <div class="flex justify-between items-center px-8">
                                 <p class="text-sm md:text-base text-gray-500/90 font-medium">Total sales tax</p>
-                                <p class="text-base font-bold md:text-lg">$2.25</p>
+                                <p class="text-base font-bold md:text-lg">${{total_sales_tax}}</p>
                             </div>
                         </div>
                         <div class="relative bg-gray-300/20 w-[95%] h-2 before:absolute before:w-full before:border-t-2 before:border-dotted before:translate-y-1/2 before:border-black/30"></div>
                         <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-tl-2xl rounded-tr-2xl mb-10">
                             <div class="flex justify-between items-center px-8">
                                 <p class="text-lg font-medium md:text-2xl">Total</p>
-                                <p class="text-base font-bold md:text-lg">$34.86</p>
+                                <p class="text-base font-bold md:text-lg">${{total}}</p>
                             </div>
                         </div>
                     </div>

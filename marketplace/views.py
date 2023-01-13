@@ -42,6 +42,7 @@ def vendor_menu(request, vendor_slug):
     }
     return render(request, 'marketplace/vendor_menu.html', context)
 
+
 def add_to_cart(request, food_id=None):
     if request.user.is_authenticated:
         if request.headers.get('x-request-with') == 'XMLHttpRequest':
@@ -92,8 +93,24 @@ def increment_cartitem(request, cartitem_id=None):
             if cart_item.quantity >= 1:
                 cart_item.quantity += 1
                 cart_item.save()
-                return JsonResponse({"status": "Success", "message": "Cart item decremented"})
+                return JsonResponse({"status": "Success", "message": "Cart item incremented"})
             else:
                 return JsonResponse({"status": "Success", "message": "Item is at the minimum"})
+        return JsonResponse({"status": "Failed", "message": "Invalid request"})
+    return JsonResponse({"status": "Failed", "message": "Please login to continue"})
+
+def delete_cartitem(request, cartitem_id=None):
+
+    if request.user.is_authenticated:
+        if request.headers.get('x-request-with') == 'XMLHttpRequest':
+            try:
+                cart_item = get_object_or_404(CartItem, pk=cartitem_id)
+                if cart_item:
+                    cart_item.delete()
+                    return JsonResponse({"status": "Success", "message": "Item deleted successfully from cart"})
+                else:
+                    return JsonResponse({"status": "Failed", "message": "Item no longer in cart"})
+            except:
+                return JsonResponse({"status": "Failed", "message": "Item no longer in cart"})
         return JsonResponse({"status": "Failed", "message": "Invalid request"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})

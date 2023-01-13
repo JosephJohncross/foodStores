@@ -26,3 +26,17 @@ def get_items_in_cart(request):
             cart_item="No item exist in the cart"
     print(cart_item)
     return dict(cart_item=cart_item)
+
+def get_cart_amounts(request):
+    subtotal = 0
+    discount_sales = 0
+    total_sales_tax = 0
+    total = 0
+
+    if request.user.is_authenticated:
+        cart = Cart.objects.get(user=request.user)
+        cart_items = CartItem.objects.filter(cart=cart)
+        for items in cart_items:
+            subtotal += items.quantity  * items.fooditem.price
+        total = subtotal - discount_sales + total_sales_tax
+        return dict(subtotal=subtotal, discount_sales=discount_sales, total_sales_tax=total_sales_tax, total=total) 
