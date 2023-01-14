@@ -5,6 +5,7 @@ const sideDrawer = document.getElementById('sideDrawer') || null;
 const orders = document.getElementById('orders')
 const cartCount = document.getElementById('cart_count') || null
 
+
 menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) : ""
 closeOrder != null ? closeOrder.addEventListener('click', slideDrawer) : ""
 orders != null ? orders.addEventListener('click', slideDrawer) : ""
@@ -196,4 +197,19 @@ function toastNotification(result){
         icon: result.status == "Success" ? "success": "error",
         title: result.message
     })
+}
+
+async function placeAutoSuggestion(){
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '93464f8037msh725108e7458de10p12cd2cjsn038b91e1081a',
+            'X-RapidAPI-Host': 'spott.p.rapidapi.com'
+        }
+    };
+    
+    response = await fetch('https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&country=US%2CCA&q=Sea&type=CITY', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.err)
 }

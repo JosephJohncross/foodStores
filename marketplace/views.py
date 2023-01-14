@@ -6,6 +6,8 @@ from menu.models import Category, FoodItem
 from vendor.models import Vendor
 from .models import Cart, CartItem
 from .context_processor import get_cart_counter
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -42,7 +44,7 @@ def vendor_menu(request, vendor_slug):
     }
     return render(request, 'marketplace/vendor_menu.html', context)
 
-
+@login_required(login_url='login')
 def add_to_cart(request, food_id=None):
     if request.user.is_authenticated:
         if request.headers.get('x-request-with') == 'XMLHttpRequest':
@@ -72,6 +74,7 @@ def add_to_cart(request, food_id=None):
             return JsonResponse({"status": "Failed", "message": "Invalid request!"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})
 
+@login_required(login_url='login')
 def decrement_cartitem(request, cartitem_id=None):
     cart_item = get_object_or_404(CartItem, pk=cartitem_id)
 
@@ -84,6 +87,7 @@ def decrement_cartitem(request, cartitem_id=None):
             return JsonResponse({"status": "Failed", "message": "Item is at the minimum"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})
 
+@login_required(login_url='login')
 def increment_cartitem(request, cartitem_id=None):
     cart_item = get_object_or_404(CartItem, pk=cartitem_id)
 
@@ -99,6 +103,7 @@ def increment_cartitem(request, cartitem_id=None):
         return JsonResponse({"status": "Failed", "message": "Invalid request"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})
 
+@login_required(login_url='login')
 def delete_cartitem(request, cartitem_id=None):
 
     if request.user.is_authenticated:

@@ -174,4 +174,4 @@ static\images
 
 # End of https://www.toptal.com/developers/gitignore/api/django
 
-node_modules/
+node_modules

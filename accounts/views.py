@@ -138,11 +138,14 @@ def registerVendor(request):
 def login(request):
     global message_state
 
+    print("testing login url")
     if request.user.is_authenticated:
         messages.warning(request, "Already logged in")
         message_state = "warning"
+        print("test auth")
         return redirect('myAccount')
     elif request.method == 'POST':
+        print("test post")
         email = request.POST['email']
         password = request.POST['password']
 

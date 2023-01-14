@@ -1,7 +1,10 @@
+from accounts.views import check_role_customer
 from .models import Cart, CartItem
-from menu.models import FoodItem
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Gets the number of items added to cart by a user
+# @login_required(login_url='login')
+# @user_passes_test(check_role_customer)
 def get_cart_counter(request):
     cart_count = 0
     if request.user.is_authenticated:
@@ -11,10 +14,13 @@ def get_cart_counter(request):
             for items in cart_item:
                 cart_count += 1
         except Exception as e:
-            print(e)
+            # print(e)
             cart_count = 0
-    return dict(cart_count=cart_count)
+        return dict(cart_count=cart_count)
+        
 
+# @login_required(login_url='login')
+# @user_passes_test(check_role_customer)
 def get_items_in_cart(request):
     cart_item = dict()
     if request.user.is_authenticated:
@@ -24,9 +30,10 @@ def get_items_in_cart(request):
             cart_item = dict(cart_item=cart_items)
         except:
             cart_item="No item exist in the cart"
-    print(cart_item)
-    return dict(cart_item=cart_item)
+        return dict(cart_item=cart_item)
 
+# @login_required(login_url='login')
+# @user_passes_test(check_role_customer)
 def get_cart_amounts(request):
     subtotal = 0
     discount_sales = 0
