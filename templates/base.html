@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" integrity="sha512-4wfcoXlib1Aq0mUtsLLM74SZtmB73VHTafZAvxIp/Wk9u1PpIsrfmTvK0+yKetghCL8SHlZbMyEcV8Z21v42UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+		<!-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" /> -->
 		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 		<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
 		<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
@@ -20,7 +20,6 @@
 		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     	<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<link rel="stylesheet" href={% static 'css/output.css' %} >
 	</head>
 	<body>
@@ -36,7 +35,8 @@
 		
 		{% block link %}
 		{% endblock link %}
-		<script src={% static 'js/site.js' %} ></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src={% static 'js/site.js' %}></script>
 		<!-- <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete" async defer></script> -->
 		<!-- <script>
 			const toggleDark = document.getElementById("toggleTheme")

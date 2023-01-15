@@ -4,11 +4,15 @@ const closeOrder = document.getElementById('close-order') || null;
 const sideDrawer = document.getElementById('sideDrawer') || null;
 const orders = document.getElementById('orders')
 const cartCount = document.getElementById('cart_count') || null
+const homeSearch = document.getElementById('home-search') || null
+const searchDropDown = document.getElementById('search-dropdown') || null
 
 
+homeSearch != null ? homeSearch.addEventListener('keyup', (e)=>{autoComplete(e)}) : ""
 menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) : ""
 closeOrder != null ? closeOrder.addEventListener('click', slideDrawer) : ""
 orders != null ? orders.addEventListener('click', slideDrawer) : ""
+// searchDropDown != null ? searchDropDown.addEventListener('change', (e)=>{autoComplete(e)}) : ""
 
 document.onreadystatechange = () => {
     if ( document.readyState === 'complete'){
@@ -30,8 +34,52 @@ document.onreadystatechange = () => {
                 e.preventDefault()
                 decrementCartItem(e.target)
             }
+            else if (e.target.closest('.address-item') !== null || e.target.classList.contains('address-item')){
+                e.preventDefault()
+                homeSearch.value = e.target.children[1]?.innerHTML || e.target.innerHTML
+                searchDropDown.classList.add('hidden')
+                searchDropDown.classList.remove('flex')
+            }
         }
     }
+}
+function autoComplete(e){
+    searchDropDown.innerHTML =''
+    if (e.target.value.length < 3 || e.target.value == "") {
+        searchDropDown.classList.add('hidden')
+        searchDropDown.classList.remove('flex')
+        return
+    }
+    else{
+        searchDropDown.classList.add('flex')
+        searchDropDown.classList.remove('hidden')
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '93464f8037msh725108e7458de10p12cd2cjsn038b91e1081a',
+                'X-RapidAPI-Host': 'spott.p.rapidapi.com'
+            }
+        }
+    
+        fetch(`https://spott.p.rapidapi.com/places?type=CITY&limit=10&q=${encodeURI(e.target.value)}}`, options)
+        .then(response => response.json())
+        .then(response => {
+            response.forEach(address => {
+                var places = document.createElement('div')
+                places.classList.add('place-flex', 'address-item')
+                places.innerHTML = `
+                <div class="">
+                    <img src="https://img.icons8.com/color/96/null/google-maps.png" class="place-image"/>
+                </div>
+                <div class="place-text">${address.name}, ${address.country.name}</div>
+            `
+                searchDropDown.append(places)
+            })
+        })
+        .catch(err => console.error(err));
+    }
+
+    
 }
 
 function toggleSelectionMenu(e){
@@ -213,3 +261,4 @@ async function placeAutoSuggestion(){
         .then(response => console.log(response))
         .catch(err => console.err)
 }
+

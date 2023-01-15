@@ -16,7 +16,7 @@ def get_cart_counter(request):
         except Exception as e:
             # print(e)
             cart_count = 0
-        return dict(cart_count=cart_count)
+    return dict(cart_count=cart_count)
         
 
 # @login_required(login_url='login')
@@ -30,7 +30,7 @@ def get_items_in_cart(request):
             cart_item = dict(cart_item=cart_items)
         except:
             cart_item="No item exist in the cart"
-        return dict(cart_item=cart_item)
+    return dict(cart_item=cart_item)
 
 # @login_required(login_url='login')
 # @user_passes_test(check_role_customer)
@@ -46,4 +46,5 @@ def get_cart_amounts(request):
         for items in cart_items:
             subtotal += items.quantity  * items.fooditem.price
         total = subtotal - discount_sales + total_sales_tax
-        return dict(subtotal=subtotal, discount_sales=discount_sales, total_sales_tax=total_sales_tax, total=total) 
+    return dict(subtotal=subtotal, discount_sales=discount_sales, total_sales_tax=total_sales_tax, total=total) 
+    
