@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='homepage'),
     path('', include("accounts.urls")),
-    path('', include("marketplace.urls"))
+    path('', include("marketplace.urls")),
+    path('/search', views.search, name="search")
 ]
 
 if settings.DEBUG:
