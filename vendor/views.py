@@ -26,11 +26,15 @@ def vprofile(request):
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
         vendor_form = VendorForm(request.POST, request.FILES, instance=vendor)
-        if profile_form.is_valid() and vendor_form.is_valid():
-            profile_form.save()
-            vendor_form.save()
-        message_state = 'success'
-        messages.success(request, "Profile update successful")
+        try:
+            if profile_form.is_valid() and vendor_form.is_valid():
+                profile_form.save()
+                vendor_form.save()
+                messages.success(request, "Profile update successful")
+            else:
+                print(profile_form.errors.as_json())
+        except Exception as e:
+            print(e)
     else:
         profile_form = UserProfileForm(instance=profile)
         vendor_form = VendorForm(instance=vendor)

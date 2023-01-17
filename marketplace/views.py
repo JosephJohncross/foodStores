@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.db.models import Prefetch 
 from django.shortcuts import get_object_or_404
@@ -119,3 +119,7 @@ def delete_cartitem(request, cartitem_id=None):
                 return JsonResponse({"status": "Failed", "message": "Item no longer in cart"})
         return JsonResponse({"status": "Failed", "message": "Invalid request"})
     return JsonResponse({"status": "Failed", "message": "Please login to continue"})
+
+
+def search(request):
+    return HttpResponse("Search page")

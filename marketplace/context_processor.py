@@ -41,10 +41,13 @@ def get_cart_amounts(request):
     total = 0
 
     if request.user.is_authenticated:
-        cart = Cart.objects.get(user=request.user)
-        cart_items = CartItem.objects.filter(cart=cart)
-        for items in cart_items:
-            subtotal += items.quantity  * items.fooditem.price
-        total = subtotal - discount_sales + total_sales_tax
+        try:
+            cart = Cart.objects.get(user=request.user)
+            cart_items = CartItem.objects.filter(cart=cart)
+            for items in cart_items:
+                subtotal += items.quantity  * items.fooditem.price
+            total = subtotal - discount_sales + total_sales_tax
+        except:
+            dict(subtotal=subtotal, discount_sales=discount_sales, total_sales_tax=total_sales_tax, total=total) 
     return dict(subtotal=subtotal, discount_sales=discount_sales, total_sales_tax=total_sales_tax, total=total) 
     

@@ -18,13 +18,14 @@ from django.urls import include, path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from marketplace.views import search 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='homepage'),
     path('', include("accounts.urls")),
     path('', include("marketplace.urls")),
-    path('/search', views.search, name="search")
+    # path('search/', search, name="search")
 ]
 
 if settings.DEBUG:

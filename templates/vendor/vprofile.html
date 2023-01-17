@@ -13,7 +13,7 @@
         {% include 'vendor/vendorHero.html' %}
         <div class="py-10 mx-auto mt-10 font-monserat px-4 md:px-2">
             <p class="text-3xl dark:text-[#7EC8E3] md:px-16 mb-12">Profile Settings</p>            
-            <form class="md:px-16 flex flex-col space-y-6" action={% url 'vprofile' %} method="post" enctype="multipart/form-data">
+            <form class="md:px-16 flex flex-col space-y-6" action="{% url 'vprofile' %}" method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
                     <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url('{% if profile.profile_picture %}{{profile.profile_picture.url}} {% else %}{% static 'images/default_vendor_profile.jpg' %}{% endif %}')"></div>

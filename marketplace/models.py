@@ -5,7 +5,7 @@ from menu.models import FoodItem
 # Create your models here.
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now=True)
 
