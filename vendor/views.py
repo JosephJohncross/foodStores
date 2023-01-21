@@ -57,7 +57,8 @@ def menu_builder(request):
 
     context = {
         'categories': categories,
-        "form": category_form   
+        "form": category_form,
+        "vendor": vendor 
     }
     return render(request, 'vendor/menu_builder.html', context)
 
@@ -76,6 +77,7 @@ def fooditems_by_category(request, pk=None):
         "food_items": food_items,
         "category": category,
         'form' : food_form,
+        'vendor': vendor
     }
     return render(request, 'vendor/fooditems_by_category.html', context)
 
@@ -102,6 +104,7 @@ def add_category(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def edit_category(request, pk=None):
+    vendor = get_vendor(request)
     category = get_object_or_404(Category, pk=pk)
 
     if request.method == 'POST':
@@ -122,7 +125,8 @@ def edit_category(request, pk=None):
         form = CategoryForm(instance=category)
         context = {
             'form': form,
-            'category': category
+            'category': category,
+            'vendor': vendor
         }
         return render(request, 'vendor/edit_category.html', context)
 
@@ -158,6 +162,7 @@ def add_food(request, pk=None):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def edit_food(request, category_id, pk=None):
+    vendor = get_vendor(request)
     food_item = get_object_or_404(FoodItem, pk=pk)
 
     if request.method == 'POST':
@@ -180,6 +185,7 @@ def edit_food(request, category_id, pk=None):
             'form': form,
             'category': category_id,
             'food_item': food_item,
+            'vendor': vendor
         }
 
         return render(request, 'vendor/edit_food_item.html', context)

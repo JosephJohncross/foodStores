@@ -44,7 +44,6 @@ def vendor_menu(request, vendor_slug):
     }
     return render(request, 'marketplace/vendor_menu.html', context)
 
-@login_required(login_url='login')
 def add_to_cart(request, food_id=None):
     if request.user.is_authenticated:
         if request.headers.get('x-request-with') == 'XMLHttpRequest':

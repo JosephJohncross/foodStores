@@ -6,18 +6,19 @@ const orders = document.getElementById('orders')
 const cartCount = document.getElementById('cart_count') || null
 const homeSearch = document.getElementById('home-search') || null
 const searchDropDown = document.getElementById('search-dropdown') || null
-
+const longitudeField = document.getElementById('long') || null
+const latitudeField = document.getElementById('lat') || null
+const vendorCity = document.getElementById('lat') || null
+const vendorCountry = document.getElementById('lat') || null
 
 homeSearch != null ? homeSearch.addEventListener('keyup', (e)=>{autoComplete(e)}) : ""
 menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) : ""
 closeOrder != null ? closeOrder.addEventListener('click', slideDrawer) : ""
 orders != null ? orders.addEventListener('click', slideDrawer) : ""
-// searchDropDown != null ? searchDropDown.addEventListener('change', (e)=>{autoComplete(e)}) : ""
 
 document.onreadystatechange = () => {
     if ( document.readyState === 'complete'){
         document.onclick = (e)=>{
-            console.log(e.target);
             if (e.target.classList.contains('add_cart')){
                 e.preventDefault()
                 addToCart(e.target)
@@ -37,6 +38,8 @@ document.onreadystatechange = () => {
             else if (e.target.closest('.address-item') !== null || e.target.classList.contains('address-item')){
                 e.preventDefault()
                 homeSearch.value = e.target.children[1]?.innerHTML || e.target.innerHTML
+                longitudeField.value = e.target.children[2]?.value || e.target.nextElementSibling?.value 
+                latitudeField.value = e.target.lastElementChild?.value || e.target.nextElementSibling?.nextElementSibling?.value
                 searchDropDown.classList.add('hidden')
                 searchDropDown.classList.remove('flex')
             }
@@ -64,6 +67,7 @@ function autoComplete(e){
         fetch(`https://spott.p.rapidapi.com/places?type=CITY&limit=10&q=${encodeURI(e.target.value)}}`, options)
         .then(response => response.json())
         .then(response => {
+            console.log(response)
             response.forEach(address => {
                 var places = document.createElement('div')
                 places.classList.add('place-flex', 'address-item')
@@ -72,6 +76,8 @@ function autoComplete(e){
                     <img src="https://img.icons8.com/color/96/null/google-maps.png" class="place-image"/>
                 </div>
                 <div class="place-text">${address.name}, ${address.country.name}</div>
+                <input type="hidden" id="long-data" value="${address.coordinates.longitude}"/>
+                <input type="hidden" id="lat-data" value="${address.coordinates.latitude}"/>
             `
                 searchDropDown.append(places)
             })
@@ -138,6 +144,7 @@ async function addToCart(target){
         }
     })
     result = await response.json()
+    console.log(result)
     if (result.status == "Success"){
         cartCount.textContent = result.cartcounter["cart_count"]
     }
@@ -247,18 +254,18 @@ function toastNotification(result){
     })
 }
 
-async function placeAutoSuggestion(){
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '93464f8037msh725108e7458de10p12cd2cjsn038b91e1081a',
-            'X-RapidAPI-Host': 'spott.p.rapidapi.com'
-        }
-    };
+// async function placeAutoSuggestion(){
+//     const options = {
+//         method: 'GET',
+//         headers: {
+//             'X-RapidAPI-Key': '93464f8037msh725108e7458de10p12cd2cjsn038b91e1081a',
+//             'X-RapidAPI-Host': 'spott.p.rapidapi.com'
+//         }
+//     };
     
-    response = await fetch('https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&country=US%2CCA&q=Sea&type=CITY', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.err)
-}
+//     response = await fetch('https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&country=US%2CCA&q=Sea&type=CITY', options)
+//         .then(response => response.json())
+//         .then(response => console.log(response))
+//         .catch(err => console.log(err))
+// }
 
