@@ -7,12 +7,13 @@ from vendor.models import Vendor
 from .models import Cart, CartItem
 from .context_processor import get_cart_counter
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 
 # Create your views here.
 def marketplace(request):
-    vendors = Vendor.objects.filter(is_approved=True, user__is_active=True)
+    vendors = Vendor.objects.filter(is_approved=True, user__is_active=True).order_by('vendor_name').values()
     vendors_count = vendors.count()
     context = {
         'vendors': vendors,
@@ -121,4 +122,19 @@ def delete_cartitem(request, cartitem_id=None):
 
 
 def search(request):
-    return HttpResponse("Search page")
+    address = request.GET["restaurant_name"]
+    latitude = request.GET["lat"]
+    longitude = request.GET["lng"]
+    search_keyword = request.GET["restaurant_name"]
+
+    # returns vendor id's that has the food items the user is looking for 
+    food_item_by_vendor = FoodItem.objects.filter(food_title__icontains=search_keyword, is_available=True).values_list('vendor', flat=True)
+
+    vendor = Vendor.objects.filter(Q(id__in=food_item_by_vendor) | Q(vendor_name__icontains=search_keyword, is_approved=True, user__is_active=True))
+    vendor_count = vendor.count()
+    context = {
+        "vendors" : vendor,
+        "vendors_count": vendor_count
+    }
+    return render(request, 'marketplace/listing.html', context)
+    # return HttpResponse("Search page")
