@@ -26,6 +26,9 @@
                     <span class="text-sm text-gray-700 dark:text-gray-400 mb-2">No Country</span>
                     {% endif %}
                 </div>
+                {% if vendor.kms %}
+                <div class="text-xs mt-2">{{vendor.kms}}km away</div>
+                {% endif %}
                 <div class="pt-4 flex justify-between items-center w-full">
                     <div class="flex gap-0.5 text-green-500">
                         <svg

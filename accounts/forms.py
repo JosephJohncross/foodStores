@@ -69,7 +69,6 @@ class UserForm(forms.ModelForm):
         terms_and_condition = cleaned_data.get('terms_and_condition')
 
         if password != confirm_password:
-            print('password does not match')
             raise forms.ValidationError(
                 "Password does not match!"
             )

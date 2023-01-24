@@ -14,7 +14,6 @@ def get_cart_counter(request):
             for items in cart_item:
                 cart_count += 1
         except Exception as e:
-            # print(e)
             cart_count = 0
     return dict(cart_count=cart_count)
         

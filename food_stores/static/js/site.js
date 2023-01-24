@@ -10,6 +10,8 @@ const longitudeField = document.getElementById('long') || null
 const latitudeField = document.getElementById('lat') || null
 const vendorCity = document.getElementById('lat') || null
 const vendorCountry = document.getElementById('lat') || null
+// const searchForm = document.getElementById('search-form') || null
+
 
 homeSearch != null ? homeSearch.addEventListener('keyup', (e)=>{autoComplete(e)}) : ""
 menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) : ""
@@ -268,4 +270,3 @@ function toastNotification(result){
 //         .then(response => console.log(response))
 //         .catch(err => console.log(err))
 // }
-

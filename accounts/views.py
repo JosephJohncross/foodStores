@@ -42,7 +42,6 @@ def registerUser(request):
         message_state = "warning"
         return redirect('myAccount')
     elif request.method == 'POST':
-        print(request.POST)
         form = UserForm(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
@@ -121,7 +120,6 @@ def registerVendor(request):
             message_state = 'success'
             return redirect('registerVendor')
         else:
-            print('invalid form')
             print(form.errors)
     else:
         form = UserForm()
@@ -139,14 +137,10 @@ def login(request):
     global message_state
 
     if request.user.is_authenticated:
-        print("testing auth login")
         messages.warning(request, "Already logged in")
         message_state = "warning"
-        print("test auth")
         return redirect('myAccount')
     elif request.method == 'POST':
-        print("testing post login")
-        print("test post")
         email = request.POST['email']
         password = request.POST['password']
 
@@ -164,8 +158,6 @@ def login(request):
     context = {
         'message_state': message_state
     }
-    print(context)
-    print("testing get login ")
     return render(request, "accounts/login.html", context)
 def logout(request):
     auth.logout(request)
