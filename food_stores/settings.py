@@ -72,7 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'accounts.context_processor.get_vendor',
+                'accounts.context_processor.get_forward_coding_api',
                 'accounts.context_processor.get_google_api',
                 'marketplace.context_processor.get_cart_counter',
                 'marketplace.context_processor.get_items_in_cart',
@@ -165,6 +165,8 @@ CSRF_TRUSTED_ORIGINS = ['https://a95c-197-210-55-200.eu.ngrok.io']
 SECUREE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+FORWARD_GEOCODING = config('X_RAPID_API_KEY')
+
 
 os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']

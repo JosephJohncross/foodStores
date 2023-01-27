@@ -10,7 +10,8 @@ const longitudeField = document.getElementById('long') || null
 const latitudeField = document.getElementById('lat') || null
 const vendorCity = document.getElementById('lat') || null
 const vendorCountry = document.getElementById('lat') || null
-// const searchForm = document.getElementById('search-form') || null
+const geoCode = document.getElementById('geocode') || null
+const locationFinder = document.getElementById('location-finder') || null
 
 
 homeSearch != null ? homeSearch.addEventListener('keyup', (e)=>{autoComplete(e)}) : ""
@@ -44,6 +45,10 @@ document.onreadystatechange = () => {
                 latitudeField.value = e.target.lastElementChild?.value || e.target.nextElementSibling?.nextElementSibling?.value
                 searchDropDown.classList.add('hidden')
                 searchDropDown.classList.remove('flex')
+            }
+
+            else if (e.target.id === "location-finder"){
+                getCurrentUserLocation()
             }
         }
     }
@@ -256,17 +261,27 @@ function toastNotification(result){
     })
 }
 
-// async function placeAutoSuggestion(){
-//     const options = {
-//         method: 'GET',
-//         headers: {
-//             'X-RapidAPI-Key': '93464f8037msh725108e7458de10p12cd2cjsn038b91e1081a',
-//             'X-RapidAPI-Host': 'spott.p.rapidapi.com'
-//         }
-//     };
-    
-//     response = await fetch('https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&country=US%2CCA&q=Sea&type=CITY', options)
-//         .then(response => response.json())
-//         .then(response => console.log(response))
-//         .catch(err => console.log(err))
-// }
+const getCurrentUserLocation = () => {
+    navigator.geolocation.getCurrentPosition((location)=> {
+        geoCodeUserLocation(location.coords.latitude, location.coords.longitude)
+        window.location = `?lat=${location.coords.latitude}+&lng=${location.coords.longitude}`
+    })
+}
+
+
+const geoCodeUserLocation = (lat, lng) => {
+    const url = `https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse?lat=${lat}&lon=${lng}&accept-language=en&polygon_threshold=0.0`;
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': `${geoCode.textContent}`,
+        'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
+      }
+    };
+
+    fetch(url, options)
+    	.then(res => res.json())
+    	.then(json => console.log(json.display_name))
+    	.catch(err => console.error('error:' + err));
+}

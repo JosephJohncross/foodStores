@@ -12,3 +12,6 @@ from vendor.models import Vendor
 
 def get_google_api(request):
     return {'GOOGLE_API_KEY': settings.GOOGLE_API_KEY}
+
+def get_forward_coding_api(request):
+    return { "FORWARD_GEOCODING": settings.FORWARD_GEOCODING }
