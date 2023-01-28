@@ -2,11 +2,11 @@ from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from accounts.forms import UserProfileForm
 from accounts.views import check_role_vendor
-from .forms import VendorForm
+from .forms import VendorForm, OpeningHourForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from accounts.models import UserProfile
-from .models import Vendor
+from .models import Vendor, OpeningHour
 from .utils import get_vendor
 from menu.models import Category, FoodItem
 from menu.forms import CategoryForm, FoodItemForm
@@ -199,3 +199,13 @@ def delete_food(request, category_id, pk=None):
 
     messages.success(request, "Food item deleted successfully")
     return redirect('fooditems_by_category', category_id)
+
+def opening_hours(request):
+    opening_hour = OpeningHour.objects.filter(vendor=get_vendor(request))
+    form = OpeningHourForm()
+
+    context = {
+        'form': form,
+        'opening_hours': opening_hour
+    }
+    return render(request, 'vendor/openingHour.html', context)

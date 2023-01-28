@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'includes/dashboardMobileHeader.html' %}
+<section class="customer-body h-screen grid-cols-[150px 1fr]">
+    {% include 'includes/alerts.html'%} 
+    {% include 'includes/vendorSideBar.html'%}
+    
+    <div class="block w-full bg-gray-200/50 h-screen dark:bg-[#090938] overflow-scroll main pt-20 md:pt-0">
+        {% include 'vendor/vendorHero.html' %}
+
+        <div class="py-10 mx-auto mt-10 font-monserat px-4 md:px-16">
+            <p class="text-3xl dark:text-[#7EC8E3] mb-12">Opening Hours</p>
+        </div>
+        <div class="border-2 h-12 w-12 text-black">
+            {{form}}
+            {% for official_hours in opening_hours %}
+                <p class="">{{ official_hours }} test</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- drawer init and toggle -->
+    <div class="text-center fixed bottom-0 left-0 w-full bg-black/20 rounded-tr-lg backdrop-blur-sm md:hidden">
+        <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe" data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-0" aria-controls="drawer-swipe">
+            <span class="absolute w-8 h-1 -translate-x-1/2 bg-white rounded-tl-lg rounded-tr-lg top-3 left-1/2"></span>
+        </div>
+     </div>
+</section>
+{% endblock %}
+
+{% block link %}
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+{% endblock link %}
