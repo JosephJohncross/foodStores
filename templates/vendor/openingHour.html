@@ -13,12 +13,79 @@
 
         <div class="py-10 mx-auto mt-10 font-monserat px-4 md:px-16">
             <p class="text-3xl dark:text-[#7EC8E3] mb-12">Opening Hours</p>
-        </div>
-        <div class="border-2 h-12 w-12 text-black">
-            {{form}}
-            {% for official_hours in opening_hours %}
-                <p class="">{{ official_hours }} test</p>
-            {% endfor %}
+
+            <div class="text-black flex space-x-5">
+                <div id="hour-cont" class="p-10 shadow-shadow1 rounded-md flex flex-col space-y-5 w-2/4">
+                    {% for official_hours in opening_hours %}
+                    <div class="flex items-center">
+                        <p class="font-semibold w-1/2">{{ official_hours }}</p>
+                        <span class="flex space-x-2 text-sm w-1/2">
+                            <p class="min-w-max">{{ official_hours.from_hour }}</p>
+                            <p class="">-</p>
+                            <p class="min-w-max">{{ official_hours.to_hour }}</p>
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="">
+                    <a href="#" type="button" data-modal-toggle="editUserModal" class="flex justify-center space-x-2 p-2 text-white text-sm font-medium bg-green-400 hover:bg-green-600  dark:text-white rounded-sm">
+                        <img src="https://img.icons8.com/ios/20/FFFFFF/plus-math.png"/>
+                        <span>Add Hours</span>    
+                    </a>
+                </div>
+            </div>
+
+             <!-- Add user modal -->
+            <div id="editUserModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center p-4 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative w-full max-w-xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <form id="add-hours"  method="post" class="relative font-monserat bg-white rounded-lg shadow dark:bg-gray-700">
+                        {% csrf_token %}
+                        <!-- Modal header -->
+                        <div class="flex justify-between items-start p-4 rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                New Hour
+                            </h3>
+                            <button id="hour-modal-close" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editUserModal">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="flex flex-col p-6 space-y-6">
+                            <div class="">
+                                <label for="id_day" class="text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 origin-[0] dark:bg-[#090938] py-5 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Day</label>
+                                {{form.day}}
+                            </div>
+                            <div class="flex space-x-3 items-center">
+                                <div class="relative w-1/2">
+                                    <label for="id_from_hour" class="text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 origin-[0] dark:bg-[#090938] py-5 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">From</label>
+                                    {{form.from_hour}}
+                                </div>
+                                <div class="relative w-1/2">
+                                    <label for="id_to_hour" class="text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 origin-[0] dark:bg-[#090938] py-5 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">To</label>
+                                    {{form.to_hour}}
+                                </div>
+                            </div>
+                            <div class="">
+                                {{form.is_closed}}
+                                <label for="id_is_closed" class="text-sm text-gray-500 px-3 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 origin-[0] dark:bg-[#090938] py-5 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">is closed</label>
+                            </div>
+                        </div>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in fields.errors %}
+                                    <li class="text-sm py-3">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-6 space-x-2 dark:border-gray-600">
+                            <input id="opening_url" type="hidden" value="{% url "add_opening_hours" %}"/>
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="max-width: min-content; " id="add-hour">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     

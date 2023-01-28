@@ -35,7 +35,7 @@ class OpeningHour(models.Model):
     day = models.IntegerField(choices=DAYS)
     from_hour = models.CharField(choices=HOUR_OF_DAY_24 , max_length=10, blank=True)
     to_hour = models.CharField(choices=HOUR_OF_DAY_24 , max_length=10, blank=True)
-    is_closed = models.BooleanField(default=False)
+    is_closed = models.BooleanField(default=False, blank=True)
 
     class Meta:
         ordering = ('day', 'from_hour')

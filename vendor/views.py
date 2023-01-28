@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from accounts.forms import UserProfileForm
+from django.http.response import HttpResponse, JsonResponse
 from accounts.views import check_role_vendor
 from .forms import VendorForm, OpeningHourForm
 from django.contrib import messages
@@ -11,7 +12,8 @@ from .utils import get_vendor
 from menu.models import Category, FoodItem
 from menu.forms import CategoryForm, FoodItemForm
 from django.template.defaultfilters import slugify
-
+import json
+from django.db import IntegrityError
 # global message setter
 message_state = ''
 
@@ -202,10 +204,38 @@ def delete_food(request, category_id, pk=None):
 
 def opening_hours(request):
     opening_hour = OpeningHour.objects.filter(vendor=get_vendor(request))
+    vendor = get_vendor(request)
     form = OpeningHourForm()
 
     context = {
         'form': form,
-        'opening_hours': opening_hour
+        'opening_hours': opening_hour,
+        "vendor": vendor
     }
     return render(request, 'vendor/openingHour.html', context)
+
+def add_opening_hours(request):
+    # Handle the data and save them inside the database
+    if request.user.is_authenticated:
+        if request.headers.get('x-request-with') == 'XMLHttpRequest' and request.method == "POST":
+            data = json.loads(request.body.decode())
+            day = data['day']
+            from_hour = data['from_hour']
+            to_hour = data['to_hour']
+            is_closed = data['is_closed']
+
+            try:
+                hour = OpeningHour.objects.create(vendor=get_vendor(request), day=day, from_hour=from_hour, to_hour=to_hour, is_closed=is_closed)
+                if hour:
+                    day = OpeningHour.objects.get(id=hour.id)
+                    if day.is_closed:
+                        response = {'status' : 'Success', "message": "Opening hour added", 'id': hour.id, 'day': day.get_day_display(), "is_closed": "Closed" }
+                    else:
+                        response = {'status' : 'Success', "message": "Opening hour added", 'id': hour.id, 'day': day.get_day_display(), "from_hour": hour.from_hour, "to_hour": hour.to_hour}
+                return JsonResponse(response)
+            except IntegrityError as e:
+                response = {'status' : 'Failed', "message": "Error"}
+                return JsonResponse(response)
+        else:
+            return JsonResponse({'status' : 'Failed', "message": "Error"})
+                       

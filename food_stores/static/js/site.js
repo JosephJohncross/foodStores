@@ -12,7 +12,8 @@ const vendorCity = document.getElementById('lat') || null
 const vendorCountry = document.getElementById('lat') || null
 const geoCode = document.getElementById('geocode') || null
 const locationFinder = document.getElementById('location-finder') || null
-
+const addHour = document.getElementById('add-hour') || null
+const openingUrl = document.getElementById('opening_url') || null
 
 homeSearch != null ? homeSearch.addEventListener('keyup', (e)=>{autoComplete(e)}) : ""
 menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) : ""
@@ -46,9 +47,84 @@ document.onreadystatechange = () => {
                 searchDropDown.classList.add('hidden')
                 searchDropDown.classList.remove('flex')
             }
-
             else if (e.target.id === "location-finder"){
                 getCurrentUserLocation()
+            }
+            else if (e.target.id === "add-hour"){
+                e.preventDefault()
+                const day = document.getElementById('id_day').value
+                const fromHour = document.getElementById('id_from_hour').value
+                const toHour = document.getElementById('id_to_hour').value
+                var isClosed = document.getElementById('id_is_closed').checked
+                const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                const hourCont = document.getElementById('hour-cont')
+                const addHours = document.getElementById('add-hours')
+                const hourModalCloseBtn = document.getElementById('hour-modal-close')
+                
+                var condition
+                
+                if (isClosed){
+                    isClosed = "True"
+                    condition = "day !='' "
+                }
+                else{
+                    isClosed = "False"
+                    condition = 'day != "" && fromHour != "" && toHour != ""'
+                }    
+
+                if (eval(condition)){
+                    fetch(`${openingUrl.value}`, {
+                        method: "POST",
+                        body: JSON.stringify({
+                            "day": day,
+                            "from_hour": fromHour,
+                            "to_hour": toHour,
+                            "is_closed": isClosed,
+                        }),
+                        headers: {
+                            'X-CSRFToken': csrfToken,
+                            'X-Request-With': 'XMLHttpRequest',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status = "Success"){
+                            console.log(result);
+
+                            //Adds new opening hour to vendor dashboard without page reload
+                            var html = document.createElement('div')
+                            html.classList = 'flex items-center'
+                            if (result.is_closed){
+                                html.innerHTML = `<p class="font-semibold w-1/2">${result.day}</p>
+                                        <span class="flex space-x-2 text-sm w-1/2">
+                                            <p class="min-w-max">${ result.is_closed }</p>
+                                        </span>`
+                            }
+                            else{
+                                html.innerHTML = `<p class="font-semibold w-1/2">${result.day}</p>
+                                        <span class="flex space-x-2 text-sm w-1/2">
+                                            <p class="min-w-max">${ result.from_hour }</p>
+                                            <p class=""> - </p>
+                                            <p class="min-w-max">${result.to_hour}</p>
+                                        </span>`
+
+                            }
+                            hourCont.append(html)
+                            hourModalCloseBtn.click()
+                            addHours.reset()
+                            toastNotification(result)
+                        }
+                        else{
+                            toastNotification(result)
+                        }
+                        
+                    })
+                    .catch(error => console.log(error))
+                }
+                else{
+                    console.log("Please fil in required fields")
+                }
             }
         }
     }
