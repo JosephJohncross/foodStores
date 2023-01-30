@@ -89,9 +89,9 @@ document.onreadystatechange = () => {
                     })
                     .then(response => response.json())
                     .then(result => {
-                        if (result.status = "Success"){
+                        console.log(result.status)
+                        if (result.status == "Success"){
                             console.log(result);
-
                             //Adds new opening hour to vendor dashboard without page reload
                             var html = document.createElement('div')
                             html.classList = 'flex items-center'
@@ -116,6 +116,8 @@ document.onreadystatechange = () => {
                             toastNotification(result)
                         }
                         else{
+                            hourModalCloseBtn.click()
+                            addHours.reset()
                             toastNotification(result)
                         }
                         

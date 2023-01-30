@@ -229,13 +229,11 @@ def add_opening_hours(request):
                 if hour:
                     day = OpeningHour.objects.get(id=hour.id)
                     if day.is_closed:
-                        response = {'status' : 'Success', "message": "Opening hour added", 'id': hour.id, 'day': day.get_day_display(), "is_closed": "Closed" }
+                        return JsonResponse({'status' : 'Success', "message": "Opening hour added", 'id': hour.id, 'day': day.get_day_display(), "is_closed": "Closed" })
                     else:
-                        response = {'status' : 'Success', "message": "Opening hour added", 'id': hour.id, 'day': day.get_day_display(), "from_hour": hour.from_hour, "to_hour": hour.to_hour}
-                return JsonResponse(response)
+                        return JsonResponse({'status' : 'Success', "message": "Opening hour added", 'id': hour.id, 'day': day.get_day_display(), "from_hour": hour.from_hour, "to_hour": hour.to_hour})
             except IntegrityError as e:
-                response = {'status' : 'Failed', "message": "Error"}
-                return JsonResponse(response)
+                return JsonResponse({'status' : 'Failed', "message": f"{from_hour} - {to_hour} already exist for this day!"})
         else:
             return JsonResponse({'status' : 'Failed', "message": "Error"})
                        
