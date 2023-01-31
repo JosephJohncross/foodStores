@@ -95,11 +95,13 @@ document.onreadystatechange = () => {
                             //Adds new opening hour to vendor dashboard without page reload
                             var html = document.createElement('div')
                             html.classList = 'flex items-center'
+                            html.id = `hour-${result.id}`
                             if (result.is_closed){
                                 html.innerHTML = `<p class="font-semibold w-1/2">${result.day}</p>
                                         <span class="flex space-x-2 text-sm w-1/2">
                                             <p class="min-w-max">${ result.is_closed }</p>
-                                        </span>`
+                                        </span>
+                                        <button id="remove_hour" class="w-1/3 text-red-500" data-hour_url="/vendor/opening_hours/delete/${result.id}">Delete</button>`
                             }
                             else{
                                 html.innerHTML = `<p class="font-semibold w-1/2">${result.day}</p>
@@ -107,7 +109,8 @@ document.onreadystatechange = () => {
                                             <p class="min-w-max">${ result.from_hour }</p>
                                             <p class=""> - </p>
                                             <p class="min-w-max">${result.to_hour}</p>
-                                        </span>`
+                                        </span>
+                                        <button id="remove_hour" class="w-1/2 text-red-500" data-hour_url="/vendor/opening_hours/delete/${result.id}">Delete</button>`
 
                             }
                             hourCont.append(html)
@@ -127,6 +130,27 @@ document.onreadystatechange = () => {
                 else{
                     console.log("Please fil in required fields")
                 }
+            }
+            else if (e.target.id === "remove_hour"){
+                var url = e.target.dataset.hour_url
+                const hourCont = document.getElementById('hour-cont')
+
+                fetch(url, {
+                    headers: {
+                        'X-Request-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.id)
+                    if (result.status === "Success"){
+                        var hourElem = document.getElementById(`hour-${result.id}`)
+                        console.log(hourElem)
+                        hourCont.removeChild(hourElem)
+                        toastNotification(result)
+                    }
+                })
+                .catch(error => console.log(error))
             }
         }
     }

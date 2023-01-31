@@ -71,7 +71,7 @@
      <div class="container mx-auto font-monserat py-14 px-8 mb-24 bg-gradient-to-bl from-orange-400 via-orange-400 to-orange-600">
          <div class="grid grid-cols-3 gap-16 font-monserat">
             {% for vendor in vendors %}
-                <div href="#" class="flex flex-col md:flex-row bg-white shadow-md rounded-md overflow-hidden">
+                <div href="#" class="relative overflow-hidden flex flex-col md:flex-row bg-white shadow-md rounded-md">
                     <div class="flex flex-col p-4 leading-normal w-full">
                         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ vendor.vendor_name}}</h5>
                         <div class="flex flex-col">
@@ -152,6 +152,11 @@
                             </a>
                         </div>
                     </div>
+                    {% if not vendor.is_open %}
+                    <span class=" bg-red-600 w-20 h-8 absolute top-0 right-0 flex items-center justify-center text-white">Closed</span>
+                    {% else %}
+                    <span class=" bg-lime-400 w-20 h-8 absolute top-0 right-0 flex items-center justify-center text-white">Open</span>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

@@ -79,8 +79,9 @@ def fooditems_by_category(request, pk=None):
         "food_items": food_items,
         "category": category,
         'form' : food_form,
-        'vendor': vendor
+        'vendor': vendor,
     }
+    
     return render(request, 'vendor/fooditems_by_category.html', context)
 
 @login_required(login_url='login')
@@ -236,4 +237,14 @@ def add_opening_hours(request):
                 return JsonResponse({'status' : 'Failed', "message": f"{from_hour} - {to_hour} already exist for this day!"})
         else:
             return JsonResponse({'status' : 'Failed', "message": "Error"})
-                       
+
+def delete_opening_hours(request, pk=None):
+    if request.user.is_authenticated:
+        if request.headers.get('x-request-with') == 'XMLHttpRequest':
+            print(pk)
+            hour = get_object_or_404(OpeningHour, pk=pk)
+            if hour:
+                hour.delete()
+                return JsonResponse({'status': 'Success', 'message': 'Hour removed succesfully', 'id': pk})
+        else:
+            return JsonResponse({'status' : 'Failed', "message": "Error"})

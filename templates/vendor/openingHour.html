@@ -25,14 +25,20 @@
                 <div class="text-black">
                     <div id="hour-cont" class="p-10 shadow-shadow1 rounded-md flex flex-col space-y-5">
                         {% for official_hours in opening_hours %}
-                        <div class="flex justify-between items-center space-x-6">
-                            <p class="font-semibold w-1/3">{{ official_hours }}</p>
-                            <span class="flex space-x-2 text-sm w-1/3">
+                        <div class="flex justify-between items-center space-x-6" id="hour-{{official_hours.id}}">
+                            <p class="font-semibold w-1/2">{{ official_hours }}</p>
+                            {% if official_hours.is_closed %}
+                            <span class="flex space-x-2 text-sm w-1/2">
+                                <p class="min-w-max">Closed</p>
+                            </span>
+                            {% else %}
+                            <span class="flex space-x-2 text-sm w-1/2">
                                 <p class="min-w-max">{{ official_hours.from_hour }}</p>
                                 <p class="">-</p>
                                 <p class="min-w-max">{{ official_hours.to_hour }}</p>
                             </span>
-                            <a href="" class="w-1/3 text-red-500">Delete</a>
+                            {% endif %}
+                            <button id="remove_hour" class="w-1/2 text-red-500" data-hour_url="{% url "delete_opening_hours" official_hours.id %} ">Delete</button>
                         </div>
                         {% endfor %}
                     </div>
