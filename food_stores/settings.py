@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'livereload',
     'menu',
     'marketplace',
-    'django.contrib.gis'
+    'django.contrib.gis',
+    'customers'
 ]
 
 MIDDLEWARE = [

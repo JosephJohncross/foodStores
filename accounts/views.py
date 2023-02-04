@@ -1,4 +1,3 @@
-from email.policy import default
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode

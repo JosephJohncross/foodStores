@@ -22,6 +22,16 @@
                 </div>
                 <div>
                     <!-- Show tooltip on right -->
+                    <a href={% url "myAccount" %}>
+                        <img src="https://img.icons8.com/ios-glyphs/30/null/user--v1.png" data-tooltip-target="tooltip-right" data-tooltip-placement="right"/>
+                    </a>
+                    <div id="tooltip-right" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        My Account
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Show tooltip on right -->
                     <a href={% url "logout" %}>
                         <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/>
                     </a>
@@ -34,13 +44,10 @@
         </div>
 
         <div class="block md:grid grid-cols-10 bg-gray-200/50 h-screen">
-            <div id="mid-section" class="col-span-7 font-monserat overflow-y-scroll main pt-28 md:pt-0">
+            <div id="mid-section" class="col-span-10 font-monserat overflow-y-scroll main pt-28 md:pt-0">
                 <!-- Top bar section -->
-                <div id="top-bar" class="hidden px-10 backdrop-blur-xl z-10 md:flex justify-between items-center py-10 sticky top-0">
-                    <div>
-                        <div class="text-3xl font-monserat font-semibold">Welcome</div>
-                        <p class="text-gray-400">Discover whatever you need easily</p> 
-                    </div>
+                <div id="top-bar" class="hidden px-10 md:px-24 backdrop-blur-xl z-10 md:flex justify-between items-center py-10 sticky top-0">
+                    <p class="text-3xl dark:text-[#7EC8E3]">Profile Settings</p>    
                     <div class="">
                         <div class="relative w-10 h-10 overflow-hidden border-2 border-mainColor flex justify-center items-center bg-gray-100 rounded-full dark:bg-gray-600">
                             <svg data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
@@ -67,116 +74,86 @@
                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                             </div>
                         </div>
-                    </div>
+                    </div>       
                 </div>
 
+
                 <div class="px-10 pb-12">
-                    <!-- selection section -->
-                    <div id="menu-select" class="flex overflow-x-scroll items-center gap-x-5 text-sm pb-12 main md:gap-x-14 md:text-lg">
-                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="true">Signature</div>
-                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Croissant</div>
-                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Waffle</div>
-                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Coffee</div>
-                        <div class="selection-btn data-[pressed=true]:bg-mainColor data-[pressed=true]:text-white" data-pressed="false">Cream</div>
-                    </div>
-    
-                    <!-- menu items section -->
-                    <div class="flex flex-wrap justify-center gap-11 md:justify-start">
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu1.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
+                    <form class="md:px-16 flex flex-col space-y-6" action="{% url 'cprofile' %}" method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
+                            <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url('{% if profile.profile_picture %}{{profile.profile_picture.url}} {% else %}{% static 'images/default_vendor_profile.jpg' %}{% endif %}')"></div>
+                            <div class="flex flex-col space-y-4">
+                                <p class="dark:text-[#7EC8E3]">Profile Picture</p>
+                                <div class="flex-col space-y-3 flex">
+                                    <span>{{user_profile.profile_picture}}</span>                            
+                                    {{user_profile.profile_picture.errors}}
+                                </div>
                             </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
                         </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu2.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
+                        <div class="flex flex-col space-y-2 md:items-center py-14 md:space-x-16 px-4 md:flex-row md:space-y-0 md:px-8" style="border: 1px solid rgba(107, 114, 128, 1);">
+                            <div class="w-16 h-16 md:w-28 md:h-28 block bg-white py-2 rounded-full border-2 px-2 bg-center bg-contain" style="background-image: url('{% if profile.cover_photo %}{{profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')"></div>
+                            <div class="flex flex-col space-y-4">
+                                <p class="dark:text-[#7EC8E3]">Cover Photo</p>
+                                <div class="flex-col space-y-3 flex">
+                                    <span>{{user_profile.cover_photo}}</span>                            
+                                    {{user_profile.cover_photo.errors}}
+                                </div>
                             </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
                         </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu3.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
+                        
+                        <div class="md:px-8 flex flex-col space-y-5 py-10 md:border-slate-500/80 md:border-[1px]">
+                            <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-4xl">
+                                <div class="">  
+                                    <div class="relative max-w-4xl">
+                                        <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">First Name</label>
+                                        {{user_info_form.first_name}}
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <label for="floating_outlined" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Last Name</label>
+                                    {{user_info_form.last_name}}
+                                    <div id="search-dropdown" class="absolute z-20 top-20 rounded-lg w-full shadow-lg bg-white hidden px-4 flex-col divide-gray-200 divide-y-[1px] py-6">
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    {{user_info_form.phone_number}}
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Phone Number</label>
+                                </div>
+                                <div class="relative">
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Address</label>
+                                    {{user_profile.address}}
+                                    <div id="search-dropdown" class="absolute z-20 top-20 rounded-lg w-full shadow-lg bg-white hidden px-4 flex-col divide-gray-200 divide-y-[1px] py-6">
+                                    </div>
+                                </div>  
+                                <div class="relative">
+                                    {{user_profile.state}}
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">State</label>
+                                </div>
+                                <div class="relative">
+                                    {{user_profile.city}}
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">City</label>
+                                </div>
+                                <div class="relative">
+                                    {{user_profile.pin_code}}
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pin Code</label>
+                                </div>
+                                <div class="relative">
+                                    {{user_profile.latitude}}
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Latitude</label>
+                                </div>
+                                <div class="relative">
+                                    {{user_profile.longitude}}
+                                    <label for="name" class="absolute text-base text-gray-500 dark:text-[#7EC8E3] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-[#090938] px-3 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Longitude</label>
+                                </div>
+                                <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="max-width: min-content;"/>
                             </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
                         </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu4.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
-                            </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
-                        </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu5.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
-                            </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
-                        </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu6.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
-                            </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
-                        </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu7.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
-                            </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
-                        </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu8.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
-                            </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
-                        </div>
-                        <div class="card flex flex-col space-y-2">
-                            <div class="card__div relative" style="background-image: url('/static/images/menu9.jpg'); height:150px; background-size:cover; background-position: center;">
-                                <span class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
-                                    <img src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
-                                </span>
-                            </div>
-                            <p class="card__title">Almond Brown Sugar Croissant</p>
-                            <p class="card_description">Sweet croisant with topping almonds and brown sugar</p>
-                            <p class="text-lg font-semibold text-mainColor">$12.98 <span class="text-gray-400/50 text-base">/ 3pcs</span></p>
-                        </div>
-                    </div> 
+                    </form>
                 </div>
             </div>
 
-            <div id="sideDrawer" class="bg-white shadow-md px-4 md:px-8 fixed top-0 left-0 right-0 font-spartan z-50 overflow-y-auto h-screen pb-10 transition-transform translate-x-full md:translate-x-0 duration-500 md:relative md:pb-0 md:col-span-3">
+            <div id="sideDrawer" class="bg-white shadow-md px-4 md:px-8 fixed top-0 left-0 right-0 font-spartan z-50 overflow-y-auto h-screen pb-10 transition-transform translate-x-full md:translate-x-0 duration-500 md:relative md:pb-0 md:col-span-3 md:hidden">
                 <div class="flex justify-between items-center md:justify-start pr-4">
                     <p class="md:text-3xl font-monserat font-semibold py-10">Current Order</p> 
                     <img id="close-order" src="https://img.icons8.com/ios-filled/50/null/delete-sign--v1.png" class="md:hidden w-5 h-5 cursor-pointer"/>
