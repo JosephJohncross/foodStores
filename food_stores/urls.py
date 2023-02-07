@@ -24,9 +24,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='homepage'),
     path('', include("accounts.urls")),
+    # marketplace
     path('', include("marketplace.urls")),
+    #checkout
+    path('checkout/', marketView.checkout, name="checkout"),
+    # search
     path('search/', marketView.search, name="search"),
     path('<slug:vendor_slug>/', marketView.vendor_details, name='vendor_details'),
+
 ]
 
 if settings.DEBUG:

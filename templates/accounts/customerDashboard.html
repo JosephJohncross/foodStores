@@ -238,7 +238,9 @@
                             </div>
                         </div>
                     </div>
-                    <button class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl">Proceed to Payment</button>
+                    <a href="{% url 'checkout' %}">
+                        <button class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl">Proceed to Checkout</button>
+                    </a>
                 </div>
                 {% endif %}
             </div>

@@ -3,17 +3,19 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.db.models import Prefetch 
 from django.shortcuts import get_object_or_404
-from menu.models import Category, FoodItem
-from vendor.models import OpeningHour, Vendor
-from .models import Cart, CartItem
-from .context_processor import get_cart_counter
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.geos import GEOSGeometry
+from django.contrib.gis.measure import D
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import redirect
 
-from django.contrib.gis.geos import GEOSGeometry
-from django.contrib.gis.measure import D
-from django.contrib.gis.db.models.functions import Distance
+from menu.models import Category, FoodItem
+from vendor.models import OpeningHour, Vendor
+from .models import Cart, CartItem
+from .context_processor import get_cart_counter
+from orders.forms import OrderForm
+from accounts.models import UserProfile
 
 
 
@@ -164,3 +166,24 @@ def search(request):
             "vendors_count": vendor_count
         }
         return render(request, 'marketplace/listing.html', context)
+
+
+def checkout(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    default_values = {
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
+        'phone': request.user.phone_number,
+        'email': request.user.email,
+        'address': user_profile.address,
+        'country': user_profile.country,
+        'state': user_profile.state,
+        'city': user_profile.city,
+        'pin_code': user_profile.pin_code
+    }
+    order_form = OrderForm(initial=default_values)
+
+    context = {
+        'order_form': order_form
+    }
+    return render(request, 'marketplace/checkout.html', context)
