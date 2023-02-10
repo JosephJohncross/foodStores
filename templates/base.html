@@ -12,11 +12,13 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<!-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" /> -->
 		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-		<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-		<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
-		<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
-		<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
-		<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+		{% if request.path == 'vendorDashboard/'%}
+			<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+			<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+			<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+			<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+			<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+		{% endif %}
 		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     	<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">

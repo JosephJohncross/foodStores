@@ -5,48 +5,93 @@
 >
   <div class="container flex flex-wrap md:flex-nowrap justify-around items-center mx-auto">
     
-	<a href={% url "homepage" %} class="flex items-center">
+	  <a href={% url "homepage" %} class="flex items-center">
       <img
         src="{% static 'images/doughnut.png' %}"
         class="mr-3 h-6 sm:h-9"
         alt="FoodStores logo"
       />
     </a>
-
-    <div class="flex md:order-2">
-      <button
-        data-collapse-toggle="navbar-sticky"
-        type="button"
-        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        aria-controls="navbar-sticky"
-        aria-expanded="false"
-      >
-        <span class="sr-only">Open main menu</span>
-        <svg
-          class="w-6 h-6"
-          aria-hidden="true"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </button>
-    </div>
+    {% if request.user.is_authenticated %}
+      <div class="flex md:order-2">
+        <div class="">
+          <!-- <img id="avatarButton" type="button"  class="w-10 h-10 rounded-full cursor-pointer" src="/docs/images/people/profile-picture-5.jpg" alt="User dropdown"> -->
+          <div class="flex items-center space-x-4">
+              <div class="relative w-7 h-7 md:w-10 md:h-10 overflow-hidden border-2 border-mainColor flex justify-center items-center bg-gray-100 rounded-full dark:bg-gray-600">
+                  <svg data-dropdown-toggle="userMobileDropdown" data-dropdown-placement="bottom-start" class="absolute w-4 h-4 md:w-12 md:h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+              </div>
+              <!-- Dropdown menu -->
+              <div id="userMobileDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-shadow1 w-max dark:bg-gray-700 dark:divide-gray-600 font-monserat">
+                  <div class="px-4 py-3 text-xs text-gray-900 dark:text-white">
+                  <div>{{user.first_name}} {{user.last_name}}</div>
+                  <div class="font-medium truncate">{{user.email}}</div>
+                  </div>
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+                    <li>
+                        <a href="{% url "myAccount" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{% url "cprofile" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                    </li>
+                    <li>
+                    </li>
+                  </ul>
+                  <div class="py-1 text-sm">
+                      <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
+                  </div>
+              </div>
+              <div class="">
+                <a
+                  href="{% url 'myAccount' %}"
+                  class="text-center relative inline-flex items-center text-gray-700 rounded hover:bg-gray- md:text-lg md:hover:bg-transparent md:hover:text-mainColor md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  onclick=""
+                  >
+                    <i class="uil uil-shopping-cart text-3xl"></i>
+                    <span class="sr-only">Cart</span>
+                    <div id="cart_count" class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-mainColor border-2 border-white rounded-full -top-3 -right-1 dark:border-gray-900">{{cart_count}}</div>
+                  </a>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+        <div class="">
+          <div class="">
+              <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"   data-drawer-target="drawer-navigation">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+              </button>
+          </div>
+        </div>  
+        <!-- Side menu -->
+        <div class="hidden w-full font-spartan text-center text-lg" id="navbar-hamburger">
+          <ul class="flex flex-col mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+            <li>  
+              <a href="{% url 'marketplace' %}" class="block py-2 pl-3 pr-4 text-gray-700  hover:bg-mainColor/70 hover:rounded hover:dark:bg-mainColor/600 hover:text-white" aria-current="page">Marketplace</a>
+            </li>
+            <li>
+              <a href="{% url 'login' %}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-mainColor/70 hover:rounded hover:dark:bg-mainColor/600 hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Sign in</a>
+            </li>
+            <li>
+              <a href="{% url 'registerUser' %}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-mainColor/70 hover:rounded hover:dark:bg-mainColor/600 hover:text-white dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Sign up</a>
+            </li>
+            <li>
+              <a href="{% url 'registerVendor' %}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-mainColor/70 hover:rounded hover:dark:bg-mainColor/600 hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Sign up as restaurant</a>
+            </li>
+          </ul>
+        </div>
+        
+    {% endif %}
 
 	<div class="hidden md:justify-end md:space-x-10 items-center w-full md:flex md:w-full md:order-1" id="navbar-sticky">
       <ul class="flex flex-col shadow-lg md:shadow-none p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 ">
         {% if user.is_authenticated%}
           <li class="flex flex-col space-y-3">
-            <a
+            <!-- <a
               href="{% url 'myAccount'%}"
               class="block py-2 pr-4 pl-3 text-base text-white rounded bg-mainColor text-center hover:bg-mainColor md:text-lg md:hover:bg-transparent"
               >My Accounts</a
-            >
+            > -->
             <a
               href="{% url 'logout'%}"
               class="block py-2 pr-4 pl-3 text-base text-white rounded bg-mainColor text-center hover:bg-mainColor md:text-lg md:hover:bg-transparent"

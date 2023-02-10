@@ -71,3 +71,6 @@
 .place-text{
   @apply text-base font-semibold font-spartan text-gray-500
 }
+.payment_method{
+  @apply absolute h-full opacity-0 w-full
+}

@@ -3,8 +3,11 @@
 {% load static %}
 
 {% block content%}
-{% include 'includes/header.html'%}
-<section class="bg-gray-300/50 pb-16 font-monserat">
+<div class="hidden md:block">
+    {% include 'includes/header.html' %}
+</div>
+<section class="bg-gray-300/50 pb-16 font-monserat pt-20 md:pt-0">
+    {% include 'includes/dashboardMobileHeader.html' %}
     <div class="relative w-full block bg-center bg-cover bg-no-repeat" style="background-image: url('{% if vendor.user_profile.cover_photo %}{{vendor.user_profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')">
         <div class="absolute left-0 right-0 top-0 bottom-0 bg-black/50 z-[-1]"></div>
         <ul class="pt-10 container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -20,15 +23,15 @@
                 </div>
             </div>
             <ul class="h-12 flex text-mainColor space-x-4">
-                <li class="px-6 py-3 bg-white font-bold">About</li>
+                <li class="px-6 py-3 bg-white font-bold rounded-tr-lg rounded-tl-lg">About</li>
                 <a href="{% url 'vendor_menu' vendor.vendor_slug %}" class="flex justify-center items-center">
                     <li class="px-2 py-1 bg-white font-bold  rounded-md hover:scale-105 hover:shadow-md">Our Menu</li>
                 </a>
             </ul>
         </ul>
-
+        
         {% if hours %}
-        <div class="absolute top-1/2 right-20 z-10 -translate-y-1/2">
+        <div class="absolute pl-5 md:pl-0 top-2/3 md:top-1/2 md:right-20 z-10 -translate-y-1/2">
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-mainColor hover:bg-mainColor/70 focus:ring-4 focus:outline-none focus:ring-mainColor/40 font-medium rounded-lg text-sm px-8 py-2.5 text-center inline-flex items-center dark:bg-mainColor dark:hover:bg-mainColor/70 dark:focus:ring-mainColor/40" type="button">Opening hours <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
             <!-- Dropdown menu -->
             <div id="dropdown" class="py-6 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-shadow1 w-64 dark:bg-gray-700 border-4 border-mainColor">
@@ -57,7 +60,7 @@
         {% endif %}
     </div>
     <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div class="shadow-lg bg-white md:py-16 md:px-16">
+        <div class="px-4 py-6 shadow-lg bg-white md:py-16 md:px-16 rounded-br-lg rounded-r-lg rounded-bl-lg">
             <p class="mb-8 text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod modi ducimus nihil tempore deleniti rem delectus hic. Reprehenderit libero consequuntur quae dolore nemo alias quasi ipsa velit suscipit impedit officiis at, incidunt exercitationem debitis quia id vitae quibusdam ullam perspiciatis.</p>
             <div class="">
                 <p class="text-xl font-medium pb-2">Location</p>
@@ -75,6 +78,9 @@
             </div>
         </div>
     </div>
+    {% if request.user.is_authenticated %}
+        {% include 'includes/drawerComponent.html' %}
+    {% endif %}
 </section>
 {% include 'includes/footer.html' %}
 {% endblock %}

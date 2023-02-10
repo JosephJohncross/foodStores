@@ -3,8 +3,11 @@
 {% load static %}
 
 {% block content%}
-{% include 'includes/header.html'%}
-<section class="bg-gray-300/50 pb-16 font-monserat">
+<div class="hidden md:block">
+    {% include 'includes/header.html' %}
+</div>
+<section class="bg-gray-300/50 pb-16 font-monserat pt-20 md:pt-0">
+    {% include 'includes/dashboardMobileHeader.html' %}
     <div class="relative w-full block bg-center bg-cover bg-no-repeat" style="background-image: url('{% if vendor.user_profile.cover_photo %}{{vendor.user_profile.cover_photo.url}} {% else %} {% static 'images/default_vendor_cover.jpg' %}{% endif %}')">
         <div class="absolute left-0 right-0 top-0 bottom-0 bg-black/50 z-[-1]"></div>
         <ul class="pt-10 container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -18,12 +21,12 @@
                 <a href="{% url 'vendor_details'  vendor.vendor_slug %}" class="flex justify-center items-center">
                     <li class="px-2 py-1 bg-white font-bold  rounded-md hover:scale-105 hover:shadow-md">About</li>
                 </a>
-                <li class="px-6 py-3 bg-white font-bold">Our Menu</li>
+                <li class="px-6 py-3 bg-white font-bold rounded-tr-lg rounded-tl-lg">Our Menu</li>
             </ul>
         </ul>
 
         {% if hours %}
-        <div class="absolute top-1/2 right-20 z-10 -translate-y-1/2">
+        <div class="absolute pl-5 md:pl-0 top-2/3 md:top-1/2 md:right-20 z-10 -translate-y-1/2">
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-mainColor hover:bg-mainColor/70 focus:ring-4 focus:outline-none focus:ring-mainColor/40 font-medium rounded-lg text-sm px-8 py-2.5 text-center inline-flex items-center dark:bg-mainColor dark:hover:bg-mainColor/70 dark:focus:ring-mainColor/40" type="button">Opening hours <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
             <!-- Dropdown menu -->
             <div id="dropdown" class="py-6 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-shadow1 w-64 dark:bg-gray-700 border-4 border-mainColor">
@@ -53,15 +56,19 @@
 
     </div>
     <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div class="shadow-lg bg-white md:py-16 md:px-16 md:grid" style="grid-template-columns: 1fr 3fr;">
-            <div class="px-4">
+        <div class="shadow-lg bg-white py-7 px-4 md:pb-0 md:py-16 md:px-16 md:grid rounded-r-lg rounded-l-lg" style="grid-template-columns: 1fr 3fr;">
+            <div class="px-4 pb-10 md:pb-0">
                 <p class="text-slate-600 text-lg font-semibold pb-5 border-b border-gray-300">Categories</p>
                 <ul class="flex-col flex space-y-2 pt-5">
+                    {% if categories %}
                     {% for category in categories %}
                     <li>
                         <a href="#{{category.slug}}" class="text-sm hover:text-mainColor text:gray-500">{{category.category_name  }}</a>
                     </li>
                     {% endfor %}
+                    {% else %}
+                    <li class="">No category</li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="px-4">
@@ -75,29 +82,33 @@
                             <div id="{{category.slug}}">
                                 <h2 id="accordion-collapse-heading-{{forloop.counter}}">
                                   <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-2 focus:ring-gray-200 focus:bg-mainColor focus:border-mainColor focus:text-white dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-{{forloop.counter}}" aria-expanded="true" aria-controls="accordion-collapse-body-{{forloop.counter}}">
-                                    <span>{{category}}</span>
-                                    <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span class="text-sm md:textbase">{{category}}</span>
+                                    <svg data-accordion-icon class="w-4 h-4 md:w-6 md:h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                   </button>
                                 </h2>
                                 <div id="accordion-collapse-body-{{forloop.counter}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{forloop.counter}}">
                                   <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                                     <div class="flex flex-wrap justify-center gap-11 md:justify-start">
+                                        {% if category %}
                                         {% for food in category.fooditems.all %}
-                                        {% if category.fooditems %}
                                         <div class="menu-card flex flex-col space-y-2">
                                             <div class="card__div relative" style="background-image: url({{ food.image.url}}); height:100px; background-size:cover; background-position: center;">
                                                 <button class="absolute top-2 right-2 p-1 bg-white h-10 w-10 rounded-md hover:cursor-pointer">
                                                     <img class="add_cart" data-url="{% url 'add_to_cart' food.id %}" data-id="{{food.id}}" src="https://img.icons8.com/sf-ultralight/75/E86E10/shopping-cart.png"/>
                                                 </button>
                                             </div>
+                                            {% if food.food_title != none %}
                                             <p class="card__title">{{food.food_title}}</p>
                                             <p class="card_description">{{food.description}}</p>
                                             <p class="text-lg font-semibold text-mainColor">${{food.price}}</span></p>
+                                            {% else %}
+                                            <p class="card_description">Empty</p>
+                                            {% endif %}
                                         </div>
+                                        {% endfor %}
                                         {% else %}
                                         <div class="text-slate-600">Coming soon</div>
                                         {% endif %}
-                                        {% endfor %}
                                     </div> 
                                   </div>
                                 </div>
@@ -109,6 +120,9 @@
             </div>
         </div>
     </div>
+    {% if request.user.is_authenticated %}
+        {% include 'includes/drawerComponent.html' %}
+    {% endif %}
 </section>
 {% include 'includes/footer.html' %}
 {% endblock %}

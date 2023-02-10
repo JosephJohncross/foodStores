@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <form action="" method="">
+        <form action="#" method="">
             {% csrf_token %}
             <div class="block md:grid grid-cols-10 bg-gray-200/50 h-screen">
                 <div id="mid-section" class="col-span-7 font-monserat overflow-y-scroll main pt-28 md:pt-0">
@@ -120,7 +120,7 @@
                     </div>
                     <!-- orders -->
                     <div id="orders_list" class="flex flex-col space-y-6 drop-shadow-lg border border-gray-200/60 py-6 px-6 mb-12">
-                        {% if cart_item.cart_item %}
+                        
                         {% for items in cart_item.cart_item %}
                         <div class="flex space-x-4 scale-95 md:scale-100" id="cart-item_{{items.id}}">
                             <div class="group relative h-16 w-24 md:h-16 md:w-32 rounded-md cursor-pointer before:absolute before:left-0 before:right-0 before:bottom-0 before:top-0 before:rounded-md before:z-[3] hover:before:bg-black/50 before:block" style="background-image: url('{{ items.fooditem.image.url}}'); background-size:cover; background-position: center;">
@@ -136,12 +136,6 @@
                             </div>
                         </div>  
                         {% endfor %}
-                        {% else %}
-                        <div class="flex flex-col space-y-4 items-center w-full py-3">
-                            <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/null/external-empty-cart-web-store-flaticons-lineal-color-flat-icons.png"  class="w-16 h-16"/>
-                            <small class="text-gray-300">Cart is empty</small>
-                        </div>
-                        {% endif %}
                     </div>
                     {% if cart_item.cart_item %}
                     <div class="w-full md:px-10 scale-95 md:scale-95">
@@ -168,8 +162,23 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="text-sm mb-4">Choose payment method</p>
+                        <div class="flex space-x-4 items-center mb-8">
+                            <div class="relative">
+                                <input class="payment_method peer" name="payment_method" type="radio" value="paypal"/>
+                                <div class="peer-checked:border  peer-checked:bg-green-200 p-2 border border-transparent">
+                                    <img class="h-5" src={% static 'images/paypal3.svg' %}/>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <input class="payment_method peer" name="payment_method" type="radio" value="paystack"/>
+                                <div class="peer-checked:border peer-checked:bg-green-200 p-2 border border-transparent">
+                                    <img class="h-5 " src={% static 'images/paystack-2.svg' %}/>
+                                </div>
+                            </div>
+                        </div>
                         <a href="">
-                            <button class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl">Proceed to Payment</button>
+                            <button type="submit" class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl" onclick="paymentConfirmed(e)">Proceed to Payment</button>
                         </a>
                     </div>
                     {% endif %}
@@ -240,4 +249,20 @@
 
 {% block link %}
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script>
+        function paymentConfirmed(e) {
+            e.preventDefault()
+            var paymentType = document.querySelectorAll("input[name='payment_method']")
+            if (paymentType[0].checked == false && paymentType[1].checked == false){
+                toastNotification({'status': 'error', 'message': 'Please select a payment method'})
+                return false
+            }
+            for (var i = 0; i< paymentType.length; i++){
+                if (paymentType[i].checked == true){
+                    alert(paymentType[i].value)
+                    return paymentType[i]
+                }
+            }
+        }   
+    </script>
 {% endblock link %}

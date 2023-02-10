@@ -3,9 +3,12 @@
 {% load static %}
 
 {% block content%}
+<div class="hidden md:block">
+    {% include 'includes/header.html' %}
+</div>
 <section class="container mx-auto">
-{% include 'includes/header.html' %}
-<div class="py-32 container md:px-12 bg-center bg-no-repeat bg-cover" style="background-image: url('{% static 'images/home_landing.jpg'%}');">
+    {% include 'includes/dashboardMobileHeader.html' %}
+<div class="pt-32 md:py-32 container md:px-12 bg-center bg-no-repeat bg-cover" style="background-image: url('{% static 'images/home_landing.jpg'%}');">
     <div class="container mx-auto max-w-screen-xl px-4 pb-6 sm:px-6 lg:px-8">
         <div class="">
             <div class="font-monserat mb-4">
@@ -19,10 +22,10 @@
                 <!-- Restaurant name and radius -->
                 <div class="w-full flex items-center space-x-5">
                     <div class="relative h-max w-2/3">
-                        <input id="restaurant_name" type="text" name="restaurant_name" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full focus:ring-mainColor/40 focus:border-mainColor dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by restaurant or food name">
+                        <input id="restaurant_name" type="text" name="restaurant_name" class="block w-full p-4 md:pl-10 text-sm text-gray-900 border border-gray-300 rounded-full focus:ring-mainColor/40 focus:border-mainColor dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by restaurant or food name">
                     </div>
                     <div class="relative h-max w-1/3">
-                        <input id="radius" type="text" name="radius" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full focus:ring-mainColor/40 focus:border-mainColor dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Radius in km">
+                        <input id="radius" type="text" name="radius" class="block w-full p-4 md:pl-10 text-sm text-gray-900 border border-gray-300 rounded-full focus:ring-mainColor/40 focus:border-mainColor dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Radius in km">
                     </div>
                 </div>
 
@@ -48,7 +51,7 @@
 </div>
  <div class="container mx-auto max-w-screen-xl px-4 pb-6 sm:px-6 lg:px-8">
      <div class="container max-w-4xl mx-auto font-monserat py-16 mb-10 text-sm">
-         <div class="flex justify-between text-gray-500">
+         <div class=" text-gray-500 flex-col flex md:flex-row md:justify-between">
              <div class="flex space-x-2 items-center shadow-lg px-3 py-5 rounded-lg">
                  <img src="https://img.icons8.com/color/35/null/track-and-field.png"/>
                  <p class="">Fast and Reliable</p>
@@ -69,22 +72,17 @@
          <p class="text-center text-3xl font-semibold text-slate-800 mb-16 font-spartan">Popular Restaurants</p>
      {% endif %}
      <div class="container mx-auto font-monserat py-14 px-8 mb-24 bg-gradient-to-bl from-orange-400 via-orange-400 to-orange-600">
-         <div class="grid grid-cols-3 gap-16 font-monserat">
+         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16 font-monserat">
             {% for vendor in vendors %}
                 <div href="#" class="relative overflow-hidden flex flex-col md:flex-row bg-white shadow-md rounded-md">
                     <div class="flex flex-col p-4 leading-normal w-full">
-                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ vendor.vendor_name}}</h5>
+                        <h5 class="mb-2 text-lg pt-5 md:text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ vendor.vendor_name}}</h5>
                         <div class="flex flex-col">
                             {% if vendor.user_profile.address %}
                             <span class="text-sm text-gray-700 dark:text-gray-400 mb-2">{{ vendor.user_profile.address }}</span>
                             {% else %}
                             <span class="text-sm text-gray-700 dark:text-gray-400 mb-2">No Address available</span>
                             {% endif %}
-                            <!-- {% if vendor.user_profile.country %}
-                            <span class="text-sm text-gray-700 dark:text-gray-400">{{ vendor.user_profile.country }}</span>
-                            {% else %}
-                            <span class="text-sm text-gray-700 dark:text-gray-400 mb-2">No Country</span>
-                            {% endif %} -->
                         </div>
                         {% if vendor.kms %}
                         <div class="text-xs mt-2">{{vendor.kms}}km away</div>
@@ -164,11 +162,11 @@
      
         
      <!-- popular foods and menus -->
-     <div class="flex container font-monserat mb-24 pb-48">
-         <div class="w-1/2">
+     <div class="flex flex-col md:flex-row container font-monserat mb-24 pb-48">
+         <div class="md:w-1/2">
              <p class="text-3xl text-slate-800 mb-8 font-spartan">Popular Foods</p>
              <div class="flex py-10 bg-white shadow-md rounded-md">
-                 <div class="w-1/2 flex flex-col space-y-5">
+                 <div class="hidden w-1/2 md:flex flex-col space-y-5">
                      <div class="flex justify-end hover:scale-105 w-full">
                          <div class=" rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
                              <img src="{% static 'images/menu2.jpg' %}" alt=""/>
@@ -182,7 +180,7 @@
                          <div class="-translate-x-10 py-6 px-3 pl-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
                      </div>
                  </div>
-                 <div class="w-1/2 flex flex-col space-y-5">
+                 <div class=" w-full md:w-1/2 flex flex-col space-y-5">
                      <div class="flex justify-center hover:scale-105 w-full">
                          <div class=" rounded-full w-20 h-20 overflow-hidden shadow-shadow1 z-10 peer">
                              <img src="{% static 'images/menu2.jpg' %}" alt=""/>
@@ -199,10 +197,10 @@
               </div>
               
          </div>
-         <div class="w-1/2 md:translate-y-56">
-             <p class="text-3xl text-slate-800 mb-8 text-end ">Popular Menu</p>
+         <div class="pt-8 md:w-1/2 md:translate-y-56 w-full md:pt-0">
+             <p class="text-3xl text-slate-800 mb-8 md:text-end font-spartan">Popular Menu</p>
              <div class="flex py-10 bg-white shadow-md rounded-md">
-                 <div class="w-1/2 flex flex-col space-y-5 items-end">
+                 <div class="w-full md:w-1/2 flex flex-col space-y-5 items-end">
                      <div class="flex items-center hover:scale-105 w-max">
                          <div class="py-6 px-3 pr-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
                          <div class="-translate-x-10 rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
@@ -216,7 +214,7 @@
                          </div>
                      </div>
                  </div>
-                 <div class="w-1/2 flex flex-col space-y-5 items-end">
+                 <div class="hidden w-1/2 md:flex flex-col space-y-5 items-end">
                      <div class="flex items-center hover:scale-105 ">
                          <div class="py-6 px-3 pr-12 shadow-shadow1 rounded-md peer-hover:bg-mainColor hover:bg-mainColor hover:text-white peer-hover:text-white hover:transition-all duration-700 hover:cursor-pointer peer-hover:transition-all peer-hover:cursor-pointer">Test news is note</div>
                          <div class="-translate-x-10 rounded-full w-20 h-20 overflow-hidden inset-4 shadow-shadow1 z-10 peer">
@@ -624,5 +622,6 @@
     })
   })
 </script>
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 {% endblock link %}
 
