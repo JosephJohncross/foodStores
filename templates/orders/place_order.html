@@ -226,18 +226,18 @@
                     // Make an AJAX call to your server with the reference to verify the transaction
                     var transaction_id = response.transaction
                     var payment_method = "Paystack"
-                    var amount = '{{total}}'
                     var status = response.status
 
                     fetch(url, {
                         method: "POST",
                         headers: {
                             'X-CSRFToken': csrftoken,
+                            'X-Request-With': 'XMLHttpRequest',
                         },
                         body: JSON.stringify({
-                            'transaction_id': '{{order_number}}',
+                            'order_number': '{{order_number}}',
                             'payment_method': payment_method,
-                            'amount': amount,
+                            'transaction_id': transaction_id,
                             'status': status,
                             // 'csrfmiddlewaretoken': csrftoken
                         })

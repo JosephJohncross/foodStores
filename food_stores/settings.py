@@ -195,4 +195,5 @@ GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.
 # )
 
 PAY_STACK_KEY = config('PAY_STACK_KEY') 
+DEFAULT_FROM_EMAIL = "josephibochi2@gmail.com"
 

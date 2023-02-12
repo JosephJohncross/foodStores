@@ -1,31 +1,35 @@
+import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from orders.forms import OrderForm
 from marketplace.context_processor import get_cart_amounts
-from orders.models import Order
+from orders.models import Order, Payment
+from marketplace.models import FoodItem, Cart, CartItem
 from .utils import generate_order_number
+from .models import OrderedFood
+from accounts.utils import send_notification
 
-# Create your views here.
+@login_required(login_url='login')
 def place_order(request):
     total = get_cart_amounts(request)['total']
     subtotal = get_cart_amounts(request)['subtotal']
     total_sales_tax = get_cart_amounts(request)['total_sales_tax']
     if request.method == 'POST':
-        order_form = OrderForm(request.POST)
-        if order_form.is_valid:
-            order = Order()
-            print(order_form)
+        order = Order()
+        form = OrderForm(request.POST)
+        if form.is_valid:
             order.user = request.user
-            order.first_name = order_form.cleaned_data['first_name']
-            order.last_name = order_form.cleaned_data['last_name']
-            order.phone = order_form.cleaned_data['phone']
-            order.email = order_form.cleaned_data['email']
-            order.address = order_form.cleaned_data['address']
-            order.country = order_form.cleaned_data['country']
-            order.state = order_form.cleaned_data['state']
-            order.city = order_form.cleaned_data['city']
-            order.pin_code = order_form.cleaned_data['pin_code']
+            order.first_name = request.POST['first_name']
+            order.last_name = request.POST['last_name']
+            order.phone = request.POST['phone']
+            order.email = request.POST['email']
+            order.address = request.POST['address']
+            order.country = request.POST['country']
+            order.state = request.POST['state']
+            order.city = request.POST['city']
+            order.pin_code = request.POST['pin_code']
             order.total = total
             order.total_tax = total_sales_tax
             order.payment_method = request.POST['payment_method']
@@ -39,9 +43,73 @@ def place_order(request):
             }
             return render(request,'orders/place_order.html', context)
         else:
-            print(order_form.errors)
-
+            print(form.errors)
     return render(request, 'orders/place_order.html')
 
+@login_required(login_url='login')
 def payments(request):
+    # check if request is Ajax
+    if request.headers.get('x-request-with') == 'XMLHttpRequest' and request.method == "POST":
+    # store payment details in the payment model
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        order_number = body["order_number"]
+        payment_method = body["payment_method"]
+        transaction_id = body["transaction_id"]
+        status = body['status']
+        print(order_number, payment_method, transaction_id, status)
+        order = Order.objects.get(user=request.user, order_number= order_number)
+        payment = Payment(user=request.user,transaction_id=transaction_id,payment_method=payment_method,amount=order.total,status=status)
+        payment.save()
+
+        # store order model
+        order.payment = payment
+        order.is_ordered = True
+        order.save()
+        # return HttpResponse("Saved")
+
+        # move the cart items to other food models
+        cart = Cart.objects.get(user=request.user)
+        cart_items = CartItem.objects.filter(cart=cart)
+        print(cart_items)
+        for item in cart_items:
+            ordered_food = OrderedFood()
+            ordered_food.fooditem = item.fooditem
+            ordered_food.quantity = item.quantity
+            ordered_food.order = order
+            ordered_food.payment = payment
+            ordered_food.user = request.user
+            ordered_food.price = item.fooditem.price
+            ordered_food.amount = item.quantity * item.fooditem.price
+            ordered_food.save()
+        
+        # send order confirmation email to customer
+        email_subject = "Thank you for ordering with us"
+        mail_template = "orders/order_confirmation_email.html"
+        context = {
+            'user': request.user,
+            'order': order,
+            'to_email': order.email,
+        }
+        send_notification(email_subject=email_subject,  mail_template=mail_template, context=context)
+        
+        
+        # send order received email to the vendor
+        email_subject = "You just received an order"
+        mail_template = "orders/new_order_recieved.html"
+        to_email = []
+        for i in cart_items:
+            if i.fooditem.vendor.user.email not in to_email:
+                to_email.append(i.fooditem.vendor.user.email)
+        context = {
+            'order': order,
+            'to_email': to_email,
+        }
+        send_notification(email_subject=email_subject,  mail_template=mail_template, context=context)
+        
+        # Clear the cart if payment is successful 
+        cart_items.delete()
+        # return back to ajax with the status success or failure
+        return HttpResponse("Done")    
+
     return HttpResponse("Payment View")
