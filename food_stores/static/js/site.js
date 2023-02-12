@@ -15,6 +15,7 @@ const locationFinder = document.getElementById('location-finder') || null
 const addHour = document.getElementById('add-hour') || null
 const openingUrl = document.getElementById('opening_url') || null
 
+
 homeSearch != null ? homeSearch.addEventListener('keyup', (e)=>{autoComplete(e)}) : ""
 menuSelect !== null ? menuSelect.addEventListener('click', toggleSelectionMenu) : ""
 closeOrder != null ? closeOrder.addEventListener('click', slideDrawer) : ""
@@ -152,6 +153,15 @@ document.onreadystatechange = () => {
                 })
                 .catch(error => console.log(error))
             }
+            else if (e.target.id === "confirm-payment"){
+                // e.preventDefault()
+                var paymentType = document.querySelectorAll("input[name='payment_method']")
+                if (paymentType[0].checked == false && paymentType[1].checked == false){
+                    toastNotification({'status': 'error', 'message': 'Please select a payment method'})
+                    return false
+                }
+                return true
+            }
         }
     }
 }
@@ -216,33 +226,6 @@ function slideDrawer(){
         sideDrawer.classList.add('translate-x-full')
     }
 }
-
-// let autocomplete;
-
-// function initAutoComplete() {
-//     autocomplete = new google.maps.places.Autocomplete(
-//         document.getElementById('id_address'),{
-//             types: ['geocode', 'establishment'],
-//             componentRestrictions: {'country': ['in', 'us']}
-//         }
-//     )
-//     //Product to specify what should happen when the product is clicked
-//     autocomplete.addEventListener('place_changed', onPlaceChanged)
-// }
-
-// function onPlaceChanged(){
-//     var place = autocomplete.getPlace();
-
-//     //user did not select the prediction, reset the input field or alert()
-//     if (!place.geometry){
-//         document.getElementById('id_address').placeholder = "start typing..."
-//     }else{
-//         console.log('place name => ', place.name)
-//     }
-//     //get the address omponent and assign them to the fields
-// }
-
-// Requests
 
 async function addToCart(target){
     url = target.dataset.url
@@ -387,3 +370,4 @@ const geoCodeUserLocation = (lat, lng) => {
     	.then(json => console.log(json.display_name))
     	.catch(err => console.error('error:' + err));
 }
+

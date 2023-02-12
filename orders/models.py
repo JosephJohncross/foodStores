@@ -6,8 +6,8 @@ class Payment(models.Model):
     """Class represnting the payment model"""
 
     PAYMENT_METHOD = (
-        ('PayPal', 'PayPal'),
-        ('Kuda', 'Kuda')
+        ('Paystack', 'Paystack'),
+        ('FlutterWave', 'FlutterWave')
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -42,7 +42,6 @@ class Order(models.Model):
     city = models.CharField(max_length = 50)
     pin_code = models.CharField(max_length=10)
     total = models.FloatField()
-    tax_data = models.JSONField(blank=True, help_text= "Data format: {'tax_type' : {'tax_percentage': 'tax_amount'}}")
     total_tax = models.FloatField()
     payment_method = models.CharField(max_length=50)
     status = models.CharField(max_length=15, choices=STATUS, default='New')
@@ -56,7 +55,6 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_number
-
 
 
 class OrderedFood(models.Model):

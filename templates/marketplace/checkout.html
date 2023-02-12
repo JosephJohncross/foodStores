@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <form action="#" method="">
+        <form id="form" action="{% url 'place_order' %}" method="post">
             {% csrf_token %}
             <div class="block md:grid grid-cols-10 bg-gray-200/50 h-screen">
                 <div id="mid-section" class="col-span-7 font-monserat overflow-y-scroll main pt-28 md:pt-0">
@@ -177,9 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="">
-                            <button type="submit" class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl" onclick="paymentConfirmed(e)">Proceed to Payment</button>
-                        </a>
+                        <button id="confirm-payment" class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl">Proceed to Payment</button>
                     </div>
                     {% endif %}
                 </div>
@@ -249,20 +247,4 @@
 
 {% block link %}
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-    <script>
-        function paymentConfirmed(e) {
-            e.preventDefault()
-            var paymentType = document.querySelectorAll("input[name='payment_method']")
-            if (paymentType[0].checked == false && paymentType[1].checked == false){
-                toastNotification({'status': 'error', 'message': 'Please select a payment method'})
-                return false
-            }
-            for (var i = 0; i< paymentType.length; i++){
-                if (paymentType[i].checked == true){
-                    alert(paymentType[i].value)
-                    return paymentType[i]
-                }
-            }
-        }   
-    </script>
 {% endblock link %}

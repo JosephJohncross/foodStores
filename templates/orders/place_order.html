@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+{% include 'includes/dashboardMobileHeader.html' %}
+
+<!-- {%include 'includes/alerts.html'%} -->
+    <section class="customer-body h-screen grid-cols-[150px 1fr]">
+        <div class="hidden bg-white shadow-md md:flex flex-col items-center py-8 space-y-20">
+            <div class="w-16 h-16"> 
+                <img src={% static "images/logo.webp" %} alt=""/>
+            </div>
+            <div class="flex flex-col items-center space-y-10">
+                <div>
+                    <!-- Show tooltip on right -->
+                    <a href={% url "marketplace" %}>
+                        <img src="https://img.icons8.com/wired/30/null/marketplace-hub.png" data-tooltip-target="tooltip-marketplace" data-tooltip-placement="right"/>
+                    </a>
+                    <div id="tooltip-marketplace" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Marketplace
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Show tooltip on right -->
+                    <a href={% url "logout" %}>
+                        <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/>
+                    </a>
+                    <div id="tooltip-logout" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Logout
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="flex flex-col md:grid grid-cols-10 bg-gray-200/50 md:h-screen">
+                <div id="mid-section" class="md:col-span-6 font-monserat md:overflow-y-scroll main pt-20 md:pt-0">
+                    <!-- Top bar section -->
+                    <div id="top-bar" class="px-6 md:px-10 backdrop-blur-xl z-10 flex justify-between items-center py-10 sticky top-0 bg-white md:bg-transparent">
+                        <div>
+                            <div class="text-lg sm:text-xl md:text-3xl font-monserat font-semibold">Billing Address</div>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="relative w-10 h-10 overflow-hidden border-2 border-mainColor flex justify-center items-center bg-gray-100 rounded-full dark:bg-gray-600">
+                                <svg data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <!-- <img id="avatarButton" type="button"  class="w-10 h-10 rounded-full cursor-pointer" src="/docs/images/people/profile-picture-5.jpg" alt="User dropdown"> -->
+    
+                            <!-- Dropdown menu -->
+                            <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-max dark:bg-gray-700 dark:divide-gray-600">
+                                <div class="md:px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                <div>{{user.first_name}} {{user.last_name}}</div>
+                                <div class="font-medium truncate">{{user.email}}</div>
+                                </div>
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+                                <li>
+                                    <a href="{% url "myAccount" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "cprofile" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                </li>
+                                <li>
+                                </li>
+                            </ul>
+                            <div class="py-1">
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="md:px-10 md:pb-12 md:mt-8">
+                        <!-- billing checkou information -->                        
+                        <div class="text-sm grid gap-4 md:mb-6 max-w-4xl bg-white px-8 pb-7 md:py-14 md:shadow-shadow1 rounded-lg">
+                            <div class=" text-gray-500">
+                                <label for="name" class="pr-4 text-mainColor dark:text-[#7EC8E3] duration-300 text-sm dark:bg-[#090938] peer-focus:px-2 peer-focus:text-mainColor/60 peer-focus:dark:text-mainColor/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Receiver Name</label>
+                                {{order.first_name}}, {{order.last_name}}
+                            </div>
+                            <div class="dark:text-[#7EC8E3] text-gray-500">
+                                <label for="name" class="pr-4 text-mainColor dark:text-[#7EC8E3] duration-300 text-sm dark:bg-[#090938] peer-focus:px-2 peer-focus:text-mainColor/60 peer-focus:dark:text-mainColor/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Phone</label>
+                                {{order_form.phone}}
+                            </div>  
+                            <div class="relative dark:text-[#7EC8E3] text-gray-500">
+                                <label for="name" class="pr-4 text-mainColor dark:text-[#7EC8E3] duration-300 text-sm dark:bg-[#090938] peer-focus:px-2 peer-focus:text-mainColor/60 peer-focus:dark:text-mainColor/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
+                                {{order.email}}
+                            </div>
+                            <div class="relative dark:text-[#7EC8E3] text-gray-500">
+                                <label for="name" class="pr-4 text-mainColor dark:text-[#7EC8E3] duration-300 text-sm dark:bg-[#090938] peer-focus:px-2 peer-focus:text-mainColor/60 peer-focus:dark:text-mainColor/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Address</label>
+                                {{order.address}}, {{order.city}}, {{order.state}}, {{order.country}}
+                            </div>
+                            <div class="relative dark:text-[#7EC8E3] text-gray-500">
+                                <label for="name" class="pr-4 text-mainColor dark:text-[#7EC8E3] duration-300 text-sm dark:bg-[#090938] peer-focus:px-2 peer-focus:text-mainColor/60 peer-focus:dark:text-mainColor/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pin Code</label>
+                                {{order.pin_code}}
+                            </div>
+                            <div class="pt-4">
+                                <a href="{% url 'checkout'%}">
+                                    <button class="text-sm rounded-sm py-1 px-5 bg-mainColor text-white">Edit</button>
+                                </a>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div id="sideDrawer" class="bg-white shadow-md main px-4 md:px-8 top-0 left-0 right-0 font-spartan overflow-y-auto md:h-screen pb-10 transition-transform duration-500 md:relative md:pb-0 md:col-span-4">
+                    <div class="flex justify-between items-center md:justify-start pr-4">
+                        <p class="md:text-3xl font-monserat font-semibold py-10">Order Summary</p> 
+                    </div>
+                    <!-- orders --> 
+                    <div id="orders_list" class="flex flex-col space-y-6 drop-shadow-lg border border-gray-200/60 py-6 px-6 mb-12">
+                        
+                        {% for items in cart_item.cart_item %}
+                        <div class="flex space-x-4 scale-95 md:scale-100" id="cart-item_{{items.id}}">
+                            <div class="group relative h-16 w-24 md:h-16 md:w-32 rounded-md cursor-pointer before:absolute before:left-0 before:right-0 before:bottom-0 before:top-0 before:rounded-md before:z-[3] hover:before:bg-black/50 before:block" style="background-image: url('{{ items.fooditem.image.url}}'); background-size:cover; background-position: center;">
+                            </div>  
+                            <div class="flex flex-col w-full">
+                                <p class="card__title h-1/2 md:text-base">{{items.fooditem.food_title}}</p>
+                                <div class="h-1/2 flex items-end justify-between">
+                                    <p class="text-sm md:text-lg font-semibold text-mainColor">${{items.fooditem.price}}</p>
+                                    <div class="flex space-x-3">
+                                        <p class="font-semibold">{{items.quantity}} QTY</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        {% endfor %}
+                    </div>
+                    {% if cart_item.cart_item %}
+                    <div class="w-full md:px-10 scale-95 md:scale-95">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-bl-2xl rounded-br-2xl flex flex-col space-y-2">
+                                <div class="flex justify-between items-center px-8">
+                                    <p class="text-sm md:text-base text-gray-500/90 font-medium">Subtotal</p>
+                                    <p class="text-base font-bold md:text-lg">${{subtotal}}</p>
+                                </div>
+                                <div class="flex justify-between items-center px-8">
+                                    <p class="text-sm md:text-base text-gray-500/90 font-medium">Discount sales</p>
+                                    <p class="text-base font-bold md:text-lg">-${{discount_sales}}</p>
+                                </div>
+                                <div class="flex justify-between items-center px-8">
+                                    <p class="text-sm md:text-base text-gray-500/90 font-medium">Tax (VAT)</p>
+                                    <p class="text-base font-bold md:text-lg">${{total_sales_tax}}</p>
+                                </div>
+                            </div>
+                            <div class="relative bg-gray-300/20 w-[95%] h-2 before:absolute before:w-full before:border-t-2 before:border-dotted before:translate-y-1/2 before:border-black/30"></div>
+                            <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-tl-2xl rounded-tr-2xl mb-10">
+                                <div class="flex justify-between items-center px-8">
+                                    <p class="text-lg font-medium md:text-2xl">Total</p>
+                                    <p class="text-base font-bold md:text-lg">${{total}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Payment form-->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 px-6 py-6">
+                            <form id="paymentForm" class="flex flex-col space-y-5">
+                                {% csrf_token %}
+                                <input type="hidden" id="email-address" value="{{user.email}}" class="block px-4 py-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:focus:border-blue-500 focus:ring-0 focus:border-blue-600 peer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
+                                <input type="hidden" id="amount"  value="{{total}}" class="block px-4 py-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:focus:border-blue-500 focus:ring-0 focus:border-blue-600 peer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
+                                <input type="hidden" id="first-name" value="{{user.first_name}}"/>
+                                <input type="hidden" id="last-name" value="{{user.last_name}}"/>
+                                <div class="form-submit">
+                                    <button type="submit" class="text-center py-3 md:py-5 bg-mainColor w-full text-white font-medium text-lg md:text-xl rounded-md hover:bg-mainColor/90 hover:shadow-xl">Proceed to Pay</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>  
+</section>
+
+{% endblock %}
+
+{% block link %}
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script type="module">
+        // Generates csrftoken
+        function getCookies(name){
+            let coookieValue = null
+            if (document.cookie && document.cookie !== ''){
+                const cookies = document.cookie.split(';')
+                for (let i=0; i < cookies.length; i++){
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + "=")){
+                        coookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return coookieValue
+        }
+
+
+        var paymentForm = document.getElementById('paymentForm');
+        const csrftoken = getCookies('csrftoken');
+        console.log(csrftoken)
+        paymentForm.addEventListener('submit', (e)=>{payWithPaystack(e)}, false);
+        function payWithPaystack(e) {
+            e.preventDefault();
+
+            //Generate random number for reference
+            const date = new Date(Date.now())
+            var year = date.getFullYear().toString()
+            var month = date.getMonth().toString()
+            var hour = date.getHours().toString()
+            var minute = date.getMinutes().toString()
+            var seconds = date.getSeconds().toString()
+            var msec = date.getMilliseconds().toString()
+            
+            // payment url
+            var url = "{% url 'payments' %}"
+
+            //Paystack integration
+            var handler = PaystackPop.setup({
+                key: '{{ PAYSTACK_KEY }}', // Replace with your public key
+                email: document.getElementById('email-address').value,
+                amount: document.getElementById('amount').value * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+                currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+                ref: year+month+hour+msec, // Replace with a reference you generated
+                callback: function(response) {
+                //this happens after the payment is completed successfully
+                    var reference = response.reference;
+                    console.log(response)
+                    // console.log('Payment complete! Reference: ' + reference);
+                    
+                    // Make an AJAX call to your server with the reference to verify the transaction
+                    var transaction_id = response.transaction
+                    var payment_method = "Paystack"
+                    var amount = '{{total}}'
+                    var status = response.status
+
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            'X-CSRFToken': csrftoken,
+                        },
+                        body: JSON.stringify({
+                            'transaction_id': '{{order_number}}',
+                            'payment_method': payment_method,
+                            'amount': amount,
+                            'status': status,
+                            // 'csrfmiddlewaretoken': csrftoken
+                        })
+                    })
+                    // .then(response => response.json())
+                    .then (response => console.log(response))
+                },
+                onClose: function() {
+                    toastNotification({'status': 'error', 'message': 'Transaction cancelled'});
+                },
+            });
+            handler.openIframe();
+        }
+    </script>
+{% endblock link %}

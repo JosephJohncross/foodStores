@@ -15,3 +15,6 @@ def get_google_api(request):
 
 def get_forward_coding_api(request):
     return { "FORWARD_GEOCODING": settings.FORWARD_GEOCODING }
+
+def get_paystack_key(request):
+    return {'PAYSTACK_KEY': settings.PAY_STACK_KEY }

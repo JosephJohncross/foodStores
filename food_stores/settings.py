@@ -79,6 +79,7 @@ TEMPLATES = [
                 'marketplace.context_processor.get_cart_counter',
                 'marketplace.context_processor.get_items_in_cart',
                 'marketplace.context_processor.get_cart_amounts',
+                'accounts.context_processor.get_paystack_key',
             ],
         },
     },
@@ -192,4 +193,6 @@ GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.
 #     # django.contrib.auth) you may enable sending PII data.
 #     send_default_pii=True
 # )
+
+PAY_STACK_KEY = config('PAY_STACK_KEY') 
 

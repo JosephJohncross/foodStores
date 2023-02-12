@@ -26,6 +26,8 @@ urlpatterns = [
     path('', include("accounts.urls")),
     # marketplace
     path('', include("marketplace.urls")),
+    #order
+    path('', include("orders.urls")),
     #checkout
     path('checkout/', marketView.checkout, name="checkout"),
     # search
