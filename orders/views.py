@@ -122,10 +122,11 @@ def order_complete(request):
     order_number =  request.GET.get('order_number')
     transaction_id = request.GET.get('transaction_id')
 
-    
+    print("Testing", order_number, transaction_id)
     try:
         order = Order.objects.get(order_number=order_number, payment__transaction_id=transaction_id, is_ordered=True)
         ordered_food = OrderedFood.objects.filter(order=order)
+        print(ordered_food)
         
         subtotal = 0
         for item in ordered_food:

@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
 from accounts.models import UserProfile
+from orders.models import Order
 
 @login_required(login_url='login')
 def cprofile(request):
@@ -31,3 +32,9 @@ def cprofile(request):
     }
     return render(request, 'customer/cprofile.html', context)
  
+def c_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered =True).order_by('-created_at')
+    context = {
+        'orders': orders
+    }
+    return render(request, 'customer/c_orders.html', context)

@@ -22,6 +22,17 @@
                 </div>
                 <div>
                     <!-- Show tooltip on right -->
+                    <a href={% url "c_orders" %}>
+                        <!-- <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/> -->
+                        <img src="https://img.icons8.com/ios-filled/25/null/purchase-order.png" data-tooltip-target="tooltip-orders" data-tooltip-placement="right"/>
+                    </a>
+                    <div id="tooltip-orders" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        My Orders
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Show tooltip on right -->
                     <a href={% url "logout" %}>
                         <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/>
                     </a>
