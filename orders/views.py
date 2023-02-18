@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from orders.forms import OrderForm
@@ -106,10 +106,41 @@ def payments(request):
             'to_email': to_email,
         }
         send_notification(email_subject=email_subject,  mail_template=mail_template, context=context)
-        
         # Clear the cart if payment is successful 
-        cart_items.delete()
+        # cart_items.delete()
+        
         # return back to ajax with the status success or failure
-        return HttpResponse("Done")    
+        response = {
+            'order_number': order_number,
+            'transaction_id': transaction_id
+        }
+        return JsonResponse(response)
 
     return HttpResponse("Payment View")
+
+def order_complete(request):
+    order_number =  request.GET.get('order_number')
+    transaction_id = request.GET.get('transaction_id')
+
+    
+    try:
+        order = Order.objects.get(order_number=order_number, payment__transaction_id=transaction_id, is_ordered=True)
+        ordered_food = OrderedFood.objects.filter(order=order)
+        
+        subtotal = 0
+        for item in ordered_food:
+            subtotal += (item.fooditem.price * item.quantity)
+        total_tax = order.total_tax
+        total = order.total 
+        context = {
+            'order': order,
+            'ordered_food': ordered_food,
+            'subtotal':subtotal,
+            'total_tax': total_tax,
+            'total': total
+
+        }
+        return render(request, 'orders/order_complete.html', context)
+    except Exception as e:
+        print(e)
+        return redirect('myAccount')

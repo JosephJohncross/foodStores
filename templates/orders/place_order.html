@@ -209,6 +209,8 @@
             
             // payment url
             var url = "{% url 'payments' %}"
+            // order complete url
+            var orderComplete = "{% url 'order_complete' %}"
 
             //Paystack integration
             var handler = PaystackPop.setup({
@@ -243,7 +245,10 @@
                         })
                     })
                     // .then(response => response.json())
-                    .then (response => console.log(response))
+                    .then (response => response.json())
+                    .then(result => {
+                        window.location.href = orderComplete + "?order_number="+result.order_number+"&transaction_id="+result.transaction_id
+                    })
                 },
                 onClose: function() {
                     toastNotification({'status': 'error', 'message': 'Transaction cancelled'});

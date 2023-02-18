@@ -1,0 +1,86 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="hidden md:block">
+    {% include 'includes/header.html' %}
+</div>
+<section class="py-10 container mx-auto max-w-screen-xl px-4 pt-28 pb-6 sm:px-6 lg:px-8 lg:pt-24 md:pt-0">
+    {% include 'includes/dashboardMobileHeader.html' %}
+    <div class="flex justify-center">
+        <div class="paid relative max-w-2xl shadow-shadow1 before:bg-center before:bg-contain rounded-lg p-5 before:bg-no-repeat before:top-0 before:left-0 before:right-0 before:block before:bottom-0 before:absolute before:bg-[url('/static/images/paid.webp')] before:opacity-10 before:z-[-3]">
+            <svg class="h-8" viewBox="0 0 118 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M37.83 19.2047C37.2352 19.237 36.6469 19.0679 36.16 18.7247C35.9566 18.5739 35.7929 18.3758 35.6831 18.1476C35.5733 17.9193 35.5208 17.6678 35.53 17.4147V8.1447C35.5252 8.1055 35.5293 8.0656 35.5422 8.0282C35.555 7.9908 35.5762 7.9569 35.6042 7.9289C35.6322 7.9009 35.6661 7.8797 35.7035 7.8669C35.7409 7.854 35.7808 7.8499 35.82 7.8547H37.5C37.69 7.8547 37.78 7.9547 37.78 8.1447V16.6947C37.78 17.0747 37.95 17.2647 38.3 17.2647C38.4484 17.2708 38.5968 17.254 38.74 17.2147C38.94 17.2147 39.05 17.2747 39.06 17.4547L39.21 18.7047C39.2172 18.7412 39.2165 18.7787 39.208 18.8149C39.1995 18.851 39.1833 18.885 39.1605 18.9143C39.1378 18.9437 39.109 18.9679 39.0762 18.9852C39.0433 19.0025 39.0071 19.0126 38.97 19.0147C38.602 19.1363 38.2175 19.2004 37.83 19.2047Z" fill="#FF7A00" />
+                <path d="M47.28 18.1347C46.4359 18.8322 45.375 19.2137 44.28 19.2137C43.185 19.2137 42.1242 18.8322 41.28 18.1347C40.5381 17.3857 40.1218 16.374 40.1218 15.3197C40.1218 14.2654 40.5381 13.2537 41.28 12.5047C42.1258 11.8108 43.186 11.4316 44.28 11.4316C45.374 11.4316 46.4342 11.8108 47.28 12.5047C48.0049 13.2606 48.4096 14.2674 48.4096 15.3147C48.4096 16.362 48.0049 17.3688 47.28 18.1247V18.1347ZM42.86 16.8147C43.2518 17.1696 43.7614 17.3661 44.29 17.3661C44.8186 17.3661 45.3283 17.1696 45.72 16.8147C46.0746 16.4071 46.2698 15.885 46.2698 15.3447C46.2698 14.8045 46.0746 14.2824 45.72 13.8747C45.3283 13.5199 44.8186 13.3233 44.29 13.3233C43.7614 13.3233 43.2518 13.5199 42.86 13.8747C42.5055 14.2824 42.3102 14.8045 42.3102 15.3447C42.3102 15.885 42.5055 16.4071 42.86 16.8147Z" fill="currentColor" />
+                
+                <path d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z" fill="#FF7A00"/>
+            </svg>
+            <p class="text-2xl font-spartan font-medium py-4 text-center">Thank you for patronizing</p>
+            <p class="text-xl font-spartan font-medium py-4 text-center italic">Order details</p>
+            <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:justify-between border-t border-b border-gray-400 md:space-x-4 py-2">
+                <div class="flex flex-col space-y-1">
+                    <p class="">Order Date</p>    
+                    <p class="text-sm font-medium">{{order.created_at}}</p>    
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <p class="">Order No</p>    
+                    <p class="text-sm font-medium">{{order.order_number}}</p>    
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <p class="">Payment Method</p>    
+                    <p class="text-sm font-medium">{{order.payment_method}}</p>    
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <p class="">Transaction ID</p>    
+                    <p class="text-sm font-medium">{{order.payment.transaction_id}}</p>    
+                </div>
+            </div>
+            <div class="py-6 flex flex-col space-y-4">
+                {% for food in ordered_food%}
+                <div class="flex justify-around items-center space-x-4">
+                    <div class="hidden md:block group relative h-16 w-24 md:h-16 md:w-28 rounded-md cursor-pointer before:absolute before:left-0 before:right-0 before:bottom-0 before:top-0 before:rounded-md before:z-[3] hover:before:bg-black/50 before:block" style="background-image: url('{{ food.fooditem.image.url}}'); background-size:cover; background-position: center;">
+                    </div>  
+                    <div class="flex flex-col w-2/4 md:w-2/6">
+                        <p class="card__title md:text-base">{{food.fooditem.food_title}}</p>
+                        <a href="" class="card__title md:text-base text-mainColor">{{food.fooditem.vendor.vendor_name}}</a>
+                    </div>
+                    <p class="text-sm md:text-lg w-1/4 font-semibold md:w-1/6">$ {{food.fooditem.price}}</p>
+                    <p class="font-semibold w-1/4 md:w-1/6">{{food.quantity}} QTY</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="">
+                <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-bl-2xl rounded-br-2xl flex flex-col space-y-2">
+                    <div class="flex justify-between items-center px-8">
+                        <p class="text-sm md:text-base text-gray-500/90 font-medium">Subtotal</p>
+                        <p class="text-base font-bold md:text-lg">${{subtotal}}</p>
+                    </div>
+                    <div class="flex justify-between items-center px-8">
+                        <p class="text-sm md:text-base text-gray-500/90 font-medium">Discount sales</p>
+                        <p class="text-base font-bold md:text-lg">-${{discount_sales}}</p>
+                    </div>
+                    <div class="flex justify-between items-center px-8">
+                        <p class="text-sm md:text-base text-gray-500/90 font-medium">Tax (VAT)</p>
+                        <p class="text-base font-bold md:text-lg">${{total_tax}}</p>
+                    </div>
+                </div>
+                <div class="relative bg-gray-300/20 w-[95%] h-2 before:absolute before:w-full before:border-t-2 before:border-dotted before:translate-y-1/2 before:border-black/30"></div>
+                <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-tl-2xl rounded-tr-2xl mb-10">
+                    <div class="flex justify-between items-center px-8">
+                        <p class="text-lg font-medium md:text-2xl">Total</p>
+                        <p class="text-base font-bold md:text-lg">${{total}}</p>
+                    </div>
+                </div>
+            </div>
+            <small class="font-spartan">@Copyright foodstores</small>
+        </div>
+    </div>
+   
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}
+
+{% block link %}
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+{% endblock link %}
