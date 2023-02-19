@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
+    'orders.middlewares.RequestObjectMiddleware', #Custom middleware created to access custom objects, in order.models.py
 ]
 
 ROOT_URLCONF = 'food_stores.urls'

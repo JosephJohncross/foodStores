@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from orders.forms import OrderForm
 from marketplace.context_processor import get_cart_amounts
 from orders.models import Order, Payment
-from marketplace.models import FoodItem, Cart, CartItem
+from marketplace.models import FoodItem, Cart, CartItem, Tax
 from .utils import generate_order_number
 from .models import OrderedFood
 from accounts.utils import send_notification
@@ -22,8 +22,10 @@ def place_order(request):
         if i.fooditem.vendor.id not in vendors_ids:
             vendors_ids.append(i.fooditem.vendor.id)
     
+    get_task = Tax.objects.filter(is_active=True)
     sub_total = 0
     k = {}
+    total_data = {}
     for i in cart_item:
         fooditem = FoodItem.objects.get(pk=i.fooditem.id, vendor_id__in=vendors_ids)
         v_id = fooditem.vendor.id
@@ -34,6 +36,17 @@ def place_order(request):
         else:
             sub_total = (fooditem.price * i.quantity)
             k[v_id] = sub_total
+
+        # Calculate the tax data
+        tax_dict = {}
+        for i in get_task:
+                tax_type = i.tax_type
+                tax_percentage = i.tax_percentage
+                tax_amount = round ((tax_percentage * sub_total )/ 100, 2)
+                tax_dict.update({tax_type: {str(tax_percentage): str(tax_amount)}})
+        
+        # Construct total data
+        total_data.update({fooditem.vendor.id: {str(sub_total): tax_dict}})
 
 
     total = get_cart_amounts(request)['total']
@@ -55,6 +68,7 @@ def place_order(request):
             order.pin_code = request.POST['pin_code']
             order.total = total
             order.total_tax = total_sales_tax
+            order.total_data = json.dumps(total_data)
             order.payment_method = request.POST['payment_method']
             order.save() #generate the order number
             order.order_number = generate_order_number(order.id)

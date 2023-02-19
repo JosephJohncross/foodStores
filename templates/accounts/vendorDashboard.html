@@ -71,8 +71,8 @@
                         <div class="dashboard-card group-focus:bg-[#fa8e29] group-focus:text-white dark:group-focus:shadow-darkCard4">
                             <div class="flex justify-between items-center">
                                 <div class="flex flex-col items-start">
-                                    <p class="dashboard-card-number">140</p>
-                                    <p class="dashboard-item">Revenue Day Ratio</p>
+                                    <p class="dashboard-card-number">$ {{total_revenue}}</p>
+                                    <p class="dashboard-item">Total Revenue</p>
                                 </div>
                                 <div class="p-1 bg-white group-focus:bg-white rounded-lg">
                                     <img src="https://img.icons8.com/ios-glyphs/30/null/combo-chart--v1.png"/>
@@ -119,7 +119,7 @@
                                         <td class="text-start px-2 py-3">{{forloop.counter}}</td>
                                         <td class="text-start px-2 py-3">{{orders.order_number}}</td>
                                         <td class="text-start px-2 py-3">{{orders.name}}</td>
-                                        <td class="text-start px-2 py-3">$ {{orders.total}}</td>
+                                        <td class="text-start px-2 py-3">$ {{orders.get_total_by_vendor.grand_total}}</td>
                                         <td class="text-start px-2 py-3">{{orders.created_at}}</td>
                                         <td class="text-center text-[.75rem]">
                                             <span class="new">{{orders.status}}</span>

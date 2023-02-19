@@ -186,12 +186,18 @@ def vendorDashboard(request):
     orders_today  = return_today_orders(orders)
     recent_orders = orders[:5]
     
+    total_revenue = 0
+    for i in orders:
+        total_revenue += i.get_total_by_vendor()['grand_total']
+
+
     context = {
         'category_count': category.count(),
         'orders': orders,
         'orders_count': orders.count(),
         'orders_today': len(orders_today),
-        'recent_orders': recent_orders
+        'recent_orders': recent_orders,
+        'total_revenue': total_revenue
     }
     return render(request, 'accounts/vendorDashboard.html', context)
 

@@ -254,10 +254,11 @@ def order_details(request, order_number=None):
     orders = Order.objects.get( order_number=order_number, is_ordered=True)
     ordered_food = OrderedFood.objects.filter(order=orders, fooditem__vendor=get_vendor(request))
     vendor = get_vendor(request)
+
     context = {
         'order': orders,
         'ordered_food': ordered_food,
-        'vendor': vendor
+        'vendor': vendor,
     } 
 
     return render(request, 'vendor/order_details.html', context)
