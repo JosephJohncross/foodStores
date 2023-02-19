@@ -3,7 +3,7 @@
 {% block content %}
 {% include 'includes/dashboardMobileHeader.html' %}
 
-<section class="customer-body h-screen grid-cols-[150px 1fr] overflow-hidden main dark:bg-[#090938]">
+<section class="customer-body h-screen grid-cols-[150px 1fr] overflow-hidden main dark:bg-[#090938] pt-20 md:pt-0">
         {% include 'includes/alerts.html'%} 
         {% include 'includes/vendorSideBar.html'%}
         
@@ -12,12 +12,12 @@
                 <p class="dark:text-[#7EC8E3]">Dashboard</p>
             </div>
             <div class="md:px-16 flex flex-col gap-y-10">
-                <div class="group aria flex flex-wrap justify-between items-center main pt-10">
+                <div class="group aria flex flex-col space-y-4 flex-wrap md:justify-between md:space-y-0 md:items-center main pt-10 md:flex-row px-4 md:px-0">
                     <button href="" class="group outline-none">
                         <div class="dashboard-card group-focus:bg-[#eb94ce] group-focus:text-white dark:group-focus:shadow-darkCard1">
                             <div class="flex justify-between items-center">
                                 <div class="flex flex-col items-start">
-                                    <p class="dashboard-card-number">120</p>
+                                    <p class="dashboard-card-number">{{category_count}}</p>
                                     <p class="dashboard-item">Total Menu</p>
                                 </div>
                                 <div class="p-1 bg-white group-focus:bg-white rounded-lg">
@@ -35,8 +35,8 @@
                         <div class="dashboard-card group-focus:bg-[#82b0e3] group-focus:text-white dark:group-focus:shadow-darkCard2">
                             <div class="flex justify-between items-center">
                                 <div class="flex flex-col items-start">
-                                    <p class="dashboard-card-number">150</p>
-                                    <p class="dashboard-item">Total Orders Today</p>
+                                    <p class="dashboard-card-number">{{orders_count}}</p>
+                                    <p class="dashboard-item">Total Orders</p>
                                 </div>
                                 <div class="p-1 bg-white group-focus:bg-white rounded-lg">
                                     <img src="https://img.icons8.com/ios-glyphs/30/null/shopping-bag.png"/>
@@ -53,7 +53,7 @@
                         <div class="dashboard-card group-focus:bg-[#a1e5af] group-focus:text-white dark:group-focus:shadow-darkCard3">
                             <div class="flex justify-between items-center">
                                 <div class="flex flex-col items-start">
-                                    <p class="dashboard-card-number">240</p>
+                                    <p class="dashboard-card-number">{{orders_today}}</p>
                                     <p class="dashboard-item">Total Client Today</p>
                                 </div>
                                 <div class="p-1 bg-white group-focus:bg-white rounded-lg">
@@ -86,63 +86,52 @@
                         </div>
                     </button>
                 </div>
-                <div class="flex flex-wrap md:justify-between justify-center">
-                    <div id="container" class="w-[44%] min-w-[44%] h-80 flex bg-white rounded-md shadow-shadow1 px-3 py-3">
-
-                    </div>
-                    <div id="barChart" class="w-[44%] min-w-[44%] h-80 bg-white rounded-md shadow-shadow1 px-3 py-5"></div>
+                <div class="flex flex-col flex-wrap md:justify-between justify-center md:flex-row px-4 md:px-0 space-y-4 md:space-y-0">
+                    <div id="container" class="w-full md:w-[44%] md:min-w-[44%] h-80 flex bg-white rounded-md shadow-shadow1 px-3 py-3"></div>
+                    <div id="barChart" class="w-full md:w-[44%] md:min-w-[44%] h-80 bg-white rounded-md shadow-shadow1 px-3 py-5"></div>
                 </div>
-                <div class="shadow-shadow1 px-10 py-8 rounded-md">
-                    <div class="flex justify-between items-center mb-8">
-                        <p class="text-xl font-monserat font-semibold dark:text-[#7EC8E3]">Order List</p>
-                        <div class="">
-                            <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Monthly</button>
-                            <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Weekly</button>
-                            <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Today</button>
+                <div class="shadow-none md:rounded-md md:shadow-shadow1 overflow-x-auto px-4 py-4">
+                    <div class="shadow-shadow1 px-10 py-8 rounded-md w-max md:w-full overflow-x-auto md:shadow-none">
+                        <div class="flex justify-between items-center mb-8">
+                            <p class="text-xl font-monserat font-semibold dark:text-[#7EC8E3]">Recent Orders</p>
+                            <div class="">
+                                <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Monthly</button>
+                                <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Weekly</button>
+                                <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Today</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <table class="table-auto">
-                            <thead class="bg-gray-100 rounded-lg px-3 py-3 dark:bg-[#000C66]">
-                              <tr class="text-start text-gray-500 dark:text-white">
-                                <td class="text-start px-2 py-2 text-sm font-medium">No</td>
-                                <td class="text-start px-2 py-2 text-sm font-medium">ID</td>
-                                <td class="text-start px-2 py-2 text-sm font-medium">Date</td>
-                                <td class="text-start px-2 py-2 text-sm font-medium">Customer Name</td>
-                                <td class="text-start px-2 py-2 text-sm font-medium">Location</td>
-                                <td class="text-start px-2 py-2 text-sm font-medium">Amount</td>
-                                <td class="text-start px-2 py-2 text-sm font-medium">Status Order</th>
-                                <td class="text-start px-2 py-2 text-sm font-medium">Action</td>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-start dark:text-gray-400">
-                                    <td class="text-start px-2 py-3">1</td>
-                                    <td class="text-start px-2 py-3">#82636</td>
-                                    <td class="text-start px-2 py-3">24 Jun 2022</td>
-                                    <td class="text-start px-2 py-3">Robert Kiosaki</td>
-                                    <td class="text-start px-2 py-3">West Minister Abbey, London</td>
-                                    <td class="text-start px-2 py-3">$23.56</td>
-                                    <td class="text-center text-[.75rem]">
-                                        <span class="new">New Order</span>
-                                    </th>
-                                    <td class="text-start px-2 py-2 cursor-pointer">...</td>
-                                </tr>
-                                <tr class="text-start mt-4 dark:text-gray-400">
-                                    <td class="text-start px-2 py-2">2</td>
-                                    <td class="text-start px-2 py-2">#34458</td>
-                                    <td class="text-start px-2 py-2">6th July 2022</td>
-                                    <td class="text-start px-2 py-2">Nania Ancher</td>
-                                    <td class="text-start px-2 py-2">34 Chin Xui district</td>
-                                    <td class="text-start px-2 py-2">$56.89</td>
-                                    <td class="text-start text-[.75rem]">
-                                        <span class="delivery">On Delivery</span>
-                                    </th>
-                                    <td class="text-start px-2 py-2 cursor-pointer">...</td>
-                                </tr>
-                             
-                            </tbody>
-                        </table>
+                        <div class="flex flex-col space-y-3">
+                            <table class="table-auto">
+                                <thead class="bg-gray-100 rounded-lg px-3 py-3 dark:bg-[#000C66]">
+                                  <tr class="text-start text-gray-500 dark:text-white">
+                                    <td class="text-start px-2 py-2 text-sm font-medium">S/N</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Order Id</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Name</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Total</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Date</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Status</th>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Action</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for orders in recent_orders%}
+                                    <tr class="text-start dark:text-gray-400">
+                                        <td class="text-start px-2 py-3">{{forloop.counter}}</td>
+                                        <td class="text-start px-2 py-3">{{orders.order_number}}</td>
+                                        <td class="text-start px-2 py-3">{{orders.name}}</td>
+                                        <td class="text-start px-2 py-3">$ {{orders.total}}</td>
+                                        <td class="text-start px-2 py-3">{{orders.created_at}}</td>
+                                        <td class="text-center text-[.75rem]">
+                                            <span class="new">{{orders.status}}</span>
+                                        </th>
+                                        <td class="text-start px-2 py-2 cursor-pointer">
+                                            <a data-order_id={{orders.order_number}} class="text-sm px-5 py-2 bg-green-400 hover:bg-green-50 rounded-md text-white" id="order_details" data-transaction_id={{order.payment.transaction_id}} data-order_no={{order.order_number}}>Details</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

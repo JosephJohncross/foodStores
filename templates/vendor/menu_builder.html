@@ -31,51 +31,53 @@
                 </a>
             </div>            
             {% if categories %}
-            <div class="shadow-shadow1 px-10 py-8 rounded-md bg-white">
-                <div class="flex flex-col space-y-3">
-                    <table class="w-full text-sm text-left text-gray-500  dark:text-gray-400 rounded-md overflow-hidden">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="py-3 px-6">
-                                    S/N
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Category
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Description
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for cat in categories %}
-                            <tr class="bg-white border-b last-of-type:border-b-0 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{forloop.counter}}
-                                </th>
-                                <td class="py-4 px-6">
-                                    <a class="" href="{% url 'fooditems_by_category' cat.id %}">{{cat}}</a>
-                                </td>
-                                {% if cat.description %}
-                                <td class="py-4 px-6">{{cat.description}}</td>
-                                {% else %}
-                                <td class="py-4 px-6">...</td>
-                                {% endif %}</td>
-                                <td class="py-4 px-6 flex space-x-3 items-center">
-                                    <a href="{% url 'edit_category' cat.id %}">
-                                        <img src="https://img.icons8.com/material-rounded/17/null/pencil--v1.png"/>
-                                    </a>
-                                    <a href="{% url 'delete_category' cat.id %}">
-                                        <img src="https://img.icons8.com/android/17/FF3000/trash.png"/>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            <div class="overflow-x-scroll px-4 py-4">
+                <div class="shadow-shadow1 px-10 py-8 rounded-md bg-white w-max md:w-full">
+                    <div class="flex flex-col space-y-3">
+                        <table class="w-full text-sm text-left text-gray-500  dark:text-gray-400 rounded-md overflow-hidden">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="py-3 px-6">
+                                        S/N
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Category
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Description
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cat in categories %}
+                                <tr class="bg-white border-b last-of-type:border-b-0 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{forloop.counter}}
+                                    </th>
+                                    <td class="py-4 px-6">
+                                        <a class="" href="{% url 'fooditems_by_category' cat.id %}">{{cat}}</a>
+                                    </td>
+                                    {% if cat.description %}
+                                    <td class="py-4 px-6">{{cat.description}}</td>
+                                    {% else %}
+                                    <td class="py-4 px-6">...</td>
+                                    {% endif %}</td>
+                                    <td class="py-4 px-6 flex space-x-3 items-center">
+                                        <a href="{% url 'edit_category' cat.id %}">
+                                            <img src="https://img.icons8.com/material-rounded/17/null/pencil--v1.png"/>
+                                        </a>
+                                        <a href="{% url 'delete_category' cat.id %}">
+                                            <img src="https://img.icons8.com/android/17/FF3000/trash.png"/>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             {% else %}

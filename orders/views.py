@@ -13,9 +13,19 @@ from accounts.utils import send_notification
 
 @login_required(login_url='login')
 def place_order(request):
+    cart = Cart.objects.get(user=request.user)
+    cart_item = CartItem.objects.filter(cart=cart)
+
+    # Gets all vendor ids to save to many to many field vendor of orders  
+    vendors_ids = []
+    for i in cart_item:
+        if i.fooditem.vendor.id not in vendors_ids:
+            vendors_ids.append(i.fooditem.vendor.id)
+
     total = get_cart_amounts(request)['total']
     subtotal = get_cart_amounts(request)['subtotal']
     total_sales_tax = get_cart_amounts(request)['total_sales_tax']
+
     if request.method == 'POST':
         order = Order()
         form = OrderForm(request.POST)
@@ -35,6 +45,7 @@ def place_order(request):
             order.payment_method = request.POST['payment_method']
             order.save() #generate the order number
             order.order_number = generate_order_number(order.id)
+            order.vendors.add(*vendors_ids)
             order.save()
 
             context = {
@@ -50,14 +61,15 @@ def place_order(request):
 def payments(request):
     # check if request is Ajax
     if request.headers.get('x-request-with') == 'XMLHttpRequest' and request.method == "POST":
-    # store payment details in the payment model
+    
+        # store payment details in the payment model
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         order_number = body["order_number"]
         payment_method = body["payment_method"]
         transaction_id = body["transaction_id"]
         status = body['status']
-        print(order_number, payment_method, transaction_id, status)
+
         order = Order.objects.get(user=request.user, order_number= order_number)
         payment = Payment(user=request.user,transaction_id=transaction_id,payment_method=payment_method,amount=order.total,status=status)
         payment.save()
@@ -66,7 +78,6 @@ def payments(request):
         order.payment = payment
         order.is_ordered = True
         order.save()
-        # return HttpResponse("Saved")
 
         # move the cart items to other food models
         cart = Cart.objects.get(user=request.user)

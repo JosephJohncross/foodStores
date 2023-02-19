@@ -7,6 +7,7 @@ from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage
 from  accounts.tokens import account_activation_token
 from food_stores import settings
+from datetime import timezone, datetime
 # from gmail import sendingMessage
 
 def detectUser(user):
@@ -20,7 +21,19 @@ def detectUser(user):
     elif user.role is None and user.is_superadmin:
         redirectUrl = "/admin"
         return redirectUrl
-        
+
+def return_today_orders(orders):
+    orders_for_today = []
+    now = datetime.now()
+    # today = datetime.time(now.hour, now.minute, now.second, now.microsecond)
+    today = datetime(now.year, now.month, now.day, 0, 0, 0, 0, tzinfo=None)
+    print(today, "today")
+    for order in orders:
+        order_date = datetime(order.created_at.year, order.created_at.month, order.created_at.day, order.created_at.hour, order.created_at.minute, order.created_at.second, order.created_at.microsecond, tzinfo=None)
+        print(order_date, "creates_at")
+        if order_date > today:
+            orders_for_today.append(order)
+    return orders_for_today
 
 def send_verification_email(request, user, mail_subject, email_template):
     current_site = get_current_site(request)

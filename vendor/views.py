@@ -248,3 +248,6 @@ def delete_opening_hours(request, pk=None):
                 return JsonResponse({'status': 'Success', 'message': 'Hour removed succesfully', 'id': pk})
         else:
             return JsonResponse({'status' : 'Failed', "message": "Error"})
+
+def order_details(request, order_number=None):
+    return render(request, 'vendor/order_details.html')

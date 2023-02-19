@@ -2,7 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from accounts.models import User, UserProfile
-from accounts.utils import detectUser, send_verification_email
+from accounts.utils import detectUser, return_today_orders, send_verification_email
+from menu.models import Category
+from orders.models import Order
 from vendor.forms import VendorForm
 from .forms import UserForm
 from django.contrib import messages, auth
@@ -170,7 +172,6 @@ def myAccount(request):
     redirectUrl = detectUser(user)
     return redirect(redirectUrl)
 
-
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def customerDashboard(request):
@@ -179,7 +180,19 @@ def customerDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
-    return render(request, 'accounts/vendorDashboard.html')
+    vendor = Vendor.objects.get(user=request.user)
+    category =  Category.objects.filter(vendor=vendor)
+    orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('-created_at')
+    orders_today  = return_today_orders(orders)
+    recent_orders = orders[:5]
+    context = {
+        'category_count': category.count(),
+        'orders': orders,
+        'orders_count': orders.count(),
+        'orders_today': len(orders_today),
+        'recent_orders': recent_orders
+    }
+    return render(request, 'accounts/vendorDashboard.html', context)
 
 def forgot_password(request):
     global message_state
