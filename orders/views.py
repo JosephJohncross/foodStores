@@ -21,9 +21,22 @@ def place_order(request):
     for i in cart_item:
         if i.fooditem.vendor.id not in vendors_ids:
             vendors_ids.append(i.fooditem.vendor.id)
+    
+    sub_total = 0
+    k = {}
+    for i in cart_item:
+        fooditem = FoodItem.objects.get(pk=i.fooditem.id, vendor_id__in=vendors_ids)
+        v_id = fooditem.vendor.id
+        if v_id in k:
+            sub_total = k[v_id]
+            sub_total += (fooditem.price * i.quantity)
+            k[v_id] = sub_total
+        else:
+            sub_total = (fooditem.price * i.quantity)
+            k[v_id] = sub_total
+
 
     total = get_cart_amounts(request)['total']
-    subtotal = get_cart_amounts(request)['subtotal']
     total_sales_tax = get_cart_amounts(request)['total_sales_tax']
 
     if request.method == 'POST':

@@ -185,6 +185,7 @@ def vendorDashboard(request):
     orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('-created_at')
     orders_today  = return_today_orders(orders)
     recent_orders = orders[:5]
+    
     context = {
         'category_count': category.count(),
         'orders': orders,

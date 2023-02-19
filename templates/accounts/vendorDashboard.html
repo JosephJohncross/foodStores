@@ -125,7 +125,7 @@
                                             <span class="new">{{orders.status}}</span>
                                         </th>
                                         <td class="text-start px-2 py-2 cursor-pointer">
-                                            <a data-order_id={{orders.order_number}} class="text-sm px-5 py-2 bg-green-400 hover:bg-green-50 rounded-md text-white" id="order_details" data-transaction_id={{order.payment.transaction_id}} data-order_no={{order.order_number}}>Details</a>
+                                            <a href="{% url 'order_details' orders.order_number %}" class="text-sm px-5 py-2 bg-green-400 hover:bg-green-500 rounded-md text-white" id="order_details" data-transaction_id={{order.payment.transaction_id}} data-order_no={{order.order_number}}>Details</a>
                                         </td>
                                     </tr>
                                     {% endfor %}

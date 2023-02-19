@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from accounts.forms import UserProfileForm
 from django.http.response import HttpResponse, JsonResponse
 from accounts.views import check_role_vendor
+from orders.models import Order, OrderedFood
 from .forms import VendorForm, OpeningHourForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -250,4 +251,13 @@ def delete_opening_hours(request, pk=None):
             return JsonResponse({'status' : 'Failed', "message": "Error"})
 
 def order_details(request, order_number=None):
-    return render(request, 'vendor/order_details.html')
+    orders = Order.objects.get( order_number=order_number, is_ordered=True)
+    ordered_food = OrderedFood.objects.filter(order=orders, fooditem__vendor=get_vendor(request))
+    vendor = get_vendor(request)
+    context = {
+        'order': orders,
+        'ordered_food': ordered_food,
+        'vendor': vendor
+    } 
+
+    return render(request, 'vendor/order_details.html', context)
