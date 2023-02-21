@@ -262,5 +262,14 @@ def order_details(request, order_number=None):
 
     return render(request, 'vendor/order_details.html', context)
 
+# Returns all orders for a particular vendor
 def all_orders(request):
-    return render(request, "vendor/all_orders.html")
+    vendor = Vendor.objects.get(user=request.user)
+    category =  Category.objects.filter(vendor=vendor)
+    orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('-created_at')
+
+    context = {
+        'orders': orders,
+    }
+
+    return render(request, "vendor/all_orders.html", context)

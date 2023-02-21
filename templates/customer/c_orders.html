@@ -6,45 +6,7 @@
 <!-- {%include 'includes/alerts.html'%} -->
     <section class="customer-body h-screen grid-cols-[150px 1fr]">
         {% include 'includes/alerts.html'%} 
-        <div class="hidden bg-white shadow-md md:flex flex-col items-center py-8 space-y-20">
-            <div class="w-16 h-16"> 
-                <img src={% static "images/logo.webp" %} alt=""/>
-            </div>
-            <div class="flex flex-col items-center space-y-10">
-                <div>
-                    <!-- Show tooltip on right -->
-                    <a href={% url "marketplace" %}>
-                        <img src="https://img.icons8.com/wired/30/null/marketplace-hub.png" data-tooltip-target="tooltip-marketplace" data-tooltip-placement="right"/>
-                    </a>
-                    <div id="tooltip-marketplace" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Marketplace
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                </div>
-               
-                <div>
-                    <!-- Show tooltip on right -->
-                    <a href={% url "c_orders" %}>
-                        <!-- <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/> -->
-                        <img src="https://img.icons8.com/ios-filled/25/null/purchase-order.png" data-tooltip-target="tooltip-orders" data-tooltip-placement="right"/>
-                    </a>
-                    <div id="tooltip-orders" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        My Orders
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                </div>
-                <div>
-                    <!-- Show tooltip on right -->
-                    <a href={% url "logout" %}>
-                        <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/>
-                    </a>
-                    <div id="tooltip-logout" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Logout
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include 'includes/customerSideBar.html'%}
 
         <div class="block md:grid grid-cols-10 bg-gray-200/50 md:h-screen">
             <div id="mid-section" class="col-span-10 font-monserat overflow-y-scroll main pt-28 md:pt-0">
@@ -73,9 +35,6 @@
                             <li>
                             </li>
                         </ul>
-                        <div class="py-1">
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                            </div>
                         </div>
                     </div>       
                 </div>
@@ -83,7 +42,7 @@
                 <div id="top-bar" class="px-10 md:px-24 py-10">
                     <div class="shadow-shadow1 px-10 py-8 rounded-md">
                         <div class="flex flex-col space-y-3">
-                            <table class="table-auto">
+                            <table class="table-auto py-10" id="ordersTable">
                                 <thead class="bg-gray-100 rounded-lg px-3 py-3 dark:bg-[#000C66]">
                                     <tr class="text-start text-gray-500 dark:text-white">
                                     <td class="text-start px-2 py-2 text-sm font-medium">No</td>
@@ -202,5 +161,11 @@
                 window.location.href = orderDetailsUrl + "?order_number="+ e.target.dataset.order_no+"&transaction_id="+e.target.dataset.transaction_id
             }
         }
+    </script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#ordersTable').DataTable();
+            } );
     </script>
 {% endblock link %}

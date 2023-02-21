@@ -18,13 +18,18 @@
 			<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
 			<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
 			<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
-		{% endif %}
+			{% endif %}
+
+		<!-- Jquery datatable cdn for pagination -->	
+		<link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet">
+
+		<!-- swipper js library cdn-->
 		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     	<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 		<link rel="stylesheet" href={% static 'css/output.css' %} media="all">
 	</head>
-	<body>
+	<body class="dark:bg-darkMain dark:text-darkText">
 		<div class="page-loader">
 			
 		</div>
@@ -35,6 +40,7 @@
 		{% endblock %}
 		<!--footer content-->
 		
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 		{% block link %}
 		{% endblock link %}
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -73,7 +79,6 @@
     }
 })
 		</script>
-		
 	</body>
 
 </html>

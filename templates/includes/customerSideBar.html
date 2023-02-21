@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="relative hidden bg-white shadow-md md:flex flex-col items-center py-8 space-y-20">
+    <div class="w-16 h-16"> 
+        <img src={% static "images/logo.webp" %} alt=""/>
+    </div>
+    <div class="flex flex-col items-center space-y-10">
+        <div>
+            <!-- Show tooltip on right -->
+            <a href={% url "marketplace" %}>
+                <img src="https://img.icons8.com/wired/30/null/marketplace-hub.png" data-tooltip-target="tooltip-marketplace" data-tooltip-placement="right"/>
+            </a>
+            <div id="tooltip-marketplace" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                Marketplace
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+        </div>
+        <div>
+            <!-- Show tooltip on right -->
+            <a href={% url "c_orders" %}>
+                <!-- <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/> -->
+                <img src="https://img.icons8.com/ios-filled/25/null/purchase-order.png" data-tooltip-target="tooltip-orders" data-tooltip-placement="right"/>
+            </a>
+            <div id="tooltip-orders" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                My Orders
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+        </div>
+        <div>
+            <!-- Show tooltip on right -->
+            <a href={% url "logout" %}>
+                <img src="https://img.icons8.com/sf-ultralight-filled/30/null   /power-off-button.png" data-tooltip-target="tooltip-logout" data-tooltip-placement="right"/>
+            </a>
+            <div id="tooltip-logout" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                Logout
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <label class="inline-flex relative items-center mb-5 cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" id="toggleTheme">
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+              </label>
+        </div>
+    </div>
+</div>

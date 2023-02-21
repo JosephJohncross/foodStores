@@ -1,1 +1,80 @@
-<h1>Order details page</h1>
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'includes/dashboardMobileHeader.html' %}
+<section class="customer-body h-screen grid-cols-[150px 1fr]">
+    {% include 'includes/alerts.html'%} 
+    {% include 'includes/vendorSideBar.html'%}
+    
+    <div class="block w-full bg-gray-200/50 h-screen dark:bg-[#090938] overflow-scroll main pt-20 md:pt-0">
+        {% include 'vendor/vendorHero.html' %}
+
+        <div class="py-10 mx-auto mt-10 font-monserat px-4 md:px-16">
+            <p class="text-3xl dark:text-[#7EC8E3] mb-12">Orders</p>
+            <div class="flex justify-end items-center mb-8">
+                <div class="">
+                    <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Monthly</button>
+                    <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Weekly</button>
+                    <button class="px-2 py-1 text-sm focus:text-white focus:bg-black rounded-md">Today</button>
+                </div>
+            </div>
+                <div class="shadow-none md:rounded-md md:shadow-shadow1 overflow-x-auto px-4 py-4 ">
+                    <div class="shadow-shadow1 px-10 py-8 rounded-md w-max md:w-full overflow-x-auto md:shadow-none dark:bg-white">
+                        <div class="flex flex-col space-y-3">
+                            <table class="table-auto py-10" id="ordersTable">
+                                <thead class="bg-gray-100 rounded-lg px-3 py-3 dark:bg-[#000C66]">
+                                  <tr class="text-start text-gray-500 dark:text-white">
+                                    <td class="text-start px-2 py-2 text-sm font-medium">S/N</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Order Id</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Name</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Total</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Date</td>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Status</th>
+                                    <td class="text-start px-2 py-2 text-sm font-medium">Action</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders%}
+                                    <tr class="text-start dark:text-gray-400">
+                                        <td class="text-start px-2 py-3">{{forloop.counter}}</td>
+                                        <td class="text-start px-2 py-3">{{order.order_number}}</td>
+                                        <td class="text-start px-2 py-3">{{order.name}}</td>
+                                        <td class="text-start px-2 py-3">$ {{order.get_total_by_vendor.grand_total}}</td>
+                                        <td class="text-start px-2 py-3">{{order.created_at}}</td>
+                                        <td class="text-center text-[.75rem]">
+                                            <span class="new">{{order.status}}</span>
+                                        </th>
+                                        <td class="text-start px-2 py-2 cursor-pointer">
+                                            <a href="{% url 'order_details' order.order_number %}" class="text-sm px-5 py-2 bg-green-400 hover:bg-green-500 rounded-md text-white" id="order_details" data-transaction_id={{order.payment.transaction_id}} data-order_no={{order.order_number}}>Details</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- drawer init and toggle -->
+    <div class="text-center fixed bottom-0 left-0 w-full bg-black/20 rounded-tr-lg backdrop-blur-sm md:hidden">
+        <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe" data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-0" aria-controls="drawer-swipe">
+            <span class="absolute w-8 h-1 -translate-x-1/2 bg-white rounded-tl-lg rounded-tr-lg top-3 left-1/2"></span>
+        </div>
+     </div>
+</section>
+{% endblock %}
+
+{% block link %}
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#ordersTable').DataTable();
+            } );
+    </script>
+{% endblock link %}
