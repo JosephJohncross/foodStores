@@ -109,7 +109,6 @@ def payments(request):
         # move the cart items to other food models
         cart = Cart.objects.get(user=request.user)
         cart_items = CartItem.objects.filter(cart=cart)
-        print(cart_items)
         for item in cart_items:
             ordered_food = OrderedFood()
             ordered_food.fooditem = item.fooditem
@@ -160,11 +159,9 @@ def order_complete(request):
     order_number =  request.GET.get('order_number')
     transaction_id = request.GET.get('transaction_id')
 
-    print("Testing", order_number, transaction_id)
     try:
         order = Order.objects.get(order_number=order_number, payment__transaction_id=transaction_id, is_ordered=True)
         ordered_food = OrderedFood.objects.filter(order=order)
-        print(ordered_food)
         
         subtotal = 0
         for item in ordered_food:

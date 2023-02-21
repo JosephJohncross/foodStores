@@ -22,14 +22,12 @@ def get_or_set_current_location(request):
 def home(request):
     location_active = False    
     if get_or_set_current_location(request) is not None:
-        print("gotten current location coordinates")
         pnt = GEOSGeometry('POINT(%s %s)' % (get_or_set_current_location(request)))
 
         vendors = Vendor.objects.filter(user_profile__location__distance_lte=(pnt, D(km=2000))).annotate(distance=Distance("user_profile__location",pnt)).order_by("distance")
 
         for v in vendors:
             v.kms = round(v.distance.km)
-            print(f'{v.kms} test location')
         location_active = True
     else:
         vendors = Vendor.objects.filter(is_approved=True, user__is_active=True)[:3]

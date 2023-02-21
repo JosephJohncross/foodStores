@@ -30,8 +30,8 @@ module.exports = {
         'darkCard1': '0px 0px 50px 7px #eb94ce',
         'darkCard2': '0px 0px 50px 7px #82b0e3',
         'darkCard3': '0px 0px 50px 7px #82b0e3',
-        'darkCard4': '0px 0px 50px 7px #a1e5af',
         'darkCard4': '0px 0px 50px 7px #fa8e29',
+        'darkCard5': '0px 0px 50px 7px #e6cc00',
       },
       keyframes: {
         scale: {

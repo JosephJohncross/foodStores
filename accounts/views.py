@@ -1,11 +1,13 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
+import json
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from accounts.models import User, UserProfile
-from accounts.utils import detectUser, return_today_orders, send_verification_email
-from menu.models import Category
+from accounts.utils import detectUser, get_orders_for_6_days, get_revenue_by_months, return_today_orders, send_verification_email
+from menu.models import Category, FoodItem
 from orders.models import Order
 from vendor.forms import VendorForm
+from vendor.utils import get_vendor
 from .forms import UserForm
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -190,6 +192,8 @@ def vendorDashboard(request):
     for i in orders:
         total_revenue += i.get_total_by_vendor()['grand_total']
 
+    # Returns number of all food items for a vendor
+    food_items = FoodItem.objects.filter(vendor=get_vendor(request))
 
     context = {
         'category_count': category.count(),
@@ -197,7 +201,10 @@ def vendorDashboard(request):
         'orders_count': orders.count(),
         'orders_today': len(orders_today),
         'recent_orders': recent_orders,
-        'total_revenue': total_revenue
+        'total_revenue': round(total_revenue, 4),
+        'monthly_revenue': get_revenue_by_months(orders),
+        'orders_by_day_count': get_orders_for_6_days(orders),
+        'food_items': food_items.count()
     }
     return render(request, 'accounts/vendorDashboard.html', context)
 

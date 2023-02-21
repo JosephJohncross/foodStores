@@ -157,7 +157,6 @@ def search(request):
 
             for v in vendor:
                 v.kms = round(v.distance.km)
-                print(f'{v.kms} test location')
 
         vendor_count = vendor.count()
 

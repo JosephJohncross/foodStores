@@ -12,13 +12,13 @@
                 <p class="dark:text-[#7EC8E3]">Dashboard</p>
             </div>
             <div class="md:px-16 flex flex-col gap-y-10">
-                <div class="group aria flex flex-col space-y-4 flex-wrap md:justify-between md:space-y-0 md:items-center main pt-10 md:flex-row px-4 md:px-0">
+                <div class="group aria flex gap-6 flex-col space-y-4 flex-wrap md:justify-between md:space-y-0  md:items-center main pt-10 md:flex-row px-4 md:px-0">
                     <button href="" class="group outline-none">
                         <div class="dashboard-card group-focus:bg-[#eb94ce] group-focus:text-white dark:group-focus:shadow-darkCard1">
                             <div class="flex justify-between items-center">
                                 <div class="flex flex-col items-start">
                                     <p class="dashboard-card-number">{{category_count}}</p>
-                                    <p class="dashboard-item">Total Menu</p>
+                                    <p class="dashboard-item">Menu (All Categories)</p>
                                 </div>
                                 <div class="p-1 bg-white group-focus:bg-white rounded-lg">
                                     <img src="https://img.icons8.com/ios-filled/30/null/menu-squared-2.png"/>
@@ -27,6 +27,25 @@
                             <div class="">
                                 <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                                     <div class="bg-[#eb94ce] group-focus:bg-black h-2.5 rounded-full dark:group-focus:bg-white" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                    <button href="" class="group outline-none">
+                        <div class="dashboard-card group-focus:bg-[#e6cc00] group-focus:text-white dark:group-focus:shadow-darkCard5">
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col items-start">
+                                    <p class="dashboard-card-number">{{food_items}}</p>
+                                    <p class="dashboard-item">All Food Items</p>
+                                </div>
+                                <div class="p-1 bg-white group-focus:bg-white rounded-lg">
+                                    <img src="https://img.icons8.com/ios-filled/30/null/food-bar.png"/>
+                                    <!-- <img src="https://img.icons8.com/ios-glyphs/30/null/combo-chart--v1.png"/> -->
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="bg-[#e6cc00] group-focus:bg-black h-2.5 rounded-full dark:group-focus:bg-white" style="width: 50%"></div>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                    </button>
+                    </button>                    
                     <button href="" class="group outline-none">
                         <div class="dashboard-card group-focus:bg-[#fa8e29] group-focus:text-white dark:group-focus:shadow-darkCard4">
                             <div class="flex justify-between items-center">
@@ -148,6 +167,138 @@
 {% endblock %}
 
 {% block link %}
-    <script src={% static 'js/anychart.js' %}></script>
+    <script>
+        anychart.onDocumentReady(function () {
+
+var lineDarkTheme = {
+    "background": {
+        "fill": "#000"
+    }
+}
+
+anychart.theme([lineDarkTheme])
+// create data set on our data
+var dataSet = anychart.data.set(getData());
+
+// map data for the first series, take x from the zero column and value from the first column of data set
+var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
+
+// map data for the third series, take x from the zero column and value from the third column of data set
+// var thirdSeriesData = dataSet.mapAs({ x: 0, value: 3 });
+
+// create line chart
+var chart = anychart.line();
+
+// turn on chart animation
+chart.animation(true);
+
+// set chart padding
+chart.padding([10, 20, 25, 20]);
+
+// turn on the crosshair
+chart.crosshair().enabled(true).yLabel(false).yStroke(null);
+
+// set tooltip mode to point
+chart.tooltip().positionMode('point');
+
+// set chart title text settings
+var title = chart.title()
+title.enabled(true);
+title.text('Revenue')
+title.width(800);
+title.textSettings('fontColor', '#000');
+title.textSettings('fontSize', '18px');
+
+
+// set yAxis title
+// chart.yAxis().title('Number of Bottles Sold (thousands)');
+chart.xAxis().labels().padding(5);
+
+chart.xScale().mode('continuous');
+
+// create first series with mapped data
+var firstSeries = chart.line(firstSeriesData);
+firstSeries.name('Revenue');
+firstSeries.hovered().markers().enabled(true).type('circle').size(4);
+firstSeries
+  .tooltip()
+  .position('right')
+  .anchor('left-center')
+  .offsetX(5)
+  .offsetY(5);
+
+// create third series with mapped data
+// var thirdSeries = chart.line(thirdSeriesData);
+// thirdSeries.name('Expenses');
+// thirdSeries.hovered().markers().enabled(true).type('circle').size(4);
+// thirdSeries
+//   .tooltip()
+//   .position('right')
+//   .anchor('left-center')
+//   .offsetX(5)
+//   .offsetY(5);
+//   thirdSeries.color('#fa8e29');
+
+// turn the legend on
+chart.legend().enabled(true).fontSize(13).padding([0, 0, 0, 0]);
+
+// set container id for the chart
+chart.container('container');
+// initiate chart drawing
+chart.draw();
+
+
+// Chart Two
+// var data = anychart.data.set([
+//     ["Jun 24", 123, "#a1e5af", "#82b0e3", null, {enabled: true}],
+//     ["Jun 25", 15, "#a1e5af", "#82b0e3", null, {enabled: true}],
+//     ["Jun 26", 130, "#a1e5af", "#82b0e3", null, {enabled: true}],
+//     ["Jun 27", 18, "#a1e5af", "#82b0e3", null, {enabled: true}],
+//     ["Jun 28", 90, "#a1e5af", "#82b0e3", null, {enabled: true}]
+//   ]);
+  var data = anychart.data.set([{% for i,v in orders_by_day_count.items%}['{{i}}', {{v}}, "#a1e5af", "#82b0e3", null, {enabled: true}],{% endfor %}])
+  
+  // map the data
+  var seriesData_1 = data.mapAs({x: 0, value: 1, label: "Orders"});
+//   var seriesData_2 = data.mapAs({x: 0, value: 2, fill: 4, stroke: 5, label: "Note"});
+//   seriesData_1.title("Test")
+  // create a chart
+  var barChart = anychart.bar();
+//   barChart.title("Order ")
+  var title2 = barChart.title();
+  title2.enabled(true)
+  title2.text("Order Summary")
+  title2.textSettings('fontColor', '#000');
+  title2.textSettings('fontSize', '18px');
+  
+  barChart.yAxis().labels().rotation();
+  barChart.yAxis().title("Number of orders");
+  barChart.yScale().ticks().interval(1);
+  var series1 = barChart.bar(seriesData_1);
+
+  barChart.container('barChart');
+
+  // initiate chart drawing
+  barChart.draw();
+});
+
+function getData() {
+return [
+  ['Jan', '{{monthly_revenue.Jan}}'],
+  ['Feb', '{{monthly_revenue.Feb}}'],
+  ['Mar', '{{monthly_revenue.Mar}}'],
+  ['Apr', '{{monthly_revenue.Apr}}'],
+  ['May', '{{monthly_revenue.May}}'],
+  ['Jun', '{{monthly_revenue.Jun}}'],
+  ['July', '{{monthly_revenue.Jul}}'],
+  ['Aug', '{{monthly_revenue.Aug}}'],
+  ['Sep', '{{monthly_revenue.Sep}}'],
+  ['Oct', '{{monthly_revenue.Oct}}'],
+  ['Nov', '{{monthly_revenue.Nov}}'],
+  ['Dec', '{{monthly_revenue.Dec}}']
+];
+}
+    </script>
+
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 {% endblock link %}

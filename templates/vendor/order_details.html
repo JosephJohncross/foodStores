@@ -15,7 +15,7 @@
             <p class="text-3xl dark:text-[#7EC8E3] mb-12">Order Details</p>
             
             <div class="flex justify-center">
-                <div class="paid relative max-w-2xl shadow-shadow1 before:bg-center before:bg-contain rounded-lg p-5 before:bg-no-repeat before:top-0 before:left-0 before:right-0 before:block before:bottom-0 before:absolute before:bg-[url('/static/images/paid.webp')] before:opacity-10 before:z-[-3]">
+                <div class="paid relative max-w-2xl shadow-shadow1 before:bg-center before:bg-contain rounded-lg p-5 before:bg-no-repeat before:top-0 before:left-0 before:right-0 before:block before:bottom-0 before:absolute before:bg-[url('/static/images/paid.webp')] before:opacity-10 before:z-[-3] dark:bg-white/30">
                     <svg class="h-8" viewBox="0 0 118 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M37.83 19.2047C37.2352 19.237 36.6469 19.0679 36.16 18.7247C35.9566 18.5739 35.7929 18.3758 35.6831 18.1476C35.5733 17.9193 35.5208 17.6678 35.53 17.4147V8.1447C35.5252 8.1055 35.5293 8.0656 35.5422 8.0282C35.555 7.9908 35.5762 7.9569 35.6042 7.9289C35.6322 7.9009 35.6661 7.8797 35.7035 7.8669C35.7409 7.854 35.7808 7.8499 35.82 7.8547H37.5C37.69 7.8547 37.78 7.9547 37.78 8.1447V16.6947C37.78 17.0747 37.95 17.2647 38.3 17.2647C38.4484 17.2708 38.5968 17.254 38.74 17.2147C38.94 17.2147 39.05 17.2747 39.06 17.4547L39.21 18.7047C39.2172 18.7412 39.2165 18.7787 39.208 18.8149C39.1995 18.851 39.1833 18.885 39.1605 18.9143C39.1378 18.9437 39.109 18.9679 39.0762 18.9852C39.0433 19.0025 39.0071 19.0126 38.97 19.0147C38.602 19.1363 38.2175 19.2004 37.83 19.2047Z" fill="#FF7A00" />
                         <path d="M47.28 18.1347C46.4359 18.8322 45.375 19.2137 44.28 19.2137C43.185 19.2137 42.1242 18.8322 41.28 18.1347C40.5381 17.3857 40.1218 16.374 40.1218 15.3197C40.1218 14.2654 40.5381 13.2537 41.28 12.5047C42.1258 11.8108 43.186 11.4316 44.28 11.4316C45.374 11.4316 46.4342 11.8108 47.28 12.5047C48.0049 13.2606 48.4096 14.2674 48.4096 15.3147C48.4096 16.362 48.0049 17.3688 47.28 18.1247V18.1347ZM42.86 16.8147C43.2518 17.1696 43.7614 17.3661 44.29 17.3661C44.8186 17.3661 45.3283 17.1696 45.72 16.8147C46.0746 16.4071 46.2698 15.885 46.2698 15.3447C46.2698 14.8045 46.0746 14.2824 45.72 13.8747C45.3283 13.5199 44.8186 13.3233 44.29 13.3233C43.7614 13.3233 43.2518 13.5199 42.86 13.8747C42.5055 14.2824 42.3102 14.8045 42.3102 15.3447C42.3102 15.885 42.5055 16.4071 42.86 16.8147Z" fill="currentColor" />
@@ -29,21 +29,21 @@
                         <p class="text-sm">{{order.phone}}</p>
                         <p class="text-sm">{{order.address}}</p>
                     </div>
-                    <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:justify-between border-t border-b border-gray-400 md:space-x-4 py-2">
+                    <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:justify-between border-t border-b border-gray-400 md:space-x-4 py-2 dark:text-gray-800">
                         <div class="flex flex-col space-y-1">
                             <p class="">Order Date</p>    
                             <p class="text-sm font-medium">{{order.created_at}}</p>    
                         </div>
                         <div class="flex flex-col space-y-1">
-                            <p class="">Order No</p>    
+                            <p class="dark:text-black/80">Order No</p>    
                             <p class="text-sm font-medium">{{order.order_number}}</p>    
                         </div>
                         <div class="flex flex-col space-y-1">
-                            <p class="">Payment Method</p>    
+                            <p class="dark:text-black/80">Payment Method</p>    
                             <p class="text-sm font-medium">{{order.payment_method}}</p>    
                         </div>
                         <div class="flex flex-col space-y-1">
-                            <p class="">Transaction ID</p>    
+                            <p class="dark:text-black/80">Transaction ID</p>    
                             <p class="text-sm font-medium">{{order.payment.transaction_id}}</p>    
                         </div>
                     </div>
@@ -53,26 +53,26 @@
                             <div class="hidden md:block group relative h-16 w-24 md:h-16 md:w-28 rounded-md cursor-pointer before:absolute before:left-0 before:right-0 before:bottom-0 before:top-0 before:rounded-md before:z-[3] hover:before:bg-black/50 before:block" style="background-image: url('{{ food.fooditem.image.url}}'); background-size:cover; background-position: center;">
                             </div>  
                             <div class="flex flex-col w-2/4 md:w-2/6">
-                                <p class="card__title md:text-base">{{food.fooditem.food_title}}</p>
+                                <p class="card__title md:text-base dark:text-gray-800">{{food.fooditem.food_title}}</p>
                                 <a href="" class="card__title md:text-base text-mainColor">{{food.fooditem.vendor.vendor_name}}</a>
                             </div>
-                            <p class="text-sm md:text-lg w-1/4 font-semibold md:w-1/6">$ {{food.fooditem.price}}</p>
-                            <p class="font-semibold w-1/4 md:w-1/6">{{food.quantity}} QTY</p>
+                            <p class="text-sm md:text-lg w-1/4 font-semibold md:w-1/6 dark:text-gray-800">$ {{food.fooditem.price}}</p>
+                            <p class="font-semibold w-1/4 md:w-1/6 dark:text-gray-800">{{food.quantity}} QTY</p>
                         </div>
                         {% endfor %}
                     </div>
                     <div class="">
                         <div class="bg-gray-300/20 py-6 w-full rounded-xl rounded-bl-2xl rounded-br-2xl flex flex-col space-y-2">
-                            <div class="flex justify-between items-center px-8">
-                                <p class="text-sm md:text-base text-gray-500/90 font-medium">Subtotal</p>
+                            <div class="flex justify-between items-center px-8 dark:text-gray-800">
+                                <p class="text-sm md:text-base text-gray-500/90 font-medium dark:text-black/80">Subtotal</p>
                                 <p class="text-base font-bold md:text-lg">${{order.get_total_by_vendor.subtotal}}</p>
                             </div>
-                            <div class="flex justify-between items-center px-8">
-                                <p class="text-sm md:text-base text-gray-500/90 font-medium">Discount sales</p>
+                            <div class="flex justify-between items-center px-8 dark:text-gray-800">
+                                <p class="text-sm md:text-base text-gray-500/90 font-medium dark:text-black/80">Discount sales</p>
                                 <p class="text-base font-bold md:text-lg">-${{discount_sales}}</p>
                             </div>
-                            <div class="flex justify-between items-center px-8">
-                                <p class="text-sm md:text-base text-gray-500/90 font-medium">Tax (VAT)</p>
+                            <div class="flex justify-between items-center px-8 dark:text-gray-800">
+                                <p class="text-sm md:text-base text-gray-500/90 font-medium dark:text-black/80">Tax (VAT)</p>
                                 <p class="text-base font-bold md:text-lg">${{order.get_total_by_vendor.tax}}</p>
                             </div>
                         </div>

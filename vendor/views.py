@@ -242,7 +242,6 @@ def add_opening_hours(request):
 def delete_opening_hours(request, pk=None):
     if request.user.is_authenticated:
         if request.headers.get('x-request-with') == 'XMLHttpRequest':
-            print(pk)
             hour = get_object_or_404(OpeningHour, pk=pk)
             if hour:
                 hour.delete()
@@ -262,3 +261,6 @@ def order_details(request, order_number=None):
     } 
 
     return render(request, 'vendor/order_details.html', context)
+
+def all_orders(request):
+    return render(request, "vendor/all_orders.html")

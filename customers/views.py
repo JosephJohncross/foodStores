@@ -21,7 +21,6 @@ def cprofile(request):
         else:
             print(user_info_form.errors, user_profile.errors)
     else:
-        print("Test")
         user_info_form = UserFormInfo(instance=request.user)
         user_profile = UserProfileForm(instance=profile)
     

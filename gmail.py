@@ -45,7 +45,6 @@ def send_message(service, user_id, message):
 
         return message
     except Exception as e:
-        print('An error occurred: {}'.format(e))
         return None
 
 def create_message_with_attachment(sender,to,subject,message_text,):

@@ -25,5 +25,6 @@ urlpatterns = [
     path('opening_hours/delete/<int:pk>', views.delete_opening_hours, name="delete_opening_hours"),
 
     #order details for vendor
-    path('order_details/<int:order_number>', views.order_details, name="order_details")
+    path('order_details/<int:order_number>', views.order_details, name="order_details"),
+    path('all_orders', views.all_orders, name="all_orders")
 ]
