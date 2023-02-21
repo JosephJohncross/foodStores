@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html'%}
+
+{% load static %}
+
+{% block content%}
+    <div class="relative h-screen w-screen overflow-hidden p-5 md:p-20">
+        <div class="relative shadow-shadow1 h-full rounded-2xl px-14 py-9 border-mainColor border-4 flex">
+            <div class=" w-full md:w-1/2 flex flex-col space-y-4 justify-end font-spartan pb-10">
+                <p class="text-9xl font-semibold">404</p>
+                <p class="text-5xl">Something went</p>
+                <p class="uppercase text-4xl font-semibold text-mainColor">Wrong!</p>
+                <div class=" px-8 py-3 rounded-full bg-emerald-400 max-w-max text-white font-semibold">
+                    <button>Back to Homepage</button>
+                </div>
+            </div>
+            <div class=" w-full md:w-1/2 flex flex-col space-y-4 justify-end font-spartan absolute left-3 top-3 right-3 -z-10 md:relative md:z-10 px-2 md:px-0 opacity-75">
+                <img src="{% static 'images/404.svg' %}" />
+            </div>
+        </div>
+    </div>
+{% endblock %}

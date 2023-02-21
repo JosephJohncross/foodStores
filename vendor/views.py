@@ -216,6 +216,8 @@ def opening_hours(request):
     }
     return render(request, 'vendor/openingHour.html', context)
 
+
+@login_required(login_url='login')
 def add_opening_hours(request):
     # Handle the data and save them inside the database
     if request.user.is_authenticated:
@@ -239,6 +241,7 @@ def add_opening_hours(request):
         else:
             return JsonResponse({'status' : 'Failed', "message": "Error"})
 
+@login_required(login_url='login')
 def delete_opening_hours(request, pk=None):
     if request.user.is_authenticated:
         if request.headers.get('x-request-with') == 'XMLHttpRequest':
@@ -249,6 +252,7 @@ def delete_opening_hours(request, pk=None):
         else:
             return JsonResponse({'status' : 'Failed', "message": "Error"})
 
+@login_required(login_url='login')
 def order_details(request, order_number=None):
     orders = Order.objects.get( order_number=order_number, is_ordered=True)
     ordered_food = OrderedFood.objects.filter(order=orders, fooditem__vendor=get_vendor(request))
@@ -263,6 +267,7 @@ def order_details(request, order_number=None):
     return render(request, 'vendor/order_details.html', context)
 
 # Returns all orders for a particular vendor
+@login_required(login_url='login')
 def all_orders(request):
     vendor = Vendor.objects.get(user=request.user)
     category =  Category.objects.filter(vendor=vendor)

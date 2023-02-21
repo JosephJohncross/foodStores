@@ -23,7 +23,7 @@ module.exports = {
         'mainDark': '#0c1023',
         'mainDarkLight': '#191f3a',
         'whiteLight': '#c8c8c8',
-        'darkMain': "#0f0f56",
+        'darkMain': "#071920",
         "darkText": "#7EC8E3"
       },
       boxShadow: {

@@ -163,7 +163,7 @@
                         <div class="group relative h-16 w-24 md:h-16 md:w-32 rounded-md cursor-pointer before:absolute before:left-0 before:right-0 before:bottom-0 before:top-0 before:rounded-md before:z-[3] hover:before:bg-black/50 before:block" style="background-image: url('{{ items.fooditem.image.url}}'); background-size:cover; background-position: center;">
                             <img src="https://img.icons8.com/material-outlined/24/FF7A00/trash--v1.png" class="absolute z-[10] hidden group-hover:block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 delete-item" data-url="{% url 'delete_cartitem' items.id %}" data-id="{{items.id}}"/>
                         </div>  
-                        <div class="flex flex-c ol w-full">
+                        <div class="flex flex-col w-full">
                             <p class="card__title h-1/2 md:text-base">{{items.fooditem.food_title}}</p>
                             <div class="h-1/2 flex items-end justify-between">
                                 <p class="text-sm md:text-lg font-semibold text-mainColor">${{items.fooditem.price}}</p>

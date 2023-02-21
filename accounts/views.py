@@ -60,7 +60,7 @@ def registerUser(request):
 
             messages.success(request, "Your account has been registered successfully")
             message_state = 'success'
-            return redirect('registerUser')
+            return redirect('login')
         else:
             pass
     else:
@@ -121,7 +121,7 @@ def registerVendor(request):
             
             messages.success(request, "Your account has been registered successfully! Please wait for the approval")
             message_state = 'success'
-            return redirect('registerVendor')
+            return redirect('login')
         else:
             print(form.errors)
     else:

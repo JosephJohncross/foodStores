@@ -1,14 +1,16 @@
 {% extends 'accounts/base.html' %}
 {% load static%}
 
-
 {% block content%}
-    <body class="px-4 py-6 md:px-0 bg-register bg-center bg-cover bg-no-repeat h-screen flex justify-center items-center" style="background-image:url({% static 'images/login.jpg' %})">
+<section class="relative h-screen w-screen overflow-hidden md:flex">
+    <div class="w-full md:w-1/2 px-4 py-6 md:px-0 bg-register bg-center bg-cover bg-no-repeat h-screen flex justify-center items-center" style="background-image:url({% static 'images/login.jpg' %})">
+    </div>
+    <div class="absolute top-0 left-0 bottom-0 right-0 md:w-1/2 md:flex md:justify-center md:items-center md:relative ">
         <div class="max-w-screen-lg">
-            <div class=" px-10 py-10 lg:shadow-xl border-[1px] bg-white rounded-md">
+            <div class="flex flex-col justify-center px-10 py-10 shadow-lg bg-white rounded-md h-screen md:h-auto md:block">
                 <div class="text-center pb-16 flex flex-col space-y-3">
-                    <h2 class="text-2xl lg:text-4xl text- font-baskerville font-bold uppercase">Welcome back</h2>
-                    <p class="text-amber-700 lg:px-16 text-sm lg:text-lg font-dancing">We can't wait to connect your taste buds to glorious food</p>
+                    <h2 class="text-2xl lg:text-4xl text- font-spartan font-bold">Welcome back</h2>
+                    <p class="text-mainColor lg:px-16 text-sm lg:text-lg font-dancing">We can't wait to connect your taste buds to glorious food</p>
                 </div>
                 <form action="{% url 'login'%}" method="post" novalidate>
                     {% csrf_token %}
@@ -25,11 +27,16 @@
                         </div> 
                     </div>
                     <ul class="italic text-red-500 text-[10px]">{{form.non_field_errors}}</ul>
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
-                    <a href={% url 'forgot_password'%} class="text-sm text-blue-500 cursor-pointer block" style="color: blue; margin-top: 1.2rem;">Forgot password</a>
+                    <div class="md:flex justify-center mt-20">
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                    </div>
+                    <a href={% url 'forgot_password'%} class="text-sm text-blue-500 cursor-pointer block text-center" style="color: blue; margin-top: 1.2rem;">Forgot password</a>
                     <!--Load message-->
                     {% include 'includes/alerts.html'%} 
                 </form>
+                <div class="text-center  w-full pt-3">
+                        <a class="text-blue-700 font-medium" href="{% url 'registerUser' %}">Sign Up</a>
+                </div>
                 <a href="{% url 'homepage' %}">
                     <div class="flex items-center justify-center h-10 w-10 rounded-full fixed top-16 left-5 bg-green-300 before:rounded-full before:absolute before:inset-1 before:bg-green-500 before:animate-ping after:rounded-full after:absolute after:inset-2 after:animate-pulse after:bg-green-700 cursor-pointer">
                         <svg class="w-5 h-5" fill="white" stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -37,6 +44,10 @@
                 </a>
             </div>
         </div>
-        <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-    </body>
+    </div>
+</section>    
 {% endblock %}
+
+{% block link %}
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+{% endblock link %}

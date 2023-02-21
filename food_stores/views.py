@@ -36,3 +36,4 @@ def home(request):
         'location_active': location_active
     }
     return render(request, 'home.html', context)
+    

@@ -30,7 +30,8 @@ def cprofile(request):
         'profile': profile
     }
     return render(request, 'customer/cprofile.html', context)
- 
+
+@login_required(login_url='login') 
 def c_orders(request):
     orders = Order.objects.filter(user=request.user, is_ordered =True).order_by('-created_at')
     context = {
