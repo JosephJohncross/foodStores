@@ -21,7 +21,7 @@
     @apply h-12 bg-cover bg-center w-full block rounded-tl-lg rounded-tr-lg
 }
 .card__title{
-    @apply text-base lg:text-lg font-semibold
+    @apply text-base lg:text-lg font-medium
 }
 .card_description{
     @apply text-sm text-gray-400
@@ -35,3 +35,46 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  .dashboard-card{
+    @apply flex flex-col justify-between rounded-md font-monserat p-4 sm:w-64 w-full h-40 bg-white border-2 border-slate-400/30
+  }
+  .dashboard-card-number{
+    @apply text-black font-bold text-lg  group-focus:text-white transition-colors
+  }
+  .dashboard-item{
+    @apply text-base text-slate-400 group-focus:text-white transition-colors
+  }
+  .dashboard-item-img{
+    @apply p-2 rounded-md w-4 h-4 block
+  }
+
+  .new{
+    @apply px-3 py-1 bg-gray-300/30 rounded-full block w-max font-medium
+    
+  }
+  .delivery{
+    @apply px-3 py-1 bg-[#bfcedf] rounded-full block w-max font-medium text-[#7aabe2]
+  }
+  .is_available{
+    @apply rounded-full px-3 py-2 h-min text-gray-500/70 shadow-md font-medium w-36 text-center
+  }
+  .menu-card{
+    @apply bg-white rounded-lg shadow-md w-[200px] h-[280px] p-2 hover:shadow-2xl transition-all
+}
+.place-flex{
+  @apply flex items-center space-x-3 py-2 hover:bg-gray-100 cursor-pointer
+}
+.place-image{
+  @apply w-5 h-5
+}
+.place-text{
+  @apply text-base font-semibold font-spartan text-gray-500
+}
+.payment_method{
+  @apply absolute h-full opacity-0 w-full
+}
+/* .paid::before{
+  background-image: url('static/images/paid.webp');
+} */
+/* before:bg-[url('{% static 'images/paid.webp' %}')] */
