@@ -2,6 +2,8 @@ set -o errexit
 
 pip install -r requirements.txt
 
+apt install sudo
+usermod -aG sudo foodStores
 sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
 sudo apt-get update
 sudo apt-get install gdal-bin
