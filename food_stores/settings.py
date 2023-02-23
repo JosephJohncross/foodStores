@@ -15,7 +15,11 @@ from pathlib import Path
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Development
+# BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Production
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -140,10 +144,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR/'static'
+# Development
+# STATIC_ROOT = BASE_DIR/'static'
+STATIC_ROOT = "/opt/render/project/src/static"
 STATICFILES_DIRS = [
     'food_stores/static',
-    'static'
 ]
 
 # Media files configuration
