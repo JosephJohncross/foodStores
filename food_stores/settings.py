@@ -151,11 +151,11 @@ STATIC_ROOT = BASE_DIR/'static'
 # ]
 
 #   Production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 STATICFILES_DIRS = [
     'food_stores/static',
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 
 # Media files configuration
