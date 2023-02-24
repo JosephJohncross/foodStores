@@ -19,7 +19,7 @@ from decouple import config
 # BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Production
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -144,7 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = BASE_DIR,'static'
 # DEvelopment
 # STATICFILES_DIRS = [
 #     'food_stores/static',
