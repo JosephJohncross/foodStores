@@ -154,7 +154,7 @@ STATIC_ROOT = BASE_DIR/'static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
-    BASE_DIR/'food_stores/static',
+    'food_stores/static',
 ]
 
 
