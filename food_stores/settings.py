@@ -144,7 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/opt/render/project/src/static'
+STATIC_ROOT = os.path.join(BASE_DIR,'src/static')
 # DEvelopment
 # STATICFILES_DIRS = [
 #     'food_stores/static',
@@ -152,7 +152,7 @@ STATIC_ROOT = '/opt/render/project/src/static'
 
 #   Production
 STATICFILES_DIRS = [
-    'food_stores/static',
+    'src/food_stores/static',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
