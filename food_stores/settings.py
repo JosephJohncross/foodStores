@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'marketplace',
     'django.contrib.gis',
     'customers',
-    'orders'
+    'orders',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -160,6 +162,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # Media files configuration
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
@@ -212,4 +216,10 @@ if DEBUG == True:
 
 PAY_STACK_KEY = config('PAY_STACK_KEY') 
 DEFAULT_FROM_EMAIL = "josephibochi2@gmail.com"
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+}
 
