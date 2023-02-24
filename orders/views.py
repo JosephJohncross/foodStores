@@ -155,6 +155,7 @@ def payments(request):
 
     return HttpResponse("Payment View")
 
+@login_required(login_url='login')
 def order_complete(request):
     order_number =  request.GET.get('order_number')
     transaction_id = request.GET.get('transaction_id')
