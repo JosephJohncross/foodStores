@@ -145,12 +145,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR/'static'
+# DEvelopment
+# STATICFILES_DIRS = [
+#     'food_stores/static',
+# ]
+
+#   Production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [
-    'food_stores/static',
+    BASE_DIR/'food_stores/static',
 ]
 
-# Production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files configuration
 MEDIA_URL = '/media/'
