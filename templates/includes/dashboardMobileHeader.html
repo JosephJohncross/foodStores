@@ -30,9 +30,15 @@
                     <li>
                         <a href="{% url "myAccount" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                     </li>
+                    {% if role == "customer" %}
                     <li>
                         <a href="{% url "cprofile" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                     </li>
+                    {% elif role == "vendor" %}
+                    <li>
+                      <a href="{% url "vprofile" %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                  </li>
+                  {% endif %}
                     <li>
                     </li>
                   </ul>
@@ -40,6 +46,7 @@
                       <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
                   </div>
               </div>
+              {% if role == "customer" %}
               <div class="">
                 <a
                   href="{% url 'myAccount' %}"
@@ -51,6 +58,7 @@
                     <div id="cart_count" class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-mainColor border-2 border-white rounded-full -top-3 -right-1 dark:border-gray-900">{{cart_count}}</div>
                   </a>
               </div>
+              {% endif %}
           </div>
         </div>
       </div>

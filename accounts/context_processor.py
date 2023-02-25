@@ -18,3 +18,14 @@ def get_forward_coding_api(request):
 
 def get_paystack_key(request):
     return {'PAYSTACK_KEY': settings.PAY_STACK_KEY }
+
+# Returns user role 
+def get_user_role(request):
+    role = "anon"
+    if request.user.role == 1:
+        role="vendor"
+    elif request.user.role == 2:
+        role = "customer"
+    elif request.user.role is None or request.user.is_superadmin:
+        role = role
+    return  {'role': role}

@@ -155,13 +155,8 @@
                 </div>
             </div>
         </div>
-        
-        <!-- drawer init and toggle -->
-        <div class="text-center fixed bottom-0 left-0 w-full bg-black/20 rounded-tr-lg backdrop-blur-sm md:hidden">
-            <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe" data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-0" aria-controls="drawer-swipe">
-                <span class="absolute w-8 h-1 -translate-x-1/2 bg-white rounded-tl-lg rounded-tr-lg top-3 left-1/2"></span>
-            </div>
-         </div>
+
+        {% include 'includes/drawerVendorComponent.html' %}
 </section>
 
 {% endblock %}
