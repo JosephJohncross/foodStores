@@ -1,13 +1,14 @@
 from django.db import models
 from accounts.models import User, UserProfile
 from datetime import date, datetime, time
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Vendor(models.Model):
     user = models.OneToOneField(User, related_name='user', on_delete=models.CASCADE)
     user_profile = models.OneToOneField(UserProfile, related_name='user_profile', on_delete=models.CASCADE)
     vendor_name = models.CharField(max_length=50)
-    vendor_license = models.ImageField(upload_to="vendor/license")
+    vendor_license = CloudinaryField()
     vendor_slug = models.SlugField(max_length=50, unique=True)
     is_approved = models.BooleanField(default= False)
     created_at = models.DateTimeField(auto_now_add=True)

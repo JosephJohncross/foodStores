@@ -2,6 +2,7 @@ from django import forms
 from django.forms import EmailInput, NumberInput, PasswordInput, TextInput
 from .models import User,UserProfile    
 from .validators import allowed_image_ext
+from cloudinary.forms import CloudinaryFileField
 
 class UserForm(forms.ModelForm):
     terms_and_condition = forms.BooleanField(widget=forms.CheckboxInput(
@@ -81,8 +82,8 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    profile_picture = forms.FileField(widget=forms.FileInput(attrs={'class': "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), validators=[allowed_image_ext], required=False)
-    cover_photo = forms.FileField(widget=forms.FileInput(attrs={'class': "font-monserat block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), validators=[allowed_image_ext],  required=False)
+    profile_picture = CloudinaryFileField(options={ 'folder': 'users/profile_pictures'}, widget=forms.FileInput(attrs={'class': "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), validators=[allowed_image_ext], required=False)
+    cover_photo = CloudinaryFileField(options={ 'folder': 'users/cover_photos'}, widget=forms.FileInput(attrs={'class': "font-monserat block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), validators=[allowed_image_ext],  required=False)
     address = forms.CharField(widget=forms.TextInput(attrs={'id':"home-search",'class':"block px-4 py-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), required=False)
     country = forms.CharField(widget=forms.TextInput(attrs={'class':"block px-4 py-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), required=False)
     state = forms.CharField(widget=forms.TextInput(attrs={'class':"block px-4 py-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"}), required=False)
