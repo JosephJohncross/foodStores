@@ -219,7 +219,7 @@ if DEBUG == True:
 # )
 
 PAY_STACK_KEY = config('PAY_STACK_KEY') 
-DEFAULT_FROM_EMAIL = "josephibochi2@gmail.com"
+DEFAULT_FROM_EMAIL = "irenecufia@gmail.com"
 
 # CLOUDINARY_STORAGE = {
 #     'CLOUD_NAME': config('CLOUD_NAME'),
